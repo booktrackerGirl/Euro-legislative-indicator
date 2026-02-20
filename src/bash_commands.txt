@@ -1,0 +1,14 @@
+python ./src/create_yearly_panel.py --input ./data/euro_legis_df.csv --output ./outputs/dataframes/policy_year_panel.csv
+
+python ./src/plot_euromap.py --annotations ./outputs/dataframes/health_annotations.csv --panel ./outputs/dataframes/policy_year_panel.csv --output_csv ./outputs/dataframes/country_year_health_stats.csv --output_png ./outputs/figures/europe_health_map.png --output_pdf ./outputs/figures/europe_health_map.pdf
+
+python ./src/plot_euro_health_categories.py --input ./outputs/dataframes/health_annotations.csv --panel ./outputs/dataframes/policy_year_panel.csv --output ./outputs/figures/euro_health_categories.pdf
+
+python ./src/plot_euro_response_topics.py --annotation ./outputs/dataframes/health_annotations.csv --panel ./outputs/dataframes/policy_year_panel.csv --output ./outputs/figures/euro_policy_stackplot.pdf
+
+Note that some documents containing health relevance may not contain response type. so that might account for the difference in total documents in the plots.
+
+
+python ./src/health_policy_barplot.py --legislation ./data/euro_legis_df.csv --health ./outputs/dataframes/health_annotations.csv --output ./outputs/figures/euro_health_policy_timeline.png
+
+python ./src/create_aggregate_health_counts.py --panel ./outputs/dataframes/policy_year_panel.csv --health ./outputs/dataframes/health_annotations.csv --output ./outputs/dataframes/health_counts.xlsx

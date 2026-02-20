@@ -1,0 +1,292 @@
+health
+well-being
+wellbeing
+medical
+healthcare
+health care
+health service
+health clinic
+hospital
+hospitalisation
+doctor
+GP
+health emergency
+emergency
+mortality
+morbidity
+DALY
+death
+deaths
+loss of life
+loss of lives
+human life
+injury
+injuries
+accident
+traumatic injury
+fatigue
+disease
+diseases
+ill
+illness
+illnesses
+syndrome
+infection
+infections
+pathogen
+pathogens
+epidemiology
+epidemic
+epidemics
+pandemic
+pandemics
+malaria
+diarrhoea
+diarrheal disease
+diarrhoeal disease
+cholera
+typhoid
+dysentery
+leptospirosis
+polio
+measles
+SARS
+severe acute respiratory syndrome
+tuberculosis
+TB
+tuberculosis
+influenza
+flu
+pneumonia
+respiratory tract infection
+COVID-19
+COVID
+coronavirus disease 2019
+coronavirus
+Ebola
+hepatitis
+HIV
+human immunodeficiency virus
+AIDS
+acquired immunodeficiency syndrome
+sexually transmitted infection
+sexually transmitted infections
+sexually transmitted disease
+fever
+feverish
+sepsis
+NCD
+NCDs
+non-communicable disease
+non-communicable diseases
+cardiovascular disease
+CVD
+flood
+drought
+wildfire
+bushfire
+algal bloom 
+heart disease
+heart attack
+heart attacks
+heart failure
+coronary heart disease
+CHD
+ischaemic heart disease
+cerebrovascular disease
+stroke
+peripheral arterial disease
+congenital heart disease
+rheumatic heart disease
+deep vein thrombosis
+pulmonary embolism
+hypertension
+blood pressure
+diabetes
+chronic kidney disease
+CKD
+renal disease
+kidney disease
+cancer
+chronic respiratory disease
+chronic obstructive pulmonary disease
+COPD
+chronic bronchitis
+emphysema
+asthma
+bronchial asthma
+allergic asthma
+respiratory illness
+respiratory conditions
+respiratory
+lung disease
+pulmonary disease
+bronchitis
+rhinitis
+hay fever
+diarrhoea
+diarrhea
+wheezing
+allergies
+allergens
+immune system
+vector-borne disease
+vector-borne diseases
+zoonoses
+zoonotic disease
+dengue
+chikungunya
+zika
+yellow fever
+West Nile fever
+Japanese encephalitis
+tick-borne encephalitis
+Lyme disease
+borreliosis
+plague
+onchocerciasis
+river blindness
+lymphatic filariasis
+sleeping sickness
+trypanosomiasis
+American trypanosomiasis
+Chagas disease
+Ross River fever
+Ross River virus
+Barmah Forest virus
+leishmaniasis
+schistosomiasis
+bilharziasis
+tungiasis
+bacteria
+virus
+viral infection
+parasite
+protozoa
+prion
+toxins
+salmonella
+salmonellosis
+campylobacter
+campylobacteriosis
+shigella
+shigellosis
+giardia
+giardiasis
+cryptosporidium
+cryptosporidiosis
+legionella
+legionellosis
+vibrio bacteria
+food-borne disease
+food-borne diseases
+food-borne pathogens
+waterborne disease
+waterborne diseases
+aflatoxin
+mycotoxins
+arsenic
+botulism
+ciguatera
+poisoning
+nutrition
+malnutrition
+malnourishment
+undernutrition
+undernourished
+stunting
+wasting
+underweight
+overweight
+obesity
+hunger
+anthropometry
+micronutrient
+micronutrient deficiency
+micronutrient excess
+anaemia
+anemia
+low birth weight
+LBW
+maternal health
+pregnancy
+pregnant
+gestation
+preterm birth
+stillbirth
+birth weight
+pre-eclampsia
+preeclampsia
+placenta
+oligohydramnios
+haemorrhage
+hemorrhage
+air pollution
+thermal stress
+heat-related illness
+heat-related illnesses
+heat stress
+heat exhaustion
+heat cramp
+heat stroke
+hyperthermia
+hypothermia
+extreme heat
+heatwave
+high temperature
+bushfire
+bushfires
+mental health
+mental
+mental illness
+mental disorder
+mental disorders
+mental health condition
+mental health disorder
+mental health service
+mental suffering
+depression
+depressed
+depressive disorder
+anxiety
+anxious
+phobia
+suicide
+suicidal
+stress
+stressful
+psychological stress
+psychological
+psychosocial
+psychiatric
+psychiatric hospital
+trauma
+traumatic
+post-traumatic stress
+post-traumatic stress disorder
+PTSD
+grief
+grieving
+sadness
+anger
+despair
+distress
+distressed
+cognitive impairment
+cognitive disorder
+cognitive deficits
+impaired functioning
+loss of concentration
+insomnia
+sleep disorder
+sleep disruption
+sleeplessness
+eco-anxiety
+solastalgia
+ecological grief
+eco-grief
+substance use
+substance abuse
+drug use
+alcohol
+alcoholism
