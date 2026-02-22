@@ -1,6 +1,6 @@
 python ./src/create_yearly_panel.py --input ./data/euro_legis_df.csv --output ./outputs/dataframes/policy_year_panel.csv
 
-python ./src/plot_euromap.py --annotations ./outputs/dataframes/health_annotations.csv --panel ./outputs/dataframes/policy_year_panel.csv --output_csv ./outputs/dataframes/country_year_health_stats.csv --output_png ./outputs/figures/europe_health_map.png --output_pdf ./outputs/figures/europe_health_map.pdf
+python ./src/plot_euromap.py --input_csv ./outputs/dataframes/health_annotations.csv --panel ./outputs/dataframes/policy_year_panel.csv --output_csv ./outputs/dataframes/country_year_health_stats.csv --output_png ./outputs/figures/europe_health_map.png --output_pdf ./outputs/figures/europe_health_map.pdf
 
 python ./src/plot_euro_health_categories.py --input ./outputs/dataframes/health_annotations.csv --panel ./outputs/dataframes/policy_year_panel.csv --output ./outputs/figures/euro_health_categories.pdf
 

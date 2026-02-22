@@ -1,268 +1,205 @@
-#!/usr/bin/env python3
-
 import argparse
-import numpy as np
+import os
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap, BoundaryNorm
-from collections import Counter
 
-# ============================================================
-# GLOBALS
-# ============================================================
-WORLD_URL = "https://naturalearth.s3.amazonaws.com/110m_cultural/ne_110m_admin_0_countries.zip"
 
-EU_COUNTRIES = [
-    'Albania','Austria','Belgium','Bosnia and Herzegovina','Bulgaria','Croatia',
-    'Cyprus','Czechia','Denmark','Estonia','Finland','France','Germany','Greece',
-    'Hungary','Iceland','Ireland','Italy','Kosovo','Latvia','Liechtenstein','Lithuania',
-    'Luxembourg','Malta','Montenegro','Netherlands','North Macedonia','Norway','Poland',
-    'Portugal','Romania','Serbia','Slovakia','Slovenia','Spain','Sweden','Switzerland',
-    'Türkiye','United Kingdom'
-]
+# -----------------------------
+# ISO COUNTRY MAPPING
+# -----------------------------
+ISO_MAP = {
+    'Albania': 'AL',
+    'Austria': 'AT',
+    'Belgium': 'BE',
+    'Bosnia and Herzegovina': 'BA',
+    'Bulgaria': 'BG',
+    'Croatia': 'HR',
+    'Cyprus': 'CY',
+    'Czechia': 'CZ',
+    'Denmark': 'DK',
+    'Estonia': 'EE',
+    'Finland': 'FI',
+    'France': 'FR',
+    'Germany': 'DE',
+    'Greece': 'EL',
+    'Hungary': 'HU',
+    'Iceland': 'IS',
+    'Ireland': 'IE',
+    'Italy': 'IT',
+    'Kosovo': 'XK',
+    'Latvia': 'LV',
+    'Liechtenstein': 'LI',
+    'Lithuania': 'LT',
+    'Luxembourg': 'LU',
+    'Malta': 'MT',
+    'Montenegro': 'ME',
+    'Netherlands': 'NL',
+    'North Macedonia': 'MK',
+    'Norway': 'NO',
+    'Poland': 'PL',
+    'Portugal': 'PT',
+    'Romania': 'RO',
+    'Serbia': 'RS',
+    'Slovakia': 'SK',
+    'Slovenia': 'SI',
+    'Spain': 'ES',
+    'Sweden': 'SE',
+    'Switzerland': 'CH',
+    'Türkiye': 'TR',
+    'United Kingdom': 'UK'
+}
 
-FEATURE_COLS = [
-    "Health relevance (1/0)",
-    "Health adaptation mandate (1/0)",
-    "Institutional health role (1/0)"
-]
+EEA_ISO_CODES = list(ISO_MAP.values())
 
-# ============================================================
-# STEP 1: CREATE COUNTRY-YEAR HEALTH STATS
-# ============================================================
-def create_country_year_health_stats(input_csv, panel_csv, output_csv,
-                                     multilabel_col="Response", year_col="Year"):
-    df = pd.read_csv(input_csv)
-    panel = pd.read_csv(panel_csv)
 
-    # Remove failed extractions
-    df = df[df['Notes'] != 'Extraction failed']
+# -----------------------------
+# MAIN FUNCTION
+# -----------------------------
+def main(args):
+
+    print("Generating country-year statistics and aggregated totals...")
+
+    # -----------------------------
+    # LOAD DATA
+    # -----------------------------
+    annotations = pd.read_csv(args.input_csv)
+    panel = pd.read_csv(args.panel_csv)
 
     # Ensure ID and Year columns
-    if "Doc ID" in df.columns:
-        df = df.rename(columns={"Doc ID": "Document ID"})
+    if "Doc ID" in annotations.columns:
+        annotations = annotations.rename(columns={"Doc ID": "Document ID"})
     if "year" in panel.columns:
         panel = panel.rename(columns={"year": "Year"})
     elif "Year" not in panel.columns:
         raise ValueError("Panel file must contain 'Year' or 'year' column.")
 
-    df = df.drop(columns=["Year"], errors="ignore")
-    panel = panel[["Document ID", "Year"]]
+    df = annotations.merge(panel, on="Document ID", how="left")
 
-    # Merge with panel
-    df = df.merge(panel.rename(columns={"Year": year_col}),
-                  on="Document ID", how="inner")
+    # -----------------------------
+    # EXPAND EU DOCUMENTS
+    # -----------------------------
+    eu_docs = df[df["Country"] == "European Union"].copy()
+    non_eu_docs = df[df["Country"] != "European Union"].copy()
 
-    # Ensure binary features
-    for c in FEATURE_COLS:
-        df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0).astype(int)
+    expanded_rows = []
+    for _, row in eu_docs.iterrows():
+        for country in ISO_MAP.keys():
+            new_row = row.copy()
+            new_row["Country"] = country
+            expanded_rows.append(new_row)
 
-    # EU expansion
-    df_eu = df[df["Country"] == "EU"].copy()
-    df_non_eu = df[df["Country"] != "EU"].copy()
-    df_eu_expanded = pd.concat([df_eu.assign(Country=c) for c in EU_COUNTRIES],
-                               ignore_index=True)
-    df_country = pd.concat([df_non_eu, df_eu_expanded], ignore_index=True)
+    expanded_df = pd.DataFrame(expanded_rows)
+    df = pd.concat([non_eu_docs, expanded_df], ignore_index=True)
 
-    # Filter to health-relevant documents and deduplicate
-    df_health = df_country[df_country["Health relevance (1/0)"] >= 1].copy()
-    df_health = df_health.drop_duplicates(subset=["Document ID", "Country", year_col])
+    # -----------------------------
+    # ADD ISO CODE
+    # -----------------------------
+    df["CNTR_CODE"] = df["Country"].map(ISO_MAP)
 
-    # Country-year totals
-    country_year_totals = (
-        df_health.groupby(["Country", year_col])
-        .size()
-        .reset_index(name="Total documents")
-    )
+    # Drop anything not in mapping
+    df = df[df["CNTR_CODE"].notna()]
 
-    # Sum binary features
-    country_year_features = (
-        df_health.groupby(["Country", year_col])[FEATURE_COLS]
-        .sum().reset_index()
-    )
-
-    # Topic counts
-    topic_records = []
-    for (country, year), group in df_health.groupby(["Country", year_col]):
-        all_topics = []
-        for cell in group[multilabel_col].dropna():
-            all_topics.extend([t.strip() for t in cell.split(";") if t.strip()])
-        counts = Counter(all_topics)
-        for topic, count in counts.items():
-            topic_records.append({"Country": country, year_col: year, topic: count})
-    country_year_topics = pd.DataFrame(topic_records)
-    country_year_topics_wide = (
-        country_year_topics.pivot_table(index=["Country", year_col], aggfunc="sum")
+    # -----------------------------
+    # AGGREGATION (COUNTRY LEVEL)
+    # -----------------------------
+    aggregated = (
+        df.groupby(["Country", "CNTR_CODE"])
+        .agg({
+            "Health relevance (1/0)": "sum",
+            "Health adaptation mandate (1/0)": "sum",
+            "Institutional health role (1/0)": "sum"
+        })
         .reset_index()
     )
 
-    # Merge everything
-    country_year_stats = (
-        country_year_totals
-        .merge(country_year_features, on=["Country", year_col], how="left")
-        .merge(country_year_topics_wide, on=["Country", year_col], how="left")
+    # Rename for clarity
+    aggregated = aggregated.rename(columns={
+        "Health relevance (1/0)": "Health relevance",
+        "Health adaptation mandate (1/0)": "Health adaptation mandate",
+        "Institutional health role (1/0)": "Institutional health role"
+    })
+
+    # Save aggregated CSV
+    aggregated_csv_path = args.output_csv.replace(".csv", "_aggregated.csv")
+    aggregated.to_csv(aggregated_csv_path, index=False)
+    print(f"Aggregated country-level CSV saved as: {aggregated_csv_path}")
+
+    # -----------------------------
+    # LOAD SHAPEFILE
+    # -----------------------------
+    print("Creating map (World Eckert III projection)...")
+
+    shapefile_path = (
+        "./shapefile/NUTS_RG_01M_2024_4326_with_UK_2021.shp"
+        if args.resolution == "low"
+        else "./shapefile/NUTS_RG_10M_2024_4326_with_UK_2021.shp"
     )
 
-    country_year_stats.to_csv(output_csv, index=False)
-    return country_year_stats
+    gdf = gpd.read_file(shapefile_path)
 
-# ============================================================
-# STEP 2: CREATE EUROPEAN MAP
-# ============================================================
-def harmonize_country_names(df):
-    mapping = {
-        "United States": "United States of America",
-        "Russia": "Russian Federation",
-        "Congo": "Republic of the Congo",
-        "Congo, Dem. Rep.": "Democratic Republic of the Congo",
-        "Ivory Coast": "Côte d'Ivoire",
-        "South Korea": "Republic of Korea",
-        "North Korea": "Democratic People's Republic of Korea",
-        "EU": None,
-        "Türkiye": "Turkey"  
-    }
-    df["Country"] = df["Country"].replace(mapping)
-    return df
+    # Filter to requested NUTS level
+    gdf = gdf[gdf["LEVL_CODE"] == args.nuts_level].copy()
 
+    # Filter to EEA38+UK only
+    gdf = gdf[gdf["CNTR_CODE"].isin(EEA_ISO_CODES)]
 
-def create_euro_map(input_csv, output_png, output_pdf, european_countries, global_max=None):
-    df = pd.read_csv(input_csv)
-    df = df[df["Country"].isin(european_countries)].copy()
-    df = df[(df["Year"] >= 2000) & (df["Year"] <= 2025)].copy()
-    df = df[df["Health relevance (1/0)"] >= 1]
+    # -----------------------------
+    # MERGE USING ISO CODE
+    # -----------------------------
+    merged = gdf.merge(
+        aggregated,
+        on="CNTR_CODE",
+        how="left"
+    )
 
-    country_counts = df.groupby("Country")["Total documents"].sum().reset_index()
-    country_counts = harmonize_country_names(country_counts)
+    # -----------------------------
+    # PLOT MAP (Health relevance)
+    # -----------------------------
+    fig, ax = plt.subplots(1, 1, figsize=(14, 10))
 
-    world = gpd.read_file(WORLD_URL)
-    world["NAME"] = world["NAME"].replace({"Turkey": "Türkiye", "United Kingdom of Great Britain and Northern Ireland": "United Kingdom"})
-    world = world[world["NAME"].isin(european_countries)].copy()
-    world_merged = world.merge(country_counts, how="left",
-                               left_on="NAME", right_on="Country")
-    world_merged["Total documents"] = world_merged["Total documents"].fillna(0)
+    merged.plot(
+        column="Health relevance",
+        cmap="OrRd",
+        linewidth=0.5,
+        edgecolor="black",
+        legend=True,
+        missing_kwds={
+            "color": "lightgrey",
+            "edgecolor": "black",
+            "label": "No data"
+        },
+        ax=ax
+    )
 
-    # ----------------------------
-    # Use global max if provided, otherwise local max
-    # ----------------------------
-    europe_max = global_max if global_max is not None else world_merged["Total documents"].max()
-
-    # Create bins (linear + gradient-based)
-    low_bins = list(range(0, min(europe_max, 20) + 1))
-    high_bins = list(range(21, int(europe_max) + 5, max(1, int(europe_max / 10))))
-    bins = sorted(list(set(low_bins + high_bins)))
-
-    grey = [0.8, 0.8, 0.8, 1]
-    num_gradients = len(bins) - 1
-    greens = plt.cm.Greens(np.linspace(0.2, 1, num_gradients))
-    colors_list = np.vstack([grey, greens])
-    cmap = ListedColormap(colors_list)
-    norm = BoundaryNorm(bins, cmap.N)
-
-    # ----------------------------
-    # Plot
-    # ----------------------------
-    fig, ax = plt.subplots(figsize=(12, 10))
-    world.boundary.plot(ax=ax, linewidth=0.7, color="black")
-    world_merged.plot(column="Total documents", cmap=cmap, norm=norm,
-                      ax=ax, edgecolor="none")
-    
-    # ---- ADD COUNTRY LABELS ----
-    '''for idx, row in world_merged.iterrows():
-        if pd.notnull(row["Total documents"]):
-            point = row["geometry"].representative_point()
-            ax.text(
-                point.x,
-                point.y,
-                row["NAME"],
-                fontsize=8,               # very small
-                ha="center",
-                va="center",
-                color="#6A0DAD",
-                alpha=0.85
-            )
-
-    '''
-
-    ax.set_title("Cumulative Active Health-Related Legislative Documents in Europe (2000–2025)",
-                 fontsize=15, fontweight="bold")
-    # Zoom into Europe
-    ax.set_xlim(-25, 45)
-    ax.set_ylim(30, 75)
-
+    ax.set_title("Health-Relevant Climate Policy Documents\n(EEA38 + UK)",
+                 fontsize=14)
     ax.axis("off")
 
-    # Colorbar
-    sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
-    sm.set_array([])
-    # Vertical colorbar on the right
-    cbar = fig.colorbar(
-        sm,
-        ax=ax,
-        orientation="vertical",
-        fraction=0.035,   # width of colorbar
-        pad=0.02          # spacing between map and colorbar
-    )
-
-    cbar.set_label("Total Documents", fontsize=12)
-
-    num_ticks = 8
-    tick_indices = np.linspace(0, len(bins) - 1, num_ticks, dtype=int)
-    cbar.set_ticks([bins[i] for i in tick_indices])
-    cbar.set_ticklabels([str(bins[i]) for i in tick_indices])
-
     plt.tight_layout()
-    fig.savefig(output_png, dpi=300, bbox_inches="tight")
-    fig.savefig(output_pdf, bbox_inches="tight")
-    plt.close(fig)
+    plt.savefig(args.output_png, dpi=300)
+    plt.savefig(args.output_pdf)
+    plt.close()
+
+    print(f"Map saved as {args.output_png} and {args.output_pdf}")
+    print("Done.")
 
 
-# ============================================================
-# MAIN CLI
-# ============================================================
-def main():
-    parser = argparse.ArgumentParser(
-        description="Create European country-year health stats and map"
-    )
-    parser.add_argument("--annotations", required=True,
-                        help="Path to combined annotation CSV")
-    parser.add_argument("--panel", required=True,
-                        help="Path to yearly panel CSV")
-    parser.add_argument("--output_csv", required=True,
-                        help="Path to output country-year CSV")
-    parser.add_argument("--output_png", required=True,
-                        help="Path to output PNG map")
-    parser.add_argument("--output_pdf", required=True,
-                        help="Path to output PDF map")
+# -----------------------------
+# CLI
+# -----------------------------
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--input_csv", required=True)
+    parser.add_argument("--panel_csv", required=True)
+    parser.add_argument("--output_csv", required=True)
+    parser.add_argument("--output_png", required=True)
+    parser.add_argument("--output_pdf", required=True)
+    parser.add_argument("--resolution", choices=["low", "high"], default="low")
+    parser.add_argument("--nuts_level", type=int, choices=[0, 1, 2, 3], default=0)
+
     args = parser.parse_args()
 
-    print("✅ Generating country-year health stats...")
-    create_country_year_health_stats(
-        input_csv=args.annotations,
-        panel_csv=args.panel,
-        output_csv=args.output_csv
-    )
-
-    print("✅ Calculating global max for map color scaling...")
-    df_stats = pd.read_csv(args.output_csv)
-    # Only consider health-relevant documents
-    global_max = df_stats[df_stats["Health relevance (1/0)"] >= 1]["Total documents"].max()
-    if pd.isna(global_max) or global_max == 0:
-        global_max = 1  # fallback to avoid division by zero
-
-    print(f"   ➤ Global max Total documents: {global_max}")
-
-    print("✅ Creating European map...")
-    create_euro_map(
-        input_csv=args.output_csv,
-        output_png=args.output_png,
-        output_pdf=args.output_pdf,
-        european_countries=EU_COUNTRIES,
-        global_max=global_max
-    )
-
-    print("✔ Done!")
-
-
-if __name__ == "__main__":
-    main()
+    main(args)
