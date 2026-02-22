@@ -1,8 +1,8 @@
 import argparse
-import os
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 # -----------------------------
@@ -58,7 +58,7 @@ EEA_ISO_CODES = list(ISO_MAP.values())
 # -----------------------------
 def main(args):
 
-    print("Generating country-year statistics and aggregated totals...")
+    print("Generating aggregated country statistics...")
 
     # -----------------------------
     # LOAD DATA
@@ -66,23 +66,24 @@ def main(args):
     annotations = pd.read_csv(args.input_csv)
     panel = pd.read_csv(args.panel_csv)
 
-    # Ensure ID and Year columns
     if "Doc ID" in annotations.columns:
         annotations = annotations.rename(columns={"Doc ID": "Document ID"})
+
     if "year" in panel.columns:
         panel = panel.rename(columns={"year": "Year"})
     elif "Year" not in panel.columns:
-        raise ValueError("Panel file must contain 'Year' or 'year' column.")
+        raise ValueError("Panel file must contain 'Year' column.")
 
     df = annotations.merge(panel, on="Document ID", how="left")
 
     # -----------------------------
     # EXPAND EU DOCUMENTS
     # -----------------------------
-    eu_docs = df[df["Country"] == "European Union"].copy()
-    non_eu_docs = df[df["Country"] != "European Union"].copy()
+    eu_docs = df[df["Country"] == "European Union"]
+    non_eu_docs = df[df["Country"] != "European Union"]
 
     expanded_rows = []
+
     for _, row in eu_docs.iterrows():
         for country in ISO_MAP.keys():
             new_row = row.copy()
@@ -93,18 +94,16 @@ def main(args):
     df = pd.concat([non_eu_docs, expanded_df], ignore_index=True)
 
     # -----------------------------
-    # ADD ISO CODE
+    # MAP ISO
     # -----------------------------
     df["CNTR_CODE"] = df["Country"].map(ISO_MAP)
-
-    # Drop anything not in mapping
     df = df[df["CNTR_CODE"].notna()]
 
     # -----------------------------
-    # AGGREGATION (COUNTRY LEVEL)
+    # AGGREGATE
     # -----------------------------
     aggregated = (
-        df.groupby(["Country", "CNTR_CODE"])
+        df.groupby(["CNTR_CODE", "Country"])
         .agg({
             "Health relevance (1/0)": "sum",
             "Health adaptation mandate (1/0)": "sum",
@@ -113,23 +112,18 @@ def main(args):
         .reset_index()
     )
 
-    # Rename for clarity
     aggregated = aggregated.rename(columns={
         "Health relevance (1/0)": "Health relevance",
         "Health adaptation mandate (1/0)": "Health adaptation mandate",
         "Institutional health role (1/0)": "Institutional health role"
     })
 
-    # Save aggregated CSV
-    aggregated_csv_path = args.output_csv.replace(".csv", "_aggregated.csv")
-    aggregated.to_csv(aggregated_csv_path, index=False)
-    print(f"Aggregated country-level CSV saved as: {aggregated_csv_path}")
+    aggregated.to_csv(args.output_csv, index=False)
+    print(f"Aggregated CSV saved as: {args.output_csv}")
 
     # -----------------------------
     # LOAD SHAPEFILE
     # -----------------------------
-    print("Creating map (World Eckert III projection)...")
-
     shapefile_path = (
         "./shapefile/NUTS_RG_01M_2024_4326_with_UK_2021.shp"
         if args.resolution == "low"
@@ -137,48 +131,81 @@ def main(args):
     )
 
     gdf = gpd.read_file(shapefile_path)
+    gdf = gdf[gdf["LEVL_CODE"] == args.nuts_level]
+    #gdf = gdf[gdf["CNTR_CODE"].isin(EEA_ISO_CODES)]
 
-    # Filter to requested NUTS level
-    gdf = gdf[gdf["LEVL_CODE"] == args.nuts_level].copy()
+    # Project to Eckert III
+    gdf = gdf.to_crs("+proj=eck3")
 
-    # Filter to EEA38+UK only
-    gdf = gdf[gdf["CNTR_CODE"].isin(EEA_ISO_CODES)]
-
-    # -----------------------------
-    # MERGE USING ISO CODE
-    # -----------------------------
+    #merged = gdf.merge(aggregated, on="CNTR_CODE", how="left")
     merged = gdf.merge(
-        aggregated,
+        aggregated[["CNTR_CODE", "Health relevance"]],
         on="CNTR_CODE",
         how="left"
     )
 
     # -----------------------------
-    # PLOT MAP (Health relevance)
+    # PLOT
     # -----------------------------
-    fig, ax = plt.subplots(1, 1, figsize=(14, 10))
+    fig, ax = plt.subplots(figsize=(10, 9))
 
+    # Light blue background (water)
+    ax.set_facecolor("#dceaf6")
+
+    # Plot countries
     merged.plot(
         column="Health relevance",
         cmap="OrRd",
         linewidth=0.5,
         edgecolor="black",
         legend=True,
+        legend_kwds={
+            "shrink": 0.5,
+            "aspect": 20,
+            "pad": 0.02
+        },
         missing_kwds={
-            "color": "lightgrey",
+            "color": "#d9d9d9",
             "edgecolor": "black",
             "label": "No data"
         },
         ax=ax
     )
 
-    ax.set_title("Health-Relevant Climate Policy Documents\n(EEA38 + UK)",
-                 fontsize=14)
-    ax.axis("off")
+    # -----------------------------
+    # ADD LAT/LON GRIDLINES
+    # -----------------------------
+    '''xmin, ymin, xmax, ymax = merged.total_bounds
+
+    # Create evenly spaced gridlines
+    x_ticks = np.linspace(xmin, xmax, 8)
+    y_ticks = np.linspace(ymin, ymax, 8)
+
+    for x in x_ticks:
+        ax.axvline(x=x, color="gray", linestyle="--", linewidth=0.3, alpha=0.5)
+
+    for y in y_ticks:
+        ax.axhline(y=y, color="gray", linestyle="--", linewidth=0.3, alpha=0.5)
+    '''
+    # -----------------------------
+    # FRAME
+    # -----------------------------
+    for spine in ax.spines.values():
+        spine.set_visible(True)
+        spine.set_linewidth(1)
+        spine.set_edgecolor("black")
+
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    ax.set_title(
+        "Health-Relevant Climate Policy Documents\n(EEA38 + UK)",
+        fontsize=13
+    )
 
     plt.tight_layout()
-    plt.savefig(args.output_png, dpi=300)
-    plt.savefig(args.output_pdf)
+    plt.savefig(args.output_png, dpi=300, bbox_inches="tight")
+    plt.savefig(args.output_pdf, bbox_inches="tight")
     plt.close()
 
     print(f"Map saved as {args.output_png} and {args.output_pdf}")
