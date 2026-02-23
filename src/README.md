@@ -1,4 +1,4 @@
-# Pverview
+# Overview
 This documentation is to understand the purpose of each python script used in this repository. This corresponds to the 
 
 ## 🧠 Step 1 – Health Relevance Extraction
@@ -42,10 +42,11 @@ Health keywords are grouped into the following categories:
 ## 🧠 Step 2 – Create Yearly Policy Panel
 
 ### Script:
+```
 python ./src/create_yearly_panel.py
 --input ./data/euro_legis_df.csv
 --output ./outputs/dataframes/policy_year_panel.csv
-
+```
 
 
 ### Purpose:
@@ -69,8 +70,139 @@ This panel is later merged with health annotations.
 ## 🧠 Step 3 – Aggregate Health Counts
 
 ### Script:
+```
 python ./src/create_aggregate_health_counts.py
 --panel ./outputs/dataframes/policy_year_panel.csv
 --health ./outputs/dataframes/health_annotations.csv
 --output ./outputs/dataframes/health_counts.xlsx
+```
 
+
+### Purpose:
+Creates aggregated counts for:
+
+- EEA38+UK overall
+- EEA38+UK subregions
+
+Aggregation follows official EEA38+UK subregion divisions (not UN subregions).
+
+### Output:
+outputs/dataframes/health_counts.xlsx
+
+
+---
+
+## 📊 Figures
+
+---
+
+## 1️⃣ Europe Health Relevance Map
+
+### Script:
+```
+python ./src/plot_euromap.py
+--input_csv ./outputs/dataframes/health_annotations.csv
+--panel ./outputs/dataframes/policy_year_panel.csv
+--output_csv ./outputs/dataframes/country_year_health_stats.csv
+--output_png ./outputs/figures/europe_health_map.png
+--output_pdf ./outputs/figures/europe_health_map.pdf
+```
+
+
+### Description:
+Generates a map of EEA38+UK countries showing:
+
+- Number of active unique legislative documents
+- Containing health relevance
+- Active between 2000–2025
+
+### Outputs:
+outputs/figures/europe_health_map.png,
+outputs/figures/europe_health_map.pdf
+
+---
+
+## 2️⃣ Health Category Trends (Stackplot)
+
+### Script:
+```
+python ./src/plot_euro_health_categories.py
+--input ./outputs/dataframes/health_annotations.csv
+--panel ./outputs/dataframes/policy_year_panel.csv
+--output ./outputs/figures/euro_health_categories.pdf
+```
+
+
+### Description:
+- Yearly total active health-related documents (2000–2025)
+- Stacked by 13 health categories
+- Flow-based stock (not cumulative)
+
+⚠️ Documents may belong to multiple categories.
+
+### Output:
+outputs/figures/euro_health_categories.pdf
+
+---
+
+## 3️⃣ Policy Response Topics Stackplot
+
+### Script:
+```
+python ./src/plot_euro_response_topics.py
+--annotation ./outputs/dataframes/health_annotations.csv
+--panel ./outputs/dataframes/policy_year_panel.csv
+--output ./outputs/figures/euro_policy_stackplot.pdf
+
+```
+
+### Description:
+Same yearly active framework, but categorized by:
+
+- Adaptation
+- Mitigation
+- Disaster Risk Management
+- Loss and Damage
+
+Documents may:
+- Belong to multiple response types
+- Rarely belong to none
+
+### Output:
+outputs/figures/euro_policy_stackplot.pdf
+
+
+---
+
+## 4️⃣ Health Policy Flow Timeline
+
+### Script:
+```
+python ./src/health_policy_barplot.py
+--legislation ./data/euro_legis_df.csv
+--health ./outputs/dataframes/health_annotations.csv
+--output ./outputs/figures/euro_health_policy_timeline.png
+```
+
+
+### Description:
+Visualizes policy dynamics:
+
+- Policies active from previous year
+- Newly added policies
+- Removed/expired policies
+
+Shows legislative health policy flow over time.
+
+### Output:
+outputs/figures/euro_health_policy_timeline.png
+
+---
+
+## ▶️ Run Full Pipeline
+
+Instead of running scripts individually:
+```
+chmod +x run_full_pipeline.sh
+./run_full_pipeline.sh
+```
