@@ -2,7 +2,6 @@ import argparse
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 # -----------------------------
@@ -71,10 +70,22 @@ def main(args):
 
     if "year" in panel.columns:
         panel = panel.rename(columns={"year": "Year"})
-    elif "Year" not in panel.columns:
+
+    if "Year" not in panel.columns:
         raise ValueError("Panel file must contain 'Year' column.")
 
-    df = annotations.merge(panel, on="Document ID", how="left")
+    # Merge panel year
+    df = annotations.merge(
+        panel[["Document ID", "Year"]],
+        on="Document ID",
+        how="left"
+    )
+
+    # Ensure we use panel year
+    df = df.rename(columns={"Year_y": "Year"})
+
+    # Remove documents existing before 2000
+    df = df[df["Year"] >= 2000]
 
     # -----------------------------
     # EXPAND EU DOCUMENTS
@@ -91,6 +102,7 @@ def main(args):
             expanded_rows.append(new_row)
 
     expanded_df = pd.DataFrame(expanded_rows)
+
     df = pd.concat([non_eu_docs, expanded_df], ignore_index=True)
 
     # -----------------------------
@@ -100,23 +112,24 @@ def main(args):
     df = df[df["CNTR_CODE"].notna()]
 
     # -----------------------------
+    # KEEP ONLY HEALTH RELEVANT DOCS
+    # -----------------------------
+    df = df[df["Health relevance (1/0)"] == 1]
+
+    # -----------------------------
+    # REMOVE DUPLICATES
+    # Count each document ONCE per country
+    # -----------------------------
+    df = df.drop_duplicates(subset=["Document ID", "CNTR_CODE"])
+
+    # -----------------------------
     # AGGREGATE
     # -----------------------------
     aggregated = (
-        df.groupby(["CNTR_CODE", "Country"])
-        .agg({
-            "Health relevance (1/0)": "sum",
-            "Health adaptation mandate (1/0)": "sum",
-            "Institutional health role (1/0)": "sum"
-        })
-        .reset_index()
+        df.groupby("CNTR_CODE")
+        .size()
+        .reset_index(name="Health relevance")
     )
-
-    aggregated = aggregated.rename(columns={
-        "Health relevance (1/0)": "Health relevance",
-        "Health adaptation mandate (1/0)": "Health adaptation mandate",
-        "Institutional health role (1/0)": "Institutional health role"
-    })
 
     aggregated.to_csv(args.output_csv, index=False)
     print(f"Aggregated CSV saved as: {args.output_csv}")
@@ -132,14 +145,10 @@ def main(args):
 
     gdf = gpd.read_file(shapefile_path)
     gdf = gdf[gdf["LEVL_CODE"] == args.nuts_level]
-    #gdf = gdf[gdf["CNTR_CODE"].isin(EEA_ISO_CODES)]
-
-    # Project to Eckert III
     gdf = gdf.to_crs("+proj=eck3")
 
-    #merged = gdf.merge(aggregated, on="CNTR_CODE", how="left")
     merged = gdf.merge(
-        aggregated[["CNTR_CODE", "Health relevance"]],
+        aggregated,
         on="CNTR_CODE",
         how="left"
     )
@@ -148,20 +157,17 @@ def main(args):
     # PLOT
     # -----------------------------
     fig, ax = plt.subplots(figsize=(10, 9))
-
-    # Light blue background (water)
     ax.set_facecolor("#dceaf6")
 
-    # Plot countries
     merged.plot(
         column="Health relevance",
         cmap="OrRd",
-        linewidth=0.5,
+        linewidth=0.4,
         edgecolor="black",
         legend=True,
         legend_kwds={
-            "shrink": 0.5,
-            "aspect": 20,
+            "shrink": 0.6,
+            "aspect": 18,
             "pad": 0.02
         },
         missing_kwds={
@@ -172,34 +178,15 @@ def main(args):
         ax=ax
     )
 
-    # -----------------------------
-    # ADD LAT/LON GRIDLINES
-    # -----------------------------
-    '''xmin, ymin, xmax, ymax = merged.total_bounds
-
-    # Create evenly spaced gridlines
-    x_ticks = np.linspace(xmin, xmax, 8)
-    y_ticks = np.linspace(ymin, ymax, 8)
-
-    for x in x_ticks:
-        ax.axvline(x=x, color="gray", linestyle="--", linewidth=0.3, alpha=0.5)
-
-    for y in y_ticks:
-        ax.axhline(y=y, color="gray", linestyle="--", linewidth=0.3, alpha=0.5)
-    '''
-    # -----------------------------
-    # FRAME
-    # -----------------------------
     for spine in ax.spines.values():
         spine.set_visible(True)
         spine.set_linewidth(1)
-        spine.set_edgecolor("black")
 
     ax.set_xticks([])
     ax.set_yticks([])
 
     ax.set_title(
-        "Health-Relevant Climate Legislative Documents\n(EEA38 + UK)",
+        "Health-Relevant Climate Legislative Documents in EEA38+UK \n(2000-2025)",
         fontsize=13
     )
 
