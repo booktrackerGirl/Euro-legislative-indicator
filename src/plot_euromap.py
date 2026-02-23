@@ -199,7 +199,7 @@ def main(args):
     ax.set_yticks([])
 
     ax.set_title(
-        "Health-Relevant Climate Policy Documents\n(EEA38 + UK)",
+        "Health-Relevant Climate Legislative Documents\n(EEA38 + UK)",
         fontsize=13
     )
 
