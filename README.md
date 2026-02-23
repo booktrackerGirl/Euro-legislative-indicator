@@ -1,4 +1,4 @@
-# Euro Legislative Indicator (LCDE 2027)
+# Euro Legislative Indicator (part of LCDE 2027 Report)
 
 This repository contains the code, processed data, and visual outputs for the **Lancet Countdown Project** in their annual Lancet Countdown in Europe (LCDE 2027) report. The project develops quantitative indicators to track and analyze legislative activity in the European Economic Area (EEA) countries + United Kingdom, using reproducible data workflows.
 
@@ -33,9 +33,6 @@ Euro-legislative-indicator/
 ├── .gitignore # Git ignored files
 └── README.md # Project documentation
 ```
-
----
-
 
 ---
 
@@ -105,3 +102,33 @@ cd Euro-legislative-indicator
 
 ### 2️⃣ Install Dependencies
 Ensure Python 3.8+ is installed.
+```bash
+pip install -r requirements.txt
+```
+
+### 3️⃣ Run the Analysis Pipeline
+
+Scripts in the src/ directory are modular and can be executed sequentially:
+```bash
+YET TO BE ADDED
+```
+Adjust execution depending on your research needs.
+
+---
+## 🔁 Reproducibility
+This repository is structured to support full reproducibility:
+
+- Raw data stored separately from processed outputs.
+- Scripts clearly separated by function.
+- All figures generated directly from processed datasets.
+- No manual post-processing required for final outputs.
+
+## 📚 Intended Use
+
+This repository is designed for:
+
+- Academic research
+- Policy analysis
+- Teaching and coursework
+- Data science portfolio demonstration
+- Extension into further legislative or institutional studies
