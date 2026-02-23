@@ -217,5 +217,8 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
+# Files
+src/bash_commands.txt
+
 # Streamlit
 .streamlit/secrets.toml
