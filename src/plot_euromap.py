@@ -49,8 +49,6 @@ ISO_MAP = {
     'United Kingdom': 'UK'
 }
 
-EEA_ISO_CODES = list(ISO_MAP.values())
-
 
 # -----------------------------
 # MAIN FUNCTION
@@ -63,7 +61,7 @@ def main(args):
     # LOAD DATA
     # -----------------------------
     annotations = pd.read_csv(args.input_csv)
-    panel = pd.read_csv(args.panel_csv)
+    panel = pd.read_csv(args.panel)
 
     if "Doc ID" in annotations.columns:
         annotations = annotations.rename(columns={"Doc ID": "Document ID"})
@@ -74,17 +72,29 @@ def main(args):
     if "Year" not in panel.columns:
         raise ValueError("Panel file must contain 'Year' column.")
 
-    # Merge panel year
+    # -----------------------------
+    # MERGE PANEL YEAR SAFELY
+    # -----------------------------
     df = annotations.merge(
-        panel[["Document ID", "Year"]],
+        panel,
         on="Document ID",
-        how="left"
+        how="left",
+        suffixes=("", "_panel")
     )
 
-    # Ensure we use panel year
-    df = df.rename(columns={"Year_y": "Year"})
+    # Identify correct Year column
+    if "Year_panel" in df.columns:
+        df["Year"] = df["Year_panel"]
+    elif "Year" not in df.columns:
+        raise ValueError("No 'Year' column found after merging panel data.")
 
-    # Remove documents existing before 2000
+    # Ensure numeric
+    df["Year"] = pd.to_numeric(df["Year"], errors="coerce")
+
+    # Drop rows without year
+    df = df[df["Year"].notna()]
+
+    # Keep documents from 2000 onwards
     df = df[df["Year"] >= 2000]
 
     # -----------------------------
@@ -106,7 +116,7 @@ def main(args):
     df = pd.concat([non_eu_docs, expanded_df], ignore_index=True)
 
     # -----------------------------
-    # MAP ISO
+    # MAP ISO CODES
     # -----------------------------
     df["CNTR_CODE"] = df["Country"].map(ISO_MAP)
     df = df[df["CNTR_CODE"].notna()]
@@ -117,8 +127,7 @@ def main(args):
     df = df[df["Health relevance (1/0)"] == 1]
 
     # -----------------------------
-    # REMOVE DUPLICATES
-    # Count each document ONCE per country
+    # COUNT EACH DOCUMENT ONCE PER COUNTRY
     # -----------------------------
     df = df.drop_duplicates(subset=["Document ID", "CNTR_CODE"])
 
@@ -145,6 +154,8 @@ def main(args):
 
     gdf = gpd.read_file(shapefile_path)
     gdf = gdf[gdf["LEVL_CODE"] == args.nuts_level]
+
+    # Project to Eckert III
     gdf = gdf.to_crs("+proj=eck3")
 
     merged = gdf.merge(
@@ -154,30 +165,56 @@ def main(args):
     )
 
     # -----------------------------
+    # SPLIT DATA / NON-DATA
+    # -----------------------------
+    data_countries = merged[merged["Health relevance"].notna()]
+    surrounding = merged[merged["Health relevance"].isna()]
+
+    # -----------------------------
+    # CROP TO EUROPE EXTENT
+    # -----------------------------
+    xmin, ymin, xmax, ymax = data_countries.total_bounds
+    buffer = 1_200_000
+
+    ax_xlim = (xmin - buffer, xmax + buffer)
+    ax_ylim = (ymin - buffer, ymax + buffer)
+
+    # -----------------------------
     # PLOT
     # -----------------------------
-    fig, ax = plt.subplots(figsize=(10, 9))
+    fig, ax = plt.subplots(figsize=(9, 9))
+
+    # Light blue water
     ax.set_facecolor("#dceaf6")
 
-    merged.plot(
+    # Plot surrounding countries (grey)
+    surrounding.plot(
+        ax=ax,
+        color="#d9d9d9",
+        edgecolor="black",
+        linewidth=0.4
+    )
+
+    # Plot data countries
+    data_countries.plot(
         column="Health relevance",
         cmap="OrRd",
         linewidth=0.4,
         edgecolor="black",
         legend=True,
         legend_kwds={
-            "shrink": 0.6,
-            "aspect": 18,
+            "shrink": 0.5,
+            "aspect": 15,
             "pad": 0.02
-        },
-        missing_kwds={
-            "color": "#d9d9d9",
-            "edgecolor": "black",
-            "label": "No data"
         },
         ax=ax
     )
 
+    # Apply cropping
+    ax.set_xlim(ax_xlim)
+    ax.set_ylim(ax_ylim)
+
+    # Frame styling
     for spine in ax.spines.values():
         spine.set_visible(True)
         spine.set_linewidth(1)
@@ -186,18 +223,19 @@ def main(args):
     ax.set_yticks([])
 
     ax.set_title(
-        "Health-Relevant Climate Legislative Documents in EEA38+UK \n(2000-2025)",
+        "Health-Relevant Climate Legislative Documents in EEA38+UK\n(2000–2025)",
         fontsize=13
     )
 
     plt.tight_layout()
+
     plt.savefig(args.output_png, dpi=300, bbox_inches="tight")
     plt.savefig(args.output_pdf, bbox_inches="tight")
     plt.close()
 
     print(f"Map saved as {args.output_png} and {args.output_pdf}")
     print("Done.")
-
+    
 
 # -----------------------------
 # CLI
@@ -207,13 +245,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--input_csv", required=True)
-    parser.add_argument("--panel_csv", required=True)
+    parser.add_argument("--panel", required=True)
     parser.add_argument("--output_csv", required=True)
     parser.add_argument("--output_png", required=True)
     parser.add_argument("--output_pdf", required=True)
     parser.add_argument("--resolution", choices=["low", "high"], default="low")
-    parser.add_argument("--nuts_level", type=int, choices=[0, 1, 2, 3], default=0)
+    parser.add_argument("--nuts_level", type=int, choices=[0,1,2,3], default=0)
 
     args = parser.parse_args()
-
     main(args)
