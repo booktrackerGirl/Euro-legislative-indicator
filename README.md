@@ -115,13 +115,17 @@ YET TO BE ADDED
 Adjust execution depending on your research needs.
 
 ---
+
 ## 🔁 Reproducibility
 This repository is structured to support full reproducibility:
 
-- Raw data stored separately from processed outputs.
-- Scripts clearly separated by function.
-- All figures generated directly from processed datasets.
-- No manual post-processing required for final outputs.
+- All outputs are programmatically generated.
+- No manual post-processing is required.
+- Health categorization is keyword-based and transparent.
+- A document may belong to multiple health and response categories.
+- Yearly counts represent active policies, not cumulative totals.
+
+---
 
 ## 📚 Intended Use
 
@@ -132,6 +136,15 @@ This repository is designed for:
 - Teaching and coursework
 - Data science portfolio demonstration
 - Extension into further legislative or institutional studies
+
+---
+
+## 📌 Key Design Decisions
+
+- Panel constructed using start and end dates.
+- Flow-based yearly stock representation.
+- Separate aggregation for EEA38+UK.
+- Multi-label classification allowed.
 
 ---
 ## 📝 Citation
