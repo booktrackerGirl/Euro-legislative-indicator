@@ -203,6 +203,6 @@ outputs/figures/euro_health_policy_timeline.png
 
 Instead of running scripts individually:
 ```
-chmod +x run_full_pipeline.sh
-./run_full_pipeline.sh
+chmod +x src/run_full_pipeline.sh
+./src/run_full_pipeline.sh
 ```
