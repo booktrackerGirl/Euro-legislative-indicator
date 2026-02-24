@@ -118,8 +118,8 @@ def aggregate_timeline(panel_csv, annotations_csv, output_excel):
     # -------------------------------
     # Distribute EU-level documents
     # -------------------------------
-    eu_rows = policy_years[policy_years["Geographies"].str.upper() == "EU"]
-    non_eu_rows = policy_years[policy_years["Geographies"].str.upper() != "EU"]
+    eu_rows = policy_years[policy_years["Geographies"] == "European Union"]
+    non_eu_rows = policy_years[policy_years["Geographies"] != "European Union"]
 
     distributed = []
     for _, row in eu_rows.iterrows():
