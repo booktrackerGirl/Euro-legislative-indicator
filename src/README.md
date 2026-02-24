@@ -71,10 +71,10 @@ This panel is later merged with health annotations.
 
 ### Script:
 ```
-python ./src/create_aggregate_health_counts.py
---panel ./outputs/dataframes/policy_year_panel.csv
---health ./outputs/dataframes/health_annotations.csv
---output ./outputs/dataframes/health_counts.xlsx
+python ./src/create_aggregate_health_counts.py \
+    --legis ./data/euro_legis_df.csv \
+    --annotations ./outputs/dataframes/health_annotations.csv \
+    --output ./outputs/dataframes/health_counts.xlsx
 ```
 
 
@@ -84,7 +84,7 @@ Creates aggregated counts for:
 - EEA38+UK overall
 - EEA38+UK subregions
 
-Aggregation follows official EEA38+UK subregion divisions (not UN subregions).
+Aggregation follows official EEA38+UK subregion divisions.
 
 ### Output:
 outputs/dataframes/health_counts.xlsx
@@ -126,10 +126,10 @@ outputs/figures/europe_health_map.pdf
 
 ### Script:
 ```
-python ./src/plot_euro_health_categories.py
---input ./outputs/dataframes/health_annotations.csv
---panel ./outputs/dataframes/policy_year_panel.csv
---output ./outputs/figures/euro_health_categories.pdf
+python ./src/plot_euro_health_categories.py \
+  --annotation ./outputs/dataframes/health_annotations.csv \
+  --legis ./data/euro_legis_df.csv \
+  --output ./outputs/figures/euro_health_categories.pdf
 ```
 
 
@@ -149,10 +149,10 @@ outputs/figures/euro_health_categories.pdf
 
 ### Script:
 ```
-python ./src/plot_euro_response_topics.py
---annotation ./outputs/dataframes/health_annotations.csv
---panel ./outputs/dataframes/policy_year_panel.csv
---output ./outputs/figures/euro_policy_stackplot.pdf
+python .python ./src/plot_euro_response_topics.py \
+    --annotation ./outputs/dataframes/health_annotations.csv \
+    --legis ./data/euro_legis_df.csv \
+    --output ./outputs/figures/euro_policy_stackplot.pdf
 
 ```
 

@@ -20,9 +20,9 @@ python ./src/create_yearly_panel.py \
 
 echo "Step 3: Creating aggregate health counts (EEA38+UK + subregions)..."
 python ./src/create_aggregate_health_counts.py \
-  --panel ./outputs/dataframes/policy_year_panel.csv \
-  --health ./outputs/dataframes/health_annotations.csv \
-  --output ./outputs/dataframes/health_counts.xlsx
+    --legis ./data/euro_legis_df.csv \
+    --annotations ./outputs/dataframes/health_annotations.csv \
+    --output ./outputs/dataframes/health_counts.xlsx
 
 echo "Step 4: Generating EU health relevance map..."
 python ./src/plot_euromap.py \
@@ -34,21 +34,21 @@ python ./src/plot_euromap.py \
 
 echo "Step 5: Plotting health category trends..."
 python ./src/plot_euro_health_categories.py \
-  --input ./outputs/dataframes/health_annotations.csv \
-  --panel ./outputs/dataframes/policy_year_panel.csv \
+  --annotation ./outputs/dataframes/health_annotations.csv \
+  --legis ./data/euro_legis_df.csv \
   --output ./outputs/figures/euro_health_categories.pdf
 
 echo "Step 6: Plotting response type stackplot..."
-python ./src/plot_euro_response_topics.py \
-  --annotation ./outputs/dataframes/health_annotations.csv \
-  --panel ./outputs/dataframes/policy_year_panel.csv \
-  --output ./outputs/figures/euro_policy_stackplot.pdf
+python .python ./src/plot_euro_response_topics.py \
+    --annotation ./outputs/dataframes/health_annotations.csv \
+    --legis ./data/euro_legis_df.csv \
+    --output ./outputs/figures/euro_policy_stackplot.pdf
 
 echo "Step 7: Generating health policy flow timeline..."
-python ./src/health_policy_barplot.py \
-  --legislation ./data/euro_legis_df.csv \
-  --health ./outputs/dataframes/health_annotations.csv \
-  --output ./outputs/figures/euro_health_policy_timeline.png
+python python ./src/health_policy_barplot.py \
+    --legislation ./data/euro_legis_df.csv \
+    --health ./outputs/dataframes/health_annotations.csv \
+    --output ./outputs/figures/euro_health_policy_timeline.png
 
 echo "--------------------------------------------"
 echo "Pipeline completed successfully."

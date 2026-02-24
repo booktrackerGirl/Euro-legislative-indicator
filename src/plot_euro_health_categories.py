@@ -2,30 +2,20 @@
 
 import argparse
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 # ----------------------------
-# Fixed health categories
+# Health categories and colors
 # ----------------------------
 HEALTH_CATEGORIES = [
-    "communicable_disease",
-    "environmental_health",
-    "food_waterborne",
-    "general_health",
-    "injury_trauma",
-    "maternal_child_health",
-    "mental_health",
-    "mortality_morbidity",
-    "non_communicable_disease",
-    "nutrition",
-    "pathogens_microbiology",
-    "substance_use",
+    "communicable_disease", "environmental_health", "food_waterborne",
+    "general_health", "injury_trauma", "maternal_child_health",
+    "mental_health", "mortality_morbidity", "non_communicable_disease",
+    "nutrition", "pathogens_microbiology", "substance_use",
     "vector_borne_zoonotic"
 ]
 
-# ----------------------------
-# Colors
-# ----------------------------
 CATEGORY_COLORS = {
     "general_health": "#1f77b4",
     "communicable_disease": "#ff7f0e",
@@ -42,9 +32,6 @@ CATEGORY_COLORS = {
     "substance_use": "#98df8a"
 }
 
-# ----------------------------
-# Human-readable labels
-# ----------------------------
 CATEGORY_LABELS = {
     "general_health": "General health",
     "communicable_disease": "Communicable disease",
@@ -62,149 +49,137 @@ CATEGORY_LABELS = {
 }
 
 # ----------------------------
-# Main processing
+# Main plotting function
 # ----------------------------
-def main():
-    parser = argparse.ArgumentParser(
-        description="Plot cumulative trends in health keyword categories"
-    )
-    parser.add_argument("--input", required=True, help="Health keyword CSV file")
-    parser.add_argument("--panel", required=True, help="Policy year panel CSV")
-    parser.add_argument("--output", required=True, help="Output figure (PDF/PNG)")
-    parser.add_argument("--start-year", type=int, default=2000, help="Start year for plot")
-    args = parser.parse_args()
+def plot_health_stackplot(annotation_df, legis_df, output_path, plot_start_year=2000):
+    # Harmonize columns
+    if "Doc ID" in annotation_df.columns:
+        annotation_df = annotation_df.rename(columns={"Doc ID": "Document ID"})
+    annotation_df["Health keyword categories"] = annotation_df["Health keyword categories"].fillna("")
 
-    # -------------------------------------------------
-    # Load data
-    # -------------------------------------------------
-    df = pd.read_csv(args.input)
-    panel = pd.read_csv(args.panel)
+    # Keep health-relevant docs
+    annotation_df = annotation_df[annotation_df["Health relevance (1/0)"] >= 1].copy()
 
-    # Harmonize ID columns
-    if "Doc ID" in df.columns:
-        df = df.rename(columns={"Doc ID": "Document ID"})
-    if "year" in panel.columns:
-        panel = panel.rename(columns={"year": "Year"})
-    panel = panel[["Document ID", "Year"]]
+    legis_df = legis_df[legis_df["Document ID"].isin(annotation_df["Document ID"])].copy()
 
-    # Merge panel (creates cumulative structure)
-    df = df.merge(
-        panel[["Document ID", "Year"]],
+    # Expand timeline events
+    df = legis_df[[
+        "Document ID",
+        "Full timeline of events (types)",
+        "Full timeline of events (dates)"
+    ]].copy()
+    df["event_types"] = df["Full timeline of events (types)"].str.split(";")
+    df["event_dates"] = df["Full timeline of events (dates)"].str.split(";")
+    df_long = df.explode(["event_types", "event_dates"])
+    df_long["event_types"] = df_long["event_types"].astype(str).str.strip()
+    df_long["event_dates"] = df_long["event_dates"].astype(str).str.strip()
+    df_long["Year"] = df_long["event_dates"].str[:4]
+    df_long = df_long[df_long["Year"].str.match(r"^\d{4}$", na=False)]
+    df_long["Year"] = df_long["Year"].astype(int)
+
+    # Define start & end events
+    start_events = ["Passed/Approved", "Entered Into Force", "Set", "Net Zero Pledge"]
+    end_events = ["Repealed/Replaced", "Closed", "Settled"]
+
+    start_years = df_long[df_long["event_types"].isin(start_events)].groupby("Document ID")["Year"].min()
+    end_years = df_long[df_long["event_types"].isin(end_events)].groupby("Document ID")["Year"].max()
+
+    policy_years = pd.concat([start_years, end_years], axis=1)
+    policy_years.columns = ["start_year", "end_year"]
+    policy_years = policy_years.dropna(subset=["start_year"])
+
+    # Merge health keyword info
+    policy_years = policy_years.merge(
+        annotation_df[["Document ID", "Health keyword categories"]],
         on="Document ID",
-        how="inner",
-        suffixes=("_ann", "_panel")
+        how="left"
     )
+    policy_years["Health keyword categories"] = policy_years["Health keyword categories"].fillna("")
 
-    # Force panel year
-    df["Year"] = df["Year_panel"]
-    df = df.drop(columns=["Year_ann", "Year_panel"], errors="ignore")
+    # Create health dummies
+    for cat in HEALTH_CATEGORIES:
+        policy_years[cat] = policy_years["Health keyword categories"].str.contains(cat, case=False, regex=False).astype(int)
 
-    # Clean Year exactly like response script
-    df["Year"] = pd.to_numeric(df["Year"], errors="coerce")
-    df = df.dropna(subset=["Year"])
-    df["Year"] = df["Year"].astype(int)
+    # Timeline-based stock logic
+    max_year = df_long["Year"].max()
+    YEARS = list(range(plot_start_year, max_year + 1))
+    active_set = set()
+    active_totals = []
+    category_totals = {cat: [] for cat in HEALTH_CATEGORIES}
 
+    for year in YEARS:
+        new_docs = set(policy_years[policy_years["start_year"] == year]["Document ID"])
+        dropped_docs = set(policy_years[policy_years["end_year"] == year]["Document ID"])
 
-    # Only include documents with Health relevance > 0
-    df = df[df["Health relevance (1/0)"] >= 1].copy()
+        active_set = active_set.union(new_docs)
+        active_set = active_set.difference(dropped_docs)
 
-    # Drop rows missing the health keyword column
-    df = df.dropna(subset=["Health keyword categories"])
+        active_totals.append(len(active_set))
+        active_df = policy_years[policy_years["Document ID"].isin(active_set)]
 
-    # Drop duplicates
-    df = df.drop_duplicates(subset=["Document ID", "Year"])
+        for cat in HEALTH_CATEGORIES:
+            category_totals[cat].append(active_df[cat].sum())
 
-    # -------------------------------------------------
-    # Filter by start year 
-    # -------------------------------------------------
-    df = df[df["Year"] >= args.start_year].copy()
+    # Build plotting dataframe
+    gdata = pd.DataFrame({"Year": YEARS})
+    for cat in HEALTH_CATEGORIES:
+        gdata[cat] = category_totals[cat]
+    gdata["Total documents"] = active_totals
 
-    # -------------------------------------------------
-    # Create health dummies (row level)
-    # -------------------------------------------------
-    #df["Health keyword categories"] = df["Health keyword categories"].fillna("")
-
-
-    for category in HEALTH_CATEGORIES:
-        df[category] = (
-            df["Health keyword categories"]
-            .str.contains(category, case=False, regex=False)
-            .astype(int)
-        )
-
-    # -------------------------------------------------
-    # Collapse to ONE row per Document ID per Year
-    # -------------------------------------------------
-    doc_year = (
-        df
-        .groupby(["Year", "Document ID"], as_index=False)[HEALTH_CATEGORIES]
-        .max()
-    )
-
-
-    # -------------------------------------------------
-    # Aggregate globally by year (single source object)
-    # -------------------------------------------------
-    gdata = (
-        doc_year
-        .groupby("Year", as_index=False)
-        .agg({
-            **{col: "sum" for col in HEALTH_CATEGORIES},
-            "Document ID": "nunique"
-        })
-        .rename(columns={"Document ID": "Total documents"})
-        .sort_values("Year")
-    )
-
-    # Ensure integer types
-    for col in HEALTH_CATEGORIES + ["Total documents"]:
-        gdata[col] = gdata[col].astype(int)
-
-
-    # -------------------------------------------------
     # Plot
-    # -------------------------------------------------
-    plt.figure(figsize=(15, 7))
-    plt.stackplot(
-        gdata["Year"],
-        [gdata[col] for col in HEALTH_CATEGORIES],
-        colors=[CATEGORY_COLORS[c] for c in HEALTH_CATEGORIES],
-        labels=[CATEGORY_LABELS[c] for c in HEALTH_CATEGORIES],
-        alpha=0.5,
-        edgecolor="black",
-        linewidth=0.3
-    )
-    plt.plot(
-        gdata["Year"],
-        gdata["Total documents"],
-        color="#222222",
-        linewidth=2.7,
-        marker="o",
-        label="Total health-relevant documents"
-    )
+    X = np.arange(len(YEARS))
+    gdata["StackSum"] = gdata[HEALTH_CATEGORIES].sum(axis=1)
+    GLOBAL_Y_MAX = max(gdata["StackSum"].max(), gdata["Total documents"].max()) * 1.15
 
-    for year, val in zip(gdata["Year"], gdata["Total documents"]):
+    fig, ax = plt.subplots(figsize=(15, 7))
+    stack_arrays = [gdata[col].values for col in HEALTH_CATEGORIES]
+    ax.stackplot(X, stack_arrays, colors=[CATEGORY_COLORS[c] for c in HEALTH_CATEGORIES], alpha=0.5, edgecolor="black", linewidth=0.3)
+    line, = ax.plot(X, gdata["Total documents"], color="black", marker="o", linewidth=2.7, label="Total health-relevant documents")
+
+    # Add text
+    for xi, val in zip(X, gdata["Total documents"]):
         if val > 0:
-            plt.text(year, val + 0.03 * gdata["Year"].max(), str(int(val)),
-                     ha="center", va="bottom", fontsize=9, fontweight="bold")
-
-    plt.xlabel("Year", fontsize=13)
-    plt.ylabel("Number of documents", fontsize=13)
-    plt.title("Trends in Health-Related Categories in Climate Legislative Documents from Europe (2000-2025)",
-              fontsize=13, fontweight="bold",  loc="left")
-    plt.grid(axis="y", linestyle="--", alpha=0.4)
-    plt.legend(loc="upper left", fontsize=10, frameon=True)
+            ax.text(xi, val + 0.03 * GLOBAL_Y_MAX, str(int(val)), ha="center", va="bottom", fontsize=8, fontweight="bold")
 
     # Highlight Paris Agreement
-    if 2015 in gdata["Year"].values:
-        plt.axvline(x=2015, linestyle="--", linewidth=2, color="black", alpha=0.8)
-        plt.text(2015 + 0.2, plt.ylim()[1] * 0.95, "Paris Agreement",
-                 va="top", ha="left", fontsize=10, fontweight="bold")
+    if 2015 in YEARS:
+        idx_2015 = YEARS.index(2015)
+        ax.axvline(x=X[idx_2015], linestyle="--", linewidth=1.8, color="black")
+        ax.text(X[idx_2015]+0.2, 0.9*GLOBAL_Y_MAX, "Paris Agreement", va="top", fontsize=10)
 
-    plt.tight_layout()
-    plt.savefig(args.output)
+    ax.set_ylim(0, GLOBAL_Y_MAX)
+    ax.set_ylabel("Legislative documents", fontsize=13)
+    ax.set_title("Active Health-Relevant Legislative Documents Over Time in Europe", fontsize=13, fontweight="bold", loc="left")
+
+    step = 5 if len(YEARS) > 20 else 2
+    tick_years = YEARS[::step]
+    tick_indices = [YEARS.index(y) for y in tick_years]
+    ax.set_xticks(tick_indices)
+    ax.set_xticklabels([str(int(y)) for y in tick_years])
+    ax.grid(axis="y", linestyle="--", alpha=0.4)
+
+    bar_handles = [plt.Rectangle((0,0),1,1,color=CATEGORY_COLORS[c],alpha=0.5) for c in HEALTH_CATEGORIES]
+    fig.legend(handles=bar_handles+[line], labels=[CATEGORY_LABELS[c] for c in HEALTH_CATEGORIES]+["Total health-relevant documents"], loc="upper left", bbox_to_anchor=(0.1,0.88), frameon=True)
+
+    fig.text(0.01, 0.01, "Note: Analysis shown from {} onward.".format(plot_start_year), fontsize=11, style="italic")
+    plt.tight_layout(rect=[0.03, 0.04, 0.97, 0.95])
+    plt.savefig(output_path, dpi=300)
     plt.close()
 
+# ----------------------------
+# CLI
+# ----------------------------
+def main():
+    parser = argparse.ArgumentParser(description="Health categories stackplot with timeline-based active documents")
+    parser.add_argument("--annotation", required=True, help="CSV with health keyword annotations")
+    parser.add_argument("--legis", required=True, help="CSV with legislative panel info (start/end years)")
+    parser.add_argument("--output", required=True, help="Output file (PDF/PNG)")
+    args = parser.parse_args()
+
+    annotation_df = pd.read_csv(args.annotation)
+    panel_df = pd.read_csv(args.legis)
+
+    plot_health_stackplot(annotation_df, panel_df, args.output)
 
 if __name__ == "__main__":
     main()

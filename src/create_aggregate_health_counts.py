@@ -2,51 +2,21 @@
 
 import pandas as pd
 import argparse
-from collections import Counter
 
 # -------------------------------
 # Country → Subregion mapping
 # -------------------------------
 SUBREGION_MAP = {
-    "Albania": "Southern",
-    "Austria": "Western",
-    "Belgium": "Western",
-    "Bosnia and Herzegovina": "Southern",
-    "Bulgaria": "Eastern",
-    "Croatia": "Southern",
-    "Cyprus": "Southern",
-    "Czechia": "Eastern",
-    "Denmark": "Northern",
-    "Estonia": "Northern",
-    "Finland": "Northern",
-    "France": "Western",
-    "Germany": "Western",
-    "Greece": "Southern",
-    "Hungary": "Eastern",
-    "Iceland": "Northern",
-    "Ireland": "Northern",
-    "Italy": "Southern",
-    "Kosovo": "Southern",
-    "Latvia": "Northern",
-    "Liechtenstein": "Western",
-    "Lithuania": "Northern",
-    "Luxembourg": "Western",
-    "Malta": "Southern",
-    "Montenegro": "Southern",
-    "Netherlands": "Western",
-    "North Macedonia": "Southern",
-    "Norway": "Northern",
-    "Poland": "Eastern",
-    "Portugal": "Southern",
-    "Romania": "Eastern",
-    "Serbia": "Southern",
-    "Slovakia": "Eastern",
-    "Slovenia": "Southern",
-    "Spain": "Southern",
-    "Sweden": "Northern",
-    "Switzerland": "Western",
-    "Türkiye": "Southern",
-    "United Kingdom": "UK"
+    "Albania": "Southern","Austria": "Western","Belgium": "Western","Bosnia and Herzegovina": "Southern",
+    "Bulgaria": "Eastern","Croatia": "Southern","Cyprus": "Southern","Czechia": "Eastern",
+    "Denmark": "Northern","Estonia": "Northern","Finland": "Northern","France": "Western",
+    "Germany": "Western","Greece": "Southern","Hungary": "Eastern","Iceland": "Northern",
+    "Ireland": "Northern","Italy": "Southern","Kosovo": "Southern","Latvia": "Northern",
+    "Liechtenstein": "Western","Lithuania": "Northern","Luxembourg": "Western","Malta": "Southern",
+    "Montenegro": "Southern","Netherlands": "Western","North Macedonia": "Southern","Norway": "Northern",
+    "Poland": "Eastern","Portugal": "Southern","Romania": "Eastern","Serbia": "Southern",
+    "Slovakia": "Eastern","Slovenia": "Southern","Spain": "Southern","Sweden": "Northern",
+    "Switzerland": "Western","Türkiye": "Southern","United Kingdom": "UK"
 }
 
 # -------------------------------
@@ -69,88 +39,122 @@ CATEGORY_LABELS = {
 }
 
 RESPONSE_TOPICS = ["Adaptation", "Disaster Risk Management", "Loss And Damage", "Mitigation"]
-
-HEALTH_FEATURES = [
-    "Health relevance (1/0)",
-    "Health adaptation mandate (1/0)",
-    "Institutional health role (1/0)"
-]
+HEALTH_FEATURES = ["Health relevance (1/0)","Health adaptation mandate (1/0)","Institutional health role (1/0)"]
 
 # -------------------------------
 # Core aggregation function
 # -------------------------------
-def aggregate_panel_annotations(panel_csv, annotations_csv, output_excel):
+def aggregate_timeline(panel_csv, annotations_csv, output_excel):
     panel = pd.read_csv(panel_csv)
     annotations = pd.read_csv(annotations_csv)
 
-    # Merge panel and annotations
+    # Harmonize IDs
+    if "Doc ID" in annotations.columns:
+        annotations = annotations.rename(columns={"Doc ID": "Document ID"})
+
+    # Merge annotations
     df = panel.merge(
-        annotations[["Doc ID", "Country"] + HEALTH_FEATURES + ["Response", "Health keyword categories"]],
-        left_on="Document ID",
-        right_on="Doc ID",
+        annotations[["Document ID","Country"] + HEALTH_FEATURES + ["Response","Health keyword categories"]],
+        on="Document ID",
         how="left"
     )
 
     # Fill missing numeric columns
     for col in HEALTH_FEATURES:
         df[col] = df[col].fillna(0).astype(int)
-
     df["Country"] = df["Country"].fillna("Unknown")
-    df["Year"] = df["Year"].astype(int)
     df["Health keyword categories"] = df["Health keyword categories"].fillna("")
+    df["Response"] = df["Response"].fillna("")
 
-    min_year = 2000
-    max_year = df["Year"].max()
-    all_years = list(range(min_year, max_year + 1))
+    # -------------------------------
+    # Timeline-based start/end logic
+    # -------------------------------
+    start_events = ["Passed/Approved","Entered Into Force","Set","Net Zero Pledge"]
+    end_events = ["Repealed/Replaced","Closed","Settled"]
 
-    # --- Helper function to count multi-keyword columns ---
-    def count_keywords(series, allowed_keywords):
-        counts = Counter()
-        for val in series.dropna():
-            for kw in val.split(";"):
-                kw = kw.strip()
-                if kw in allowed_keywords:
-                    counts[kw] += 1
-        return counts
+    df_long = panel.copy()
+    df_long["start_year"] = None
+    df_long["end_year"] = None
 
-    # --- Country-level aggregation ---
+    for idx, row in df_long.iterrows():
+        types = str(row.get("Full timeline of events (types)","")).split(";")
+        dates = str(row.get("Full timeline of events (dates)","")).split(";")
+        start_years = [int(d[:4]) for t,d in zip(types,dates) if t.strip() in start_events and d[:4].isdigit()]
+        end_years = [int(d[:4]) for t,d in zip(types,dates) if t.strip() in end_events and d[:4].isdigit()]
+        df_long.at[idx,"start_year"] = min(start_years) if start_years else None
+        df_long.at[idx,"end_year"] = max(end_years) if end_years else None
+
+    # Keep only documents with a start year
+    df_long = df_long.dropna(subset=["start_year"])
+
+    # Merge with annotations
+    policy_years = df_long[["Document ID","start_year","end_year"]].merge(
+        annotations[["Document ID","Country"] + HEALTH_FEATURES + ["Response","Health keyword categories"]],
+        on="Document ID", how="left"
+    )
+
+    # -------------------------------
+    # Create dummy columns
+    # -------------------------------
+    for cat in CATEGORY_LABELS.keys():
+        policy_years[cat] = policy_years["Health keyword categories"].str.contains(cat, case=False, regex=False).astype(int)
+    for resp in RESPONSE_TOPICS:
+        policy_years[resp] = policy_years["Response"].str.contains(resp, case=False, regex=False).astype(int)
+
+    # -------------------------------
+    # Stock aggregation
+    # -------------------------------
+    all_years = sorted(list(set(policy_years["start_year"].dropna().astype(int).tolist() +
+                                policy_years["end_year"].dropna().astype(int).tolist())))
+    min_year = min(all_years)
+    max_year = max(all_years)
+    YEARS = list(range(min_year, max_year + 1))
+
+    active_docs = set()
     country_records = []
-    for country, group in df.groupby("Country"):
-        for year in all_years:
-            df_year = group[group["Year"] == year]
-            rec = {"Country": country, "Year": year, "Total documents": len(df_year)}
-            for f in HEALTH_FEATURES:
-                rec[f] = df_year[f].sum()
-            # Count Response topics
-            resp_counts = count_keywords(df_year["Response"], RESPONSE_TOPICS)
-            for t in RESPONSE_TOPICS:
-                rec[t] = resp_counts.get(t, 0)
-            # Count health keyword categories
-            health_counts = count_keywords(df_year["Health keyword categories"], CATEGORY_LABELS.keys())
-            for cat, label in CATEGORY_LABELS.items():
-                rec[label] = health_counts.get(cat, 0)
-            country_records.append(rec)
-    df_country = pd.DataFrame(country_records)
-
-    # --- Subregion-level aggregation ---
-    df["Subregion"] = df["Country"].map(SUBREGION_MAP).fillna("Other")
     subregion_records = []
-    for subregion, group in df.groupby("Subregion"):
-        for year in all_years:
-            df_year = group[group["Year"] == year]
-            rec = {"Subregion": subregion, "Year": year, "Total documents": len(df_year)}
-            for f in HEALTH_FEATURES:
-                rec[f] = df_year[f].sum()
-            resp_counts = count_keywords(df_year["Response"], RESPONSE_TOPICS)
-            for t in RESPONSE_TOPICS:
-                rec[t] = resp_counts.get(t, 0)
-            health_counts = count_keywords(df_year["Health keyword categories"], CATEGORY_LABELS.keys())
-            for cat, label in CATEGORY_LABELS.items():
-                rec[label] = health_counts.get(cat, 0)
-            subregion_records.append(rec)
+
+    for year in YEARS:
+        # Identify new / dropped
+        new_docs = set(policy_years[policy_years["start_year"] == year]["Document ID"])
+        dropped_docs = set(policy_years[policy_years["end_year"] == year]["Document ID"])
+        active_docs = active_docs.union(new_docs).difference(dropped_docs)
+
+        active_df = policy_years[policy_years["Document ID"].isin(active_docs)]
+        health_df = active_df[active_df["Health relevance (1/0)"] == 1]
+
+        if year >= 2000:  # Only report from 2000
+            # --- Country-level ---
+            for country, grp in active_df.groupby("Country"):
+                rec = {"Country": country, "Year": year, "Total documents": len(grp)}
+                health_grp = grp[grp["Health relevance (1/0)"] == 1]
+                for f in HEALTH_FEATURES:
+                    rec[f] = health_grp[f].sum()
+                for t in RESPONSE_TOPICS:
+                    rec[t] = health_grp[t].sum()
+                for cat,label in CATEGORY_LABELS.items():
+                    rec[label] = health_grp[cat].sum()
+                country_records.append(rec)
+
+            # --- Subregion-level ---
+            active_df["Subregion"] = active_df["Country"].map(SUBREGION_MAP).fillna("Other")
+            for subr, grp in active_df.groupby("Subregion"):
+                rec = {"Subregion": subr, "Year": year, "Total documents": len(grp)}
+                health_grp = grp[grp["Health relevance (1/0)"] == 1]
+                for f in HEALTH_FEATURES:
+                    rec[f] = health_grp[f].sum()
+                for t in RESPONSE_TOPICS:
+                    rec[t] = health_grp[t].sum()
+                for cat,label in CATEGORY_LABELS.items():
+                    rec[label] = health_grp[cat].sum()
+                subregion_records.append(rec)
+
+    df_country = pd.DataFrame(country_records)
     df_subregion = pd.DataFrame(subregion_records)
 
-    # --- Save to Excel ---
+    # -------------------------------
+    # Save to Excel
+    # -------------------------------
     with pd.ExcelWriter(output_excel) as writer:
         df_country.to_excel(writer, sheet_name="Country", index=False)
         df_subregion.to_excel(writer, sheet_name="Subregion", index=False)
@@ -158,16 +162,19 @@ def aggregate_panel_annotations(panel_csv, annotations_csv, output_excel):
     print(f"✅ Aggregated counts saved to '{output_excel}'.")
 
 
+# -------------------------------
+# CLI
+# -------------------------------
 def main():
     parser = argparse.ArgumentParser(
-        description="Aggregate yearly health-panel counts by country and subregion with readable health category names."
+        description="Timeline-based aggregation of health panel counts by country & subregion"
     )
-    parser.add_argument("--panel", required=True, help="Expanded panel CSV (Document ID + Year)")
-    parser.add_argument("--annotations", required=True, help="Health annotation CSV (Doc ID + Country + Health + Response + Health keyword categories)")
-    parser.add_argument("--output", required=True, help="Output Excel file with two sheets: Country & Subregion")
-
+    parser.add_argument("--legis", required=True, help="Legislative CSV with timeline columns")
+    parser.add_argument("--annotations", required=True, help="Health annotations CSV")
+    parser.add_argument("--output", required=True, help="Output Excel file")
     args = parser.parse_args()
-    aggregate_panel_annotations(args.panel, args.annotations, args.output)
+
+    aggregate_timeline(args.panel, args.annotations, args.output)
 
 
 if __name__ == "__main__":
