@@ -110,7 +110,8 @@ pip install -r requirements.txt
 
 Scripts in the src/ directory are modular and can be executed sequentially:
 ```bash
-YET TO BE ADDED
+chmod +x src/run_full_pipeline.sh
+./src/run_full_pipeline.sh
 ```
 Adjust execution depending on your research needs.
 
