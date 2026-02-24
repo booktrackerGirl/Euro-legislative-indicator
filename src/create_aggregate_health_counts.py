@@ -19,9 +19,13 @@ SUBREGION_MAP = {
     "Switzerland": "Western","Türkiye": "Southern","United Kingdom": "UK"
 }
 
-# -------------------------------
-# Health categories and labels
-# -------------------------------
+EU_COUNTRIES = [
+    "Austria","Belgium","Bulgaria","Croatia","Cyprus","Czechia","Denmark",
+    "Estonia","Finland","France","Germany","Greece","Hungary","Ireland",
+    "Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands","Poland",
+    "Portugal","Romania","Slovakia","Slovenia","Spain","Sweden"
+]
+
 CATEGORY_LABELS = {
     "general_health": "General health",
     "communicable_disease": "Communicable disease",
@@ -38,76 +42,101 @@ CATEGORY_LABELS = {
     "substance_use": "Substance use"
 }
 
-RESPONSE_TOPICS = ["Adaptation", "Disaster Risk Management", "Loss And Damage", "Mitigation"]
-HEALTH_FEATURES = ["Health relevance (1/0)","Health adaptation mandate (1/0)","Institutional health role (1/0)"]
+RESPONSE_TOPICS = ["Adaptation","Disaster Risk Management","Loss And Damage","Mitigation"]
+HEALTH_FEATURES = ["Health relevance (1/0)",
+                   "Health adaptation mandate (1/0)",
+                   "Institutional health role (1/0)"]
 
 # -------------------------------
-# Core aggregation function
+# Core aggregation
 # -------------------------------
 def aggregate_timeline(panel_csv, annotations_csv, output_excel):
+
     panel = pd.read_csv(panel_csv)
     annotations = pd.read_csv(annotations_csv)
 
-    # Harmonize IDs
+    # Harmonise ID column
     if "Doc ID" in annotations.columns:
         annotations = annotations.rename(columns={"Doc ID": "Document ID"})
 
-    # Merge annotations
-    df = panel.merge(
-        annotations[["Document ID","Country"] + HEALTH_FEATURES + ["Response","Health keyword categories"]],
-        on="Document ID",
-        how="left"
-    )
-
-    # Fill missing numeric columns
+    # Ensure numeric fields
     for col in HEALTH_FEATURES:
-        df[col] = df[col].fillna(0).astype(int)
-    df["Country"] = df["Country"].fillna("Unknown")
-    df["Health keyword categories"] = df["Health keyword categories"].fillna("")
-    df["Response"] = df["Response"].fillna("")
+        annotations[col] = annotations[col].fillna(0).astype(int)
+
+    annotations["Health keyword categories"] = annotations["Health keyword categories"].fillna("")
+    annotations["Response"] = annotations["Response"].fillna("")
 
     # -------------------------------
-    # Timeline-based start/end logic
+    # Extract start/end years
     # -------------------------------
     start_events = ["Passed/Approved","Entered Into Force","Set","Net Zero Pledge"]
     end_events = ["Repealed/Replaced","Closed","Settled"]
 
-    df_long = panel.copy()
-    df_long["start_year"] = None
-    df_long["end_year"] = None
+    panel["start_year"] = None
+    panel["end_year"] = None
 
-    for idx, row in df_long.iterrows():
-        types = str(row.get("Full timeline of events (types)","")).split(";")
-        dates = str(row.get("Full timeline of events (dates)","")).split(";")
-        start_years = [int(d[:4]) for t,d in zip(types,dates) if t.strip() in start_events and d[:4].isdigit()]
-        end_years = [int(d[:4]) for t,d in zip(types,dates) if t.strip() in end_events and d[:4].isdigit()]
-        df_long.at[idx,"start_year"] = min(start_years) if start_years else None
-        df_long.at[idx,"end_year"] = max(end_years) if end_years else None
+    for idx, row in panel.iterrows():
+        types = str(row.get("Full timeline of events (types)", "")).split(";")
+        dates = str(row.get("Full timeline of events (dates)", "")).split(";")
 
-    # Keep only documents with a start year
-    df_long = df_long.dropna(subset=["start_year"])
+        start_years = [
+            int(d[:4]) for t, d in zip(types, dates)
+            if t.strip() in start_events and d[:4].isdigit()
+        ]
 
-    # Merge with annotations
-    policy_years = df_long[["Document ID","start_year","end_year"]].merge(
-        annotations[["Document ID","Country"] + HEALTH_FEATURES + ["Response","Health keyword categories"]],
-        on="Document ID", how="left"
+        end_years = [
+            int(d[:4]) for t, d in zip(types, dates)
+            if t.strip() in end_events and d[:4].isdigit()
+        ]
+
+        panel.at[idx, "start_year"] = min(start_years) if start_years else None
+        panel.at[idx, "end_year"] = max(end_years) if end_years else None
+
+    panel = panel.dropna(subset=["start_year"])
+
+    # -------------------------------
+    # Merge using Document ID AND country
+    # -------------------------------
+    policy_years = panel.merge(
+        annotations,
+        left_on=["Document ID", "Geographies"],
+        right_on=["Document ID", "Country"],
+        how="inner"
     )
 
     # -------------------------------
-    # Create dummy columns
+    # Create health & response dummies
     # -------------------------------
     for cat in CATEGORY_LABELS.keys():
-        policy_years[cat] = policy_years["Health keyword categories"].str.contains(cat, case=False, regex=False).astype(int)
+        policy_years[cat] = policy_years["Health keyword categories"] \
+            .str.contains(cat, case=False, regex=False).astype(int)
+
     for resp in RESPONSE_TOPICS:
-        policy_years[resp] = policy_years["Response"].str.contains(resp, case=False, regex=False).astype(int)
+        policy_years[resp] = policy_years["Response"] \
+            .str.contains(resp, case=False, regex=False).astype(int)
 
     # -------------------------------
-    # Stock aggregation
+    # Distribute EU-level documents
     # -------------------------------
-    all_years = sorted(list(set(policy_years["start_year"].dropna().astype(int).tolist() +
-                                policy_years["end_year"].dropna().astype(int).tolist())))
-    min_year = min(all_years)
-    max_year = max(all_years)
+    eu_rows = policy_years[policy_years["Geographies"].str.upper() == "EU"]
+    non_eu_rows = policy_years[policy_years["Geographies"].str.upper() != "EU"]
+
+    distributed = []
+    for _, row in eu_rows.iterrows():
+        for country in EU_COUNTRIES:
+            new_row = row.copy()
+            new_row["Country"] = country
+            new_row["Geographies"] = country
+            distributed.append(new_row)
+
+    policy_years = pd.concat([non_eu_rows] + distributed, ignore_index=True)
+
+    # -------------------------------
+    # Stock logic (counts active docs)
+    # -------------------------------
+    min_year = int(policy_years["start_year"].min())
+    max_year = int(policy_years["start_year"].max())
+
     YEARS = list(range(min_year, max_year + 1))
 
     active_docs = set()
@@ -115,45 +144,59 @@ def aggregate_timeline(panel_csv, annotations_csv, output_excel):
     subregion_records = []
 
     for year in YEARS:
-        # Identify new / dropped
+
         new_docs = set(policy_years[policy_years["start_year"] == year]["Document ID"])
         dropped_docs = set(policy_years[policy_years["end_year"] == year]["Document ID"])
+
         active_docs = active_docs.union(new_docs).difference(dropped_docs)
-
         active_df = policy_years[policy_years["Document ID"].isin(active_docs)]
-        health_df = active_df[active_df["Health relevance (1/0)"] == 1]
 
-        if year >= 2000:  # Only report from 2000
-            # --- Country-level ---
+        if year >= 2000:
+
+            # --- Country ---
             for country, grp in active_df.groupby("Country"):
+
                 rec = {"Country": country, "Year": year, "Total documents": len(grp)}
+
                 health_grp = grp[grp["Health relevance (1/0)"] == 1]
+
                 for f in HEALTH_FEATURES:
                     rec[f] = health_grp[f].sum()
+
                 for t in RESPONSE_TOPICS:
                     rec[t] = health_grp[t].sum()
-                for cat,label in CATEGORY_LABELS.items():
+
+                for cat, label in CATEGORY_LABELS.items():
                     rec[label] = health_grp[cat].sum()
+
                 country_records.append(rec)
 
-            # --- Subregion-level ---
-            active_df["Subregion"] = active_df["Country"].map(SUBREGION_MAP).fillna("Other")
+            # --- Subregion ---
+            active_df = active_df.copy()
+            active_df["Subregion"] = active_df["Country"].map(SUBREGION_MAP)
+
             for subr, grp in active_df.groupby("Subregion"):
+
                 rec = {"Subregion": subr, "Year": year, "Total documents": len(grp)}
+
                 health_grp = grp[grp["Health relevance (1/0)"] == 1]
+
                 for f in HEALTH_FEATURES:
                     rec[f] = health_grp[f].sum()
+
                 for t in RESPONSE_TOPICS:
                     rec[t] = health_grp[t].sum()
-                for cat,label in CATEGORY_LABELS.items():
+
+                for cat, label in CATEGORY_LABELS.items():
                     rec[label] = health_grp[cat].sum()
+
                 subregion_records.append(rec)
 
     df_country = pd.DataFrame(country_records)
     df_subregion = pd.DataFrame(subregion_records)
 
     # -------------------------------
-    # Save to Excel
+    # Save
     # -------------------------------
     with pd.ExcelWriter(output_excel) as writer:
         df_country.to_excel(writer, sheet_name="Country", index=False)
@@ -166,12 +209,10 @@ def aggregate_timeline(panel_csv, annotations_csv, output_excel):
 # CLI
 # -------------------------------
 def main():
-    parser = argparse.ArgumentParser(
-        description="Timeline-based aggregation of health panel counts by country & subregion"
-    )
-    parser.add_argument("--legis", required=True, help="Legislative CSV with timeline columns")
-    parser.add_argument("--annotations", required=True, help="Health annotations CSV")
-    parser.add_argument("--output", required=True, help="Output Excel file")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--panel", required=True)
+    parser.add_argument("--annotations", required=True)
+    parser.add_argument("--output", required=True)
     args = parser.parse_args()
 
     aggregate_timeline(args.panel, args.annotations, args.output)
