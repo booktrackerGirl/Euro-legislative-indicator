@@ -118,7 +118,7 @@ def aggregate_timeline(panel_csv, annotations_csv, output_excel):
     # -------------------------------
     # Distribute EU-level documents
     # -------------------------------
-    eu_rows = policy_years[policy_years["Geographies"] == "European Union"]
+    '''eu_rows = policy_years[policy_years["Geographies"] == "European Union"]
     non_eu_rows = policy_years[policy_years["Geographies"] != "European Union"]
 
     distributed = []
@@ -129,7 +129,7 @@ def aggregate_timeline(panel_csv, annotations_csv, output_excel):
             new_row["Geographies"] = country
             distributed.append(new_row)
 
-    policy_years = pd.concat([non_eu_rows] + distributed, ignore_index=True)
+    policy_years = pd.concat([non_eu_rows] + distributed, ignore_index=True)'''
 
     # -------------------------------
     # Stock logic (counts active docs)
