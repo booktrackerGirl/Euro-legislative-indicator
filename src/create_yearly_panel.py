@@ -9,11 +9,13 @@ def create_yearly_panel(input_path, output_path):
 
     print("Reading data...")
     data = pd.read_csv(input_path)
-    data = data[~data['Document Content URL'].isna()]
+    #data = data[~data['Document Content URL'].isna()]
 
-    # Select needed columns
+    # -----------------------------------------
+    # FAMILY-LEVEL BASE TABLE (instead of docs)
+    # -----------------------------------------
     data_copy = data[[
-        'Document ID',
+        'Family ID',
         'Full timeline of events (types)',
         'Full timeline of events (dates)'
     ]].copy()
@@ -51,17 +53,17 @@ def create_yearly_panel(input_path, output_path):
     # Filter start events only
     df_starts = df_long[df_long["event_types"].isin(start_events)].copy()
 
-    # Earliest Passed/Approved per Document
+    # Earliest Passed/Approved per Family
     passed_years = (
         df_starts[df_starts["event_types"] == "Passed/Approved"]
-        .groupby("Document ID")["year"]
+        .groupby("Family ID")["year"]
         .min()
     )
 
     # Earliest among OTHER start events
     other_years = (
         df_starts[df_starts["event_types"] != "Passed/Approved"]
-        .groupby("Document ID")["year"]
+        .groupby("Family ID")["year"]
         .min()
     )
 
@@ -71,13 +73,12 @@ def create_yearly_panel(input_path, output_path):
     # Overwrite with Passed/Approved wherever it exists
     start_years.update(passed_years)
 
-    # Also include documents that ONLY have Passed/Approved
+    # Also include families that ONLY have Passed/Approved
     start_years = start_years.combine_first(passed_years)
-
 
     end_years = (
         df_long[df_long["event_types"].isin(end_events)]
-        .groupby("Document ID")["year"]
+        .groupby("Family ID")["year"]
         .max()
     )
 
@@ -90,9 +91,9 @@ def create_yearly_panel(input_path, output_path):
         "order-22-february-2024-amending-order-no-4264-establishing-the-organising-committee-for-cop29_fbe6": 2024,
     }
 
-    for doc_id, start_year in manual_starts.items():
-        if doc_id in policy_years.index:
-            policy_years.loc[doc_id, "start_year"] = start_year
+    for fam_id, start_year in manual_starts.items():
+        if fam_id in policy_years.index:
+            policy_years.loc[fam_id, "start_year"] = start_year
 
     # Fix truncated years
     def fix_year(y):
@@ -118,13 +119,13 @@ def create_yearly_panel(input_path, output_path):
 
     rows = []
 
-    for doc_id, row in policy_years.iterrows():
+    for fam_id, row in policy_years.iterrows():
         start = row["start_year"]
         end = row["end_year"] if pd.notna(row["end_year"]) else max_year
 
         for year in range(int(start), int(end) + 1):
             rows.append({
-                "Document ID": doc_id,
+                "Family ID": fam_id,
                 "Year": year
             })
 

@@ -31,12 +31,6 @@ PLOT_START_YEAR = 2000
 def plot_global_stackplot(annotation_df, legis_df, output_path):
 
     # ----------------------------
-    # Harmonize ID columns
-    # ----------------------------
-    if "Doc ID" in annotation_df.columns:
-        annotation_df = annotation_df.rename(columns={"Doc ID": "Document ID"})
-
-    # ----------------------------
     # Keep health relevant only
     # ----------------------------
     annotation_df = annotation_df[
@@ -47,7 +41,7 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
 
     # Keep only health-relevant documents in legislation
     legis_df = legis_df[
-        legis_df["Document ID"].isin(annotation_df["Document ID"])
+        legis_df["Family ID"].isin(annotation_df["Family ID"])
     ].copy()
 
     # ----------------------------
@@ -55,7 +49,7 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
     # ----------------------------
     df = legis_df[
         [
-            "Document ID",
+            "Family ID",
             "Full timeline of events (types)",
             "Full timeline of events (dates)",
         ]
@@ -92,14 +86,14 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
     # Earliest valid start
     start_years = (
         df_long[df_long["event_types"].isin(start_events)]
-        .groupby("Document ID")["Year"]
+        .groupby("Family ID")["Year"]
         .min()
     )
 
     # Latest removal
     end_years = (
         df_long[df_long["event_types"].isin(end_events)]
-        .groupby("Document ID")["Year"]
+        .groupby("Family ID")["Year"]
         .max()
     )
 
@@ -109,8 +103,8 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
 
     # Merge response info
     policy_years = policy_years.merge(
-        annotation_df[["Document ID", "Response"]],
-        on="Document ID",
+        annotation_df[["Family ID", "Response"]],
+        on="Family ID",
         how="left"
     )
 
@@ -139,25 +133,24 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
         new_docs = set(
             policy_years.loc[
                 policy_years["start_year"] == year,
-                "Document ID"
+                "Family ID"
             ]
         )
 
         dropped_docs = set(
             policy_years.loc[
                 policy_years["end_year"] == year,
-                "Document ID"
+                "Family ID"
             ]
         )
 
-        # Update stock identity
         active_set = active_set.union(new_docs)
         active_set = active_set.difference(dropped_docs)
 
         active_totals.append(len(active_set))
 
         active_df = policy_years[
-            policy_years["Document ID"].isin(active_set)
+            policy_years["Family ID"].isin(active_set)
         ]
 
         for col in RESPONSE_COLS:
@@ -222,13 +215,13 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
                 fontweight="bold"
             )
 
-    if 2015 in YEARS:
-        idx_2015 = YEARS.index(2015)
-        ax.axvline(x=X[idx_2015], linestyle="--", linewidth=1.8, color="black")
+    if 2016 in YEARS:
+        idx_2016 = YEARS.index(2016)
+        ax.axvline(x=X[idx_2016], linestyle="--", linewidth=1.8, color="black")
         ax.text(
-            X[idx_2015] + 0.2,
+            X[idx_2016] + 0.2,
             0.9 * GLOBAL_Y_MAX,
-            "Paris Agreement",
+            "Paris Agreement in force",
             va="top",
             fontsize=10
         )
@@ -279,10 +272,10 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Global stacked area plot using timeline-based stock logic"
+        description="Europe stacked area plot using timeline-based stock logic"
     )
     parser.add_argument("--annotation", required=True)
-    parser.add_argument("--legis", required=True)   
+    parser.add_argument("--legis", required=True)
     parser.add_argument("--output", required=True)
 
     args = parser.parse_args()

@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+
 import argparse
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 
 # -----------------------------
@@ -63,42 +66,31 @@ def main(args):
     annotations = pd.read_csv(args.input_csv)
     panel = pd.read_csv(args.panel)
 
-    if "Doc ID" in annotations.columns:
-        annotations = annotations.rename(columns={"Doc ID": "Document ID"})
-
-    if "year" in panel.columns:
-        panel = panel.rename(columns={"year": "Year"})
-
     if "Year" not in panel.columns:
         raise ValueError("Panel file must contain 'Year' column.")
 
+    if "Family ID" not in annotations.columns:
+        raise ValueError("Annotations file must contain 'Family ID'.")
+
     # -----------------------------
-    # MERGE PANEL YEAR SAFELY
+    # MERGE PANEL
     # -----------------------------
     df = annotations.merge(
         panel,
-        on="Document ID",
+        on="Family ID",
         how="left",
         suffixes=("", "_panel")
     )
 
-    # Identify correct Year column
     if "Year_panel" in df.columns:
         df["Year"] = df["Year_panel"]
-    elif "Year" not in df.columns:
-        raise ValueError("No 'Year' column found after merging panel data.")
 
-    # Ensure numeric
     df["Year"] = pd.to_numeric(df["Year"], errors="coerce")
-
-    # Drop rows without year
     df = df[df["Year"].notna()]
-
-    # Keep documents from 2000 onwards
     df = df[df["Year"] >= 2000]
 
     # -----------------------------
-    # EXPAND EU DOCUMENTS
+    # EXPAND EU FAMILIES
     # -----------------------------
     eu_docs = df[df["Country"] == "European Union"]
     non_eu_docs = df[df["Country"] != "European Union"]
@@ -111,25 +103,23 @@ def main(args):
             new_row["Country"] = country
             expanded_rows.append(new_row)
 
-    expanded_df = pd.DataFrame(expanded_rows)
-
-    df = pd.concat([non_eu_docs, expanded_df], ignore_index=True)
+    df = pd.concat([non_eu_docs, pd.DataFrame(expanded_rows)], ignore_index=True)
 
     # -----------------------------
-    # MAP ISO CODES
+    # MAP ISO
     # -----------------------------
     df["CNTR_CODE"] = df["Country"].map(ISO_MAP)
     df = df[df["CNTR_CODE"].notna()]
 
     # -----------------------------
-    # KEEP ONLY HEALTH RELEVANT DOCS
+    # FILTER HEALTH RELEVANT
     # -----------------------------
     df = df[df["Health relevance (1/0)"] == 1]
 
     # -----------------------------
-    # COUNT EACH DOCUMENT ONCE PER COUNTRY
+    # UNIQUE FAMILY PER COUNTRY
     # -----------------------------
-    df = df.drop_duplicates(subset=["Document ID", "CNTR_CODE"])
+    df = df.drop_duplicates(subset=["Family ID", "CNTR_CODE"])
 
     # -----------------------------
     # AGGREGATE
@@ -141,7 +131,7 @@ def main(args):
     )
 
     aggregated.to_csv(args.output_csv, index=False)
-    print(f"Aggregated CSV saved as: {args.output_csv}")
+    print(f"Aggregated CSV saved: {args.output_csv}")
 
     # -----------------------------
     # LOAD SHAPEFILE
@@ -154,40 +144,36 @@ def main(args):
 
     gdf = gpd.read_file(shapefile_path)
     gdf = gdf[gdf["LEVL_CODE"] == args.nuts_level]
-
-    # Project to Eckert III
     gdf = gdf.to_crs("+proj=eck3")
 
-    merged = gdf.merge(
-        aggregated,
-        on="CNTR_CODE",
-        how="left"
-    )
+    merged = gdf.merge(aggregated, on="CNTR_CODE", how="left")
 
     # -----------------------------
-    # SPLIT DATA / NON-DATA
+    # SPLIT MAP DATA
     # -----------------------------
     data_countries = merged[merged["Health relevance"].notna()]
     surrounding = merged[merged["Health relevance"].isna()]
 
     # -----------------------------
-    # CROP TO EUROPE EXTENT
+    # FIXED INTEGER LEGEND SCALE
     # -----------------------------
-    xmin, ymin, xmax, ymax = data_countries.total_bounds
-    buffer = 1_200_000
+    values = aggregated["Health relevance"]
 
-    ax_xlim = (xmin - buffer, xmax + buffer)
-    ax_ylim = (ymin - buffer, ymax + buffer)
+    min_val = int(values.min())
+    max_val = int(values.max())
+
+    legend_min = max(0, min_val - 2)
+    legend_max = max_val + 2
+
+    norm = mpl.colors.Normalize(vmin=legend_min, vmax=legend_max)
 
     # -----------------------------
     # PLOT
     # -----------------------------
     fig, ax = plt.subplots(figsize=(9, 9))
 
-    # Light blue water
     ax.set_facecolor("#dceaf6")
 
-    # Plot surrounding countries (grey)
     surrounding.plot(
         ax=ax,
         color="#d9d9d9",
@@ -195,26 +181,32 @@ def main(args):
         linewidth=0.4
     )
 
-    # Plot data countries
     data_countries.plot(
         column="Health relevance",
         cmap="OrRd",
         linewidth=0.4,
         edgecolor="black",
         legend=True,
+        norm=norm,
         legend_kwds={
             "shrink": 0.5,
             "aspect": 15,
-            "pad": 0.02
+            "pad": 0.02,
+            "ticks": list(range(legend_min, legend_max + 1, 2)),
+            "format": "%.0f"
         },
         ax=ax
     )
 
-    # Apply cropping
-    ax.set_xlim(ax_xlim)
-    ax.set_ylim(ax_ylim)
+    # -----------------------------
+    # FRAME SETTINGS
+    # -----------------------------
+    xmin, ymin, xmax, ymax = data_countries.total_bounds
+    buffer = 1_200_000
 
-    # Frame styling
+    ax.set_xlim(xmin - buffer, xmax + buffer)
+    ax.set_ylim(ymin - buffer, ymax + buffer)
+
     for spine in ax.spines.values():
         spine.set_visible(True)
         spine.set_linewidth(1)
@@ -223,7 +215,7 @@ def main(args):
     ax.set_yticks([])
 
     ax.set_title(
-        "Health-Relevant Climate Legislative Documents in EEA38+UK\n(2000–2025)",
+        "Health-Relevant Climate Legislative Families in EEA38+UK\n(2000–2025)",
         fontsize=13
     )
 
@@ -233,9 +225,9 @@ def main(args):
     plt.savefig(args.output_pdf, bbox_inches="tight")
     plt.close()
 
-    print(f"Map saved as {args.output_png} and {args.output_pdf}")
+    print(f"Map saved: {args.output_png}, {args.output_pdf}")
     print("Done.")
-    
+
 
 # -----------------------------
 # CLI
@@ -250,7 +242,7 @@ if __name__ == "__main__":
     parser.add_argument("--output_png", required=True)
     parser.add_argument("--output_pdf", required=True)
     parser.add_argument("--resolution", choices=["low", "high"], default="low")
-    parser.add_argument("--nuts_level", type=int, choices=[0,1,2,3], default=0)
+    parser.add_argument("--nuts_level", type=int, choices=[0, 1, 2, 3], default=0)
 
     args = parser.parse_args()
     main(args)

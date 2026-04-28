@@ -19,17 +19,17 @@ def create_health_timeline_plot(legis_path, health_path, output_png):
     # ---------------------------------------------------
     health_docs = health.loc[
         health["Health relevance (1/0)"] == 1,
-        "Doc ID"
+        "Family ID"
     ].unique()
 
-    data = data[data["Document ID"].isin(health_docs)].copy()
+    data = data[data["Family ID"].isin(health_docs)].copy()
 
     # ---------------------------------------------------
     # Expand semicolon timelines
     # ---------------------------------------------------
     df = data[
         [
-            "Document ID",
+            "Family ID",
             "Full timeline of events (types)",
             "Full timeline of events (dates)",
         ]
@@ -64,23 +64,23 @@ def create_health_timeline_plot(legis_path, health_path, output_png):
     ]
 
     # ---------------------------------------------------
-    # START YEAR (earliest valid start event per document)
+    # START YEAR
     # ---------------------------------------------------
     start_df = df_long[df_long["event_types"].isin(start_events)]
 
     start_years = (
-        start_df.groupby("Document ID")["year"]
-        .min()   # EARLIEST start event
+        start_df.groupby("Family ID")["year"]
+        .min()
     )
 
     # ---------------------------------------------------
-    # END YEAR (latest removal event per document)
+    # END YEAR
     # ---------------------------------------------------
     end_df = df_long[df_long["event_types"].isin(end_events)]
 
     end_years = (
-        end_df.groupby("Document ID")["year"]
-        .max()   # LATEST removal event
+        end_df.groupby("Family ID")["year"]
+        .max()
     )
 
     # ---------------------------------------------------
@@ -94,7 +94,6 @@ def create_health_timeline_plot(legis_path, health_path, output_png):
 
     # ---------------------------------------------------
     # Build yearly stock
-    # active = previous + new − dropped
     # ---------------------------------------------------
     min_year = 2000
     max_year = df_long["year"].max()

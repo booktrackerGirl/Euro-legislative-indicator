@@ -1,0 +1,560 @@
+Family ID,Country,Year,Response,Health relevance (1/0),Health adaptation mandate (1/0),Institutional health role (1/0),Matched health keywords,Health keyword categories
+2009-act-no-129-on-environmental-and-resource-taxes_d136,Iceland,2009.0,Mitigation,0,0,0,,
+2010-and-2019-finance-laws-on-energy-efficient-buildings-and-biofuel-standards-and-on-incentives-for-biogas_7ca9,Italy,2010.0,Mitigation,0,0,0,,
+2012-act-no-70-on-climate-change_6450,Iceland,2012.0,Adaptation;Mitigation,0,0,0,,
+2013-act-no-40-on-renewable-fuels-in-transport-on-land_5837,Iceland,2013.0,Mitigation,0,0,0,,
+act-1990-582-on-carbon-tax-and-related-regulations_ed24,Sweden,1991.0,Mitigation,0,0,0,,
+act-2005-1248-on-the-obligation-to-provide-renewable-fuels_8e02,Sweden,2005.0,Mitigation,0,0,0,,
+act-2010-598-on-sustainability-criteria-for-biofuels-and-bioliquids_8b15,Sweden,2010.0,Mitigation,0,0,0,,
+act-2017-1200-on-tax-on-air-travel_8401,Sweden,2017.0,Mitigation,0,0,0,,
+act-2017-1201-on-the-reduction-of-greenhouse-gas-emissions-by-mixing-of-biofuels-in-petrol-and-diesel-fuels_3843,Sweden,2017.0,Mitigation,0,1,0,,
+act-239-2000-coll-act-on-the-integrated-rescue-system_b08c,Czechia,2000.0,Adaptation;Disaster Risk Management,0,0,0,,
+act-3-of-october-2008-eia-act_a978,Poland,2008.0,Mitigation;Adaptation,1,1,0,accident;death;drought;emergency;flood;health;medical;mental;pregnant,environmental_health;general_health;injury_trauma;maternal_child_health;mental_health;mortality_morbidity
+act-383-2012-coll-on-conditions-for-trading-of-emission-allowances-last-amended-by-act-no-481-2024-coll_4f4d,Czechia,2012.0,Mitigation,1,1,0,death;distress;emergency;health;medical,general_health;mental_health;mortality_morbidity
+act-453-2016-coll-consumption-tax_0f6a,Czechia,2016.0,Mitigation,0,0,0,,
+act-478-2017-on-the-distribution-of-alternative-fuels-for-transport_4309,Finland,2017.0,Mitigation,0,0,0,,
+act-490-2013-on-wind-power-compensation-areas_5295,Finland,2013.0,Mitigation,0,0,0,,
+act-609-2007-on-excise-tax-from-electricity-coal-and-natural-gas_e10f,Slovakia,2007.0,Mitigation,0,0,0,,
+act-73-2012-coll-on-ozone-depleting-substances-and-fluorinated-greenhouse-gases-last-amended-by-act-218-2025_4e79,Czechia,2012.0,Mitigation,1,1,0,death,mortality_morbidity
+act-76-2002-coll-on-integrated-prevention-act_ce34,Czechia,2002.0,Mitigation,1,1,1,arsenic;emergency;health;healthcare,food_waterborne;general_health
+act-amending-the-personal-income-tax-act-and-the-corporate-income-tax-act_bd30,Poland,2019.0,Mitigation,0,0,0,,
+act-no-100-2001-coll-on-the-environmental-impact-assessment_7874,Czechia,2001.0,Mitigation,1,1,1,death;flood;health,environmental_health;general_health;mortality_morbidity
+act-no-165-2012-coll-on-supported-energy-sources-and-on-amendment-to-some-acts_b3a4,Czechia,2012.0,Mitigation,0,0,0,,
+act-no-201-2012-coll-air-protection-act_5b1c,Czechia,2012.0,Mitigation,0,0,0,,
+act-no-225-establishment-of-the-national-civil-protection-service_b5d7,Italy,1992.0,Adaptation;Disaster Risk Management,0,0,0,,
+act-no-250-2012-on-regulation-of-network-industries-as-amended_b312,Slovakia,2012.0,Mitigation,0,0,0,,
+act-no-251-2012-coll-on-energy-and-on-change-of-certain-acts_472e,Slovakia,2012.0,Mitigation,0,0,0,,
+act-no-30-of-2008-on-the-guarantee-of-origin-of-electricity-produced-from-renewable-energy-sources_2688,Iceland,2008.0,Mitigation,0,0,0,,
+act-no-314-2012-coll-on-regular-inspection-of-heating-systems-and-air-conditioning-systems_714b,Slovakia,2012.0,Mitigation,0,0,0,,
+act-no-373-2012-coll-on-emergency-stocks-of-oil-and-oil-products-and-amending-the-act-on-the-promotion-of-renewable-energy-sources-and-high-efficiency-cogeneration_615a,Slovakia,2012.0,Mitigation,1,0,0,emergency,general_health
+act-no-406-2000-coll-on-energy-management_1978,Czechia,2001.0,Mitigation,0,0,0,,
+act-no-414-2012-coll-on-emission-trading_8dbe,Slovakia,2012.0,Mitigation,0,0,0,,
+act-no-458-2000-coll-on-the-conditions-for-operating-business-and-on-performance-of-state-administration-in-energy-sectors-energy-act_3c99,Czechia,2000.0,Mitigation,0,0,0,,
+act-no-476-2008-on-energy-efficiency-and-on-the-amendment-of-act-555-2005-on-energy-efficiency-of-buildings-and-on-changes-and-amendments-of-certain-acts_77d9,Slovakia,2008.0,Mitigation,0,0,0,,
+act-no-5346-on-utilization-of-renewable-energy-sources-for-the-purposes-of-generating-electrical-energy-renewable-energy-law_acaa,Türkiye,2005.0,Mitigation,1,1,0,coronavirus;covid;diseases;doctor;emergency;epidemic;health;healthcare;medical;tb,communicable_disease;general_health
+act-no-5403-on-soil-conservation-and-land-use_3b72,Türkiye,2005.0,Adaptation,0,0,0,,
+act-no-541-2020-coll-on-waste-management-amended-by-act-no-218-2025-coll_d09b,Czechia,2020.0,Mitigation,0,0,0,,
+act-no-555-2005-coll-on-energy-efficiency-certification-of-buildings_7cad,Slovakia,2006.0,Mitigation,0,0,0,,
+act-no-56-2001-coll-on-the-conditions-of-operation-of-vehicles-on-roads-and-other-provisions_432b,Czechia,2001.0,Mitigation,0,0,0,,
+act-no-5627-on-energy-efficiency_b0e2,Türkiye,2007.0,Mitigation,0,0,0,,
+act-no-5686-on-geothermal-resources-and-mineral-waters_9ddc,Türkiye,2007.0,Mitigation,1,1,1,flood;health;medical;virus,environmental_health;general_health;pathogens_microbiology
+act-no-587-2004-coll-on-environmental-fund_1c02,Slovakia,2005.0,Mitigation,0,0,0,,
+act-no-86-lxxxvi-of-2011-on-electricity-electricity-act_f66d,Hungary,2011.0,Mitigation,0,0,0,,
+act-no-clxviii-on-handling-weather-related-and-other-natural-risks-affecting-agricultural-production_5744,Hungary,2011.0,Adaptation;Disaster Risk Management;Loss And Damage,1,0,0,emergency,general_health
+act-no-cxvii-of-2010-concerning-the-promotion-of-the-use-of-renewable-energy-for-transport-and-the-greenhouse-effect-reduction-of-energy-used-for-transport-purposes-biofuels-act_9797,Hungary,2011.0,Mitigation,0,0,0,,
+act-no-cxxviii-concerning-disaster-management-and-amending-certain-related-acts_75dd,Hungary,2011.0,Adaptation;Disaster Risk Management,0,0,0,,
+act-no-lvii-concerning-energy-efficiency_6fac,Hungary,2015.0,Mitigation,0,0,0,,
+act-no-xxxiv-of-2014-and-associated-feed-in-tariffs-regulations_697c,Malta,2014.0,Mitigation,1,1,0,healthcare;hospital;medical,general_health
+act-of-1-december-2022-amending-the-act-on-excise-duty-and-certain-other-acts_9091,Poland,2022.0,Mitigation,1,1,1,accident;alcohol;death;emergency;health;medical,general_health;injury_trauma;mortality_morbidity;substance_use
+act-of-10-april-1997-energy-law_79b1,Poland,1997.0,Mitigation,1,1,0,accident;death;disease;diseases;distress;doctor;emergency;epidemic;health;ill;illness;infections;respiratory,communicable_disease;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease
+act-of-11-january-2018-on-electromobility-and-alternative-fuels-last-amended-by-act-of-21-november-2024_6953,Poland,2018.0,Mitigation,1,1,0,accident;covid;diseases;emergency;health;medical,communicable_disease;general_health;injury_trauma
+act-of-12-of-june-2015-on-on-the-greenhouse-gas-emission-allowance-trading-scheme-last-amended-by-act-of-21-november-2025_cf9b,Poland,2015.0,Mitigation,1,1,0,accident;arsenic;covid;diseases,communicable_disease;food_waterborne;injury_trauma
+act-of-14-december-2018-on-the-promotion-of-electricity-from-high-efficiency-cogeneration-last-amended-by-act-of-27-november-2024-chp-act_d6ed,Poland,2018.0,Mitigation,1,1,0,health;mental,general_health;mental_health
+act-of-15-may-2015-on-substances-that-deplete-the-ozone-layer-and-on-certain-fluorinated-greenhouse-gases-last-amended-by-act-of-21-november-2025_be84,Poland,2015.0,Mitigation,1,1,0,accident,injury_trauma
+act-of-17-december-2020-on-the-promotion-of-electricity-production-in-marine-wind-farms-last-amended-by-act-of-9-october-2025-offshore-wind-act_493d,Poland,2020.0,Mitigation,1,1,0,accident;distress;epidemic;health,communicable_disease;general_health;injury_trauma;mental_health
+act-of-17-july-2009-on-the-system-for-managing-emissions-of-greenhouse-gases-and-other-substances-last-amended-by-act-of-21-november-2025_f993,Poland,2009.0,Mitigation,1,1,0,accident;arsenic,food_waterborne;injury_trauma
+act-of-20-february-2015-on-renewable-energy-sources-last-amended-by-act-of-9-october-2025-res-act_3f1c,Poland,2015.0,Mitigation,1,1,0,accident;aids;distress;epidemic;epidemics;health;infections;mental;sars;virus,communicable_disease;general_health;injury_trauma;mental_health;pathogens_microbiology
+act-of-20-july-2017-water-law_eed3,Poland,2017.0,Mitigation,1,1,0,accident;arsenic;death;disease;diseases;distress;drought;emergency;epidemic;flood;health;infection;injury;mortality,communicable_disease;environmental_health;food_waterborne;general_health;injury_trauma;mental_health;mortality_morbidity
+act-of-20-may-2016-on-investments-in-wind-farms-last-amended-by-act-of-9-march-2023_be7e,Poland,2016.0,Mitigation,1,1,0,death;diseases;emergency;epidemic;health;illness;infections;mental,communicable_disease;general_health;mental_health;mortality_morbidity
+act-of-25-august-2006-on-biocomponents-and-liquid-biofuels-last-amended-by-act-of-21-february-2025_ffc7,Poland,2006.0,Mitigation,1,1,0,alcohol;health,general_health;substance_use
+act-of-27-april-2001-environmental-protection-law_7d60,Poland,2001.0,Adaptation;Mitigation,1,1,0,accident;arsenic;covid;death;diseases;drought;emergency;epidemic;flood;health;infections;medical;mental,communicable_disease;environmental_health;food_waterborne;general_health;injury_trauma;mental_health;mortality_morbidity
+act-of-8-december-2017-on-the-capacity-market-last-amended-by-act-of-12-september-2025_cd4e,Poland,2017.0,Mitigation,1,1,0,covid;death;emergency;health,communicable_disease;general_health;mortality_morbidity
+act-of-excise-duties-on-energy-1994-1776_ca12,Sweden,1994.0,Mitigation,1,1,0,ill,communicable_disease
+act-on-aviation-emissions-trading-34-2010_3cd5,Finland,2010.0,Mitigation,0,0,0,,
+act-on-biofuel-blending-obligation_4152,Belgium,2013.0,Mitigation,1,1,0,flood,environmental_health
+act-on-certain-greenhouse-gas-emissions-2020-1173-emissions-trading_eec4,Sweden,2020.0,Mitigation,0,0,0,,
+act-on-climate-declaration-for-new-buildings-sfs-2021-787_1ef8,Sweden,2021.0,Mitigation,0,0,0,,
+act-on-exploration-and-exploitation-of-hydrocarbons_f82f,Croatia,2013.0,Mitigation,1,1,0,health,general_health
+act-on-organization-of-the-electricity-market-amended-by-law-of-12-may-19_c35d,Belgium,1999.0,Mitigation,1,1,1,accident;aids;coronavirus;covid;diabetes;diseases;doctor;emergency;flood;health;healthcare;hospital;ill;illness;injury;medical;mental;pandemic;pandemics;pregnancy;psychiatric;psychological;psychosocial;toxins,communicable_disease;environmental_health;general_health;injury_trauma;maternal_child_health;mental_health;non_communicable_disease;pathogens_microbiology
+act-on-state-aid-for-investments-in-new-nuclear-power-2025-587_3455,Sweden,2025.0,Mitigation,0,0,0,,
+act-on-sustainable-biofuels-and-on-the-reduction-of-greenhouse-gases-biofuels-act_c41f,Denmark,2009.0,Mitigation,1,1,0,bacteria;emergency;health,general_health;pathogens_microbiology
+act-on-the-energy-tax-on-mineral-oil-products-act-313-2011_98f1,Denmark,2006.0,Mitigation,0,1,0,,
+act-on-the-obligation-to-provide-renewable-fuels-2005-1248_32ea,Sweden,2005.0,Mitigation,0,0,0,,
+act-on-the-reduction-of-greenhouse-gas-emissions-from-certain-fuels-no-170-of-2018_57fc,Finland,2018.0,Mitigation,0,1,0,,
+act-on-the-state-owned-limited-company-climate-fund-ltd-no-173-of-2023_ffe5,Finland,2023.0,Mitigation;Adaptation,0,0,0,,
+act-on-the-use-of-the-danish-subsoil-65a8,Denmark,2019.0,Mitigation,0,1,0,,
+act-on-verification-and-notification-of-origin-of-electricity-1129-2003_64ac,Finland,2004.0,Mitigation,0,0,0,,
+agricultural-land-protection-act-alpa-last-amendment-in-2024_4b0f,Bulgaria,1996.0,Adaptation;Mitigation,0,0,0,,
+agricultural-producers-support-act-apsa-last-amended-in-2024_c55e,Bulgaria,1998.0,Mitigation;Adaptation,0,0,0,,
+agriculture-act-2020_cff3,United Kingdom,2020.0,Adaptation;Mitigation,1,1,0,aids;death;disease;health,communicable_disease;general_health;mortality_morbidity
+air-protection-law_08d4,Croatia,2011.0,Adaptation;Mitigation,0,0,0,,
+amendment-to-act-concerning-energy-tax-a-component-of-the-climate-and-energy-package-within-the-2013-national-budget-bill_a795,Sweden,2013.0,Mitigation,0,0,0,,
+an-integrated-climate-and-energy-policy_16b0,Sweden,2009.0,Adaptation;Mitigation,0,0,0,,
+anti-greenwashing-rule_705f,United Kingdom,2024.0,Mitigation,1,1,0,cancer,non_communicable_disease
+basic-law-for-the-federal-republic-of-germany_5b81,Germany,2025.0,Mitigation,1,1,0,accident;death;diseases;emergency;epidemics;health;hospital;medical;mental,communicable_disease;general_health;injury_trauma;mental_health;mortality_morbidity
+biofuel-quota-act-biokraftqug_9445,Germany,2007.0,Mitigation,0,0,0,,
+biofuels-and-bioliquids-market-regulations_b4b3,Malta,2012.0,Mitigation,0,0,0,,
+biofuels-bioliquids-and-biomass-fuels-sustainability-criteria-regulations_f2b0,Malta,2021.0,Mitigation,0,0,0,,
+budget-law-climate-tax-on-liquid-fuels-and-tax-rebate-on-low-carbon-cars_c405,Luxembourg,2017.0,Mitigation,1,1,1,accident;aids;alcohol;cancer;death;disease;diseases;distress;doctor;emergency;epidemics;flood;flu;health;healthcare;hepatitis;hiv;hospital;illnesses;injuries;injury;medical;mental;pandemic;pandemics;psychiatric;psychosocial;stress;trauma;traumatic;virus,communicable_disease;environmental_health;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease;pathogens_microbiology;substance_use
+buildings-energy-act-geg_ec47,Germany,2020.0,Mitigation,1,1,0,anger;health,general_health;mental_health
+carbon-budget-order-2016_6450,United Kingdom,2016.0,Mitigation,0,0,0,,
+carbon-capture-and-storage-act-kspg_f99d,Germany,2012.0,Mitigation,0,0,0,,
+carbon-dioxide-tax-on-certain-energy-products-act-321-2011_44d3,Denmark,2011.0,Mitigation,1,0,0,alcohol,substance_use
+carbon-fund-act-2007-number-12-of-2007_9f7e,Ireland,2007.0,Mitigation,0,0,0,,
+circular-economy-act-kreislaufwirtschaftsgesetz-krwg_7e83,Germany,2012.0,Mitigation,1,1,0,disease;diseases;emergency;epidemic;flood;health;mental,communicable_disease;environmental_health;general_health;mental_health
+civil-protection-act-act-no-82-of-12-june-2008_a876,Iceland,2008.0,Adaptation;Disaster Risk Management,0,0,0,,
+clean-ambient-air-act-last-amendment-in-2025_fce9,Bulgaria,1996.0,Mitigation,0,0,0,,
+cleaner-vehicle-purchase-incentives-decree-law-no-5-of-2009_0c1e,Italy,2009.0,Mitigation,0,0,0,,
+climate-act-klimaatwet_3147,Netherlands,2019.0,Mitigation,0,0,0,,
+climate-act_9e1d,Sweden,2017.0,Adaptation,1,1,0,health;healthcare,general_health
+climate-action-act-act-xvi-of-2024-chapter-643_d352,Malta,2024.0,Mitigation;Adaptation,1,1,0,health,general_health
+climate-action-and-low-carbon-development-act-2015_2ea8,Ireland,2015.0,Adaptation;Mitigation,1,1,0,health;pandemic,communicable_disease;general_health
+climate-adaptation-action-plan-for-sami-industries-and-culture-2023_a442,Sweden,2023.0,Adaptation,1,1,1,aids;anxiety;depression;disease;diseases;drought;emergency;epidemiology;health;hunger;ill;illness;infection;injuries;injury;medical;mental;mortality;nutrition;plague;psychological;psychosocial;stress;stressful;suicide,communicable_disease;environmental_health;general_health;injury_trauma;mental_health;mortality_morbidity;nutrition;vector_borne_zoonotic
+climate-and-energy-fund-act_c076,Austria,2007.0,Mitigation,1,0,0,death;gp,general_health;mortality_morbidity
+climate-change-act-2008_47b4,United Kingdom,2008.0,Adaptation;Mitigation,1,1,0,health,general_health
+climate-change-act-609-2015_df00,Finland,2015.0,Adaptation;Mitigation,0,1,0,,
+climate-change-act_5031,Norway,2017.0,Adaptation;Mitigation,0,1,0,,
+climate-change-agreements_c742,United Kingdom,2001.0,Mitigation,1,0,0,death,mortality_morbidity
+climate-change-and-sustainable-energy-act_9d11,United Kingdom,2006.0,Mitigation,0,0,0,,
+climate-change-mitigation-act_13f9,Bulgaria,2014.0,Adaptation;Mitigation,1,1,1,health,general_health
+climate-pact-with-the-municipalities_7f7f,Luxembourg,2012.0,Mitigation,1,1,0,emergency,general_health
+climate-protection-act-klimaschutzgesetz_e9dc,Austria,2011.0,Mitigation,1,1,1,arsenic;flood;gp;health;stressful,environmental_health;food_waterborne;general_health;mental_health
+co2-act_9e7c,Switzerland,2013.0,Adaptation;Mitigation,1,1,0,coronavirus,communicable_disease
+co2-tax-act-no-21-on-petroleum-activities_064b,Norway,1990.0,Mitigation,0,0,0,,
+coast-protection-act-1963_5d5e,Ireland,1963.0,Adaptation,0,0,0,,
+combined-heat-and-power-act-kwkg_145b,Germany,2002.0,Mitigation,0,0,0,,
+commercial-code_adec,France,2023.0,Mitigation,0,0,0,,
+commission-decision-2017-175-on-establishing-eu-ecolabel-criteria-for-tourist-accommodation_f051,European Union,2017.0,Mitigation,1,1,0,health;mental,general_health;mental_health
+commission-decision-eu-2020-1804-establishing-the-eu-ecolabel-criteria-for-electronic-displays_2449,European Union,2020.0,Mitigation,1,1,0,arsenic;health;nutrition,food_waterborne;general_health;nutrition
+commission-delegated-regulation-eu-2023-2772-supplementing-directive-2013-34-eu-as-regards-sustainability-reporting-standards_df8d,European Union,2023.0,Mitigation,0,0,0,,
+company-car-tax-reform_7a57,United Kingdom,2002.0,Mitigation,0,0,0,,
+contracts-for-difference_e2fe,United Kingdom,2014.0,Mitigation,1,0,0,death,mortality_morbidity
+council-directive-1999-31-ec-on-the-landfill-of-waste-amended-by-directive-eu-2018-850-and-directive-eu-2024-1785_9283,European Union,1999.0,Mitigation,1,1,0,accident;covid;diseases;emergency;health;hospital;medical;pandemic,communicable_disease;general_health;injury_trauma
+council-regulation-eu-euratom-2020-2093-laying-down-the-multiannual-financial-framework-for-the-years-2021-to-2027-last-amended-by-council-regulation-eu-euratom-2024-765-mff-2021-2027_463f,European Union,2020.0,Mitigation;Adaptation,1,1,0,covid;emergency;health,communicable_disease;general_health
+decision-eu-2015-1814-on-the-establishment-and-operation-of-a-market-stability-reserve-for-the-union-greenhouse-gas-emission-trading-scheme-last-amended-by-directive-eu-2023-959_78cb,European Union,2015.0,Mitigation,1,1,0,covid;distress;emergency;health;pandemic,communicable_disease;general_health;mental_health
+decision-eu-2022-591-on-a-general-union-environment-action-programme-to-2030_3384,European Union,2022.0,Adaptation;Mitigation,1,1,0,covid;disease;emergency;flood;health;pandemic;pandemics;wellbeing,communicable_disease;environmental_health;general_health
+decision-no-1386-2013-eu-on-a-general-union-environment-action-programme-to-2020-living-well-within-the-limits-of-our-planet_abf8,European Union,2013.0,Adaptation;Mitigation,1,1,0,arsenic;deaths;disease;diseases;drought;flood;health;mental;mortality;pandemics;pregnant;stress,communicable_disease;environmental_health;food_waterborne;general_health;maternal_child_health;mental_health;mortality_morbidity
+decision-no-406-2009-ec-on-the-effort-of-member-states-to-reduce-their-greenhouse-gas-emissions-to-meet-the-community-s-greenhouse-gas-emission-reduction-commitments-up-to-2020_4e70,European Union,2009.0,Mitigation,0,1,0,,
+decree-2015-1850-of-december-29-2015-taken-pursuant-to-article-l-533-22-1-of-the-monetary-and-financial-code_8367,France,2023.0,Mitigation,0,0,0,,
+decree-law-162-19-amended-by-law-8-2020-self-consumption-of-renewable-energy-art-42-bis_3e61,Italy,2019.0,Mitigation,1,1,1,accident;alcohol;death;disease;diseases;distress;doctor;emergency;flood;health;healthcare;hepatitis;hospital;illness;infection;influenza;injuries;injury;medical;mental;mortality;psychological;stroke;virus,communicable_disease;environmental_health;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease;pathogens_microbiology;substance_use
+decree-law-17-2022-on-energy-support_3752,Italy,2022.0,Mitigation,1,1,1,alcohol;covid;doctor;emergency;flu;health;healthcare;hospital;injury;medical;mental;sars,communicable_disease;general_health;injury_trauma;mental_health;substance_use
+decree-law-34-2020-tax-deduction-for-energy-efficiency-improvements-superbonus-110_9a17,Italy,2020.0,Mitigation,1,0,0,covid;emergency;health,communicable_disease;general_health
+decree-law-n-34-of-19-may-2020-on-urgent-measures-on-health-support-to-work-the-economy-and-social-policies-related-to-the-epidemiological-emergency-from-covid-19_6e2c,Italy,2020.0,Mitigation,1,1,1,accident;aids;covid;death;deaths;disease;diseases;doctor;emergency;epidemic;health;healthcare;hospital;infection;injuries;medical;mental;nutrition;pandemic;psychiatric;psychological;respiratory;sars;stress;stroke;virus,communicable_disease;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease;nutrition;pathogens_microbiology
+decree-law-no-111-2019_634a,Italy,2019.0,Mitigation,0,0,0,,
+decree-no-2021-663_f7c2,France,2023.0,Mitigation,1,1,0,health,general_health
+decree-on-activities-that-emit-greenhouse-gases-ghg_dd91,Montenegro,2022.0,Mitigation,0,0,0,,
+decree-on-the-types-of-activities-and-gases-with-a-greenhouse-effect_d0b4,Serbia,2021.0,Mitigation,0,0,0,,
+deliberation-no-2021-23-of-january-21-2021-approving-the-methods-for-calculating-the-forecast-cost-of-the-works-to-be-carried-out-by-enedis-as-part-of-the-regional-connection-plans-to-the-renewable-energy-network_ba5d,France,2021.0,Mitigation,0,0,0,,
+delta-act-on-water-safety-and-fresh-water-supply_f9e5,Netherlands,2012.0,Adaptation;Disaster Risk Management,1,0,0,flood,environmental_health
+directive-1999-94-ec-relating-to-the-availability-of-consumer-information-on-fuel-economy-and-co2-emissions-in-respect-of-the-marketing-of-new-passenger-cars_3731,European Union,1999.0,Mitigation,1,1,0,accident;aids;diseases;health;hiv;medical;nutrition,communicable_disease;general_health;injury_trauma;nutrition
+directive-2003-87-ec-establishing-a-scheme-for-greenhouse-gas-emission-allowance-trading-eu-emission-trading-scheme-eu-ets_674a,European Union,2003.0,Mitigation,1,1,0,covid;distress;emergency;health;medical;mental;pandemic,communicable_disease;general_health;mental_health
+directive-2006-40-ec-on-emissions-from-air-conditioning-systems-in-motor-vehicles_96b4,European Union,2006.0,Mitigation,0,1,0,,
+directive-2007-60-ec-on-the-assessment-and-management-of-flood-risks_60c7,European Union,2007.0,Disaster Risk Management,1,1,0,accident;emergency;flood;health;mental,environmental_health;general_health;injury_trauma;mental_health
+directive-2008-98-ec-on-waste-amended-by-directive-eu-2018-851-and-last-amended-by-directive-eu-2025-1892-waste-framework-directive_ca90,European Union,2008.0,Mitigation,1,1,1,cancer;covid;death;disease;diseases;health;medical;mental;nutrition;pandemic;respiratory;toxins,communicable_disease;general_health;mental_health;mortality_morbidity;non_communicable_disease;nutrition;pathogens_microbiology
+directive-2009-125-ec-establishing-a-framework-for-the-setting-of-ecodesign-requirements-for-energy-related-products-repealed-by-regulation-eu-2024-1781-ecodesign-directive_dcff,European Union,2009.0,Mitigation,1,1,0,covid;health;medical;mental;pandemic;respiratory;stress;wasting,communicable_disease;general_health;mental_health;non_communicable_disease;nutrition
+directive-2009-30-ec-amending-directive-98-70-ec-on-the-specification-of-petrol-diesel-and-gas-oil-and-introducing-a-mechanism-to-monitor-and-reduce-greenhouse-gas-emissions_35cb,European Union,1998.0,Mitigation,1,1,0,alcohol;health;mental,general_health;mental_health;substance_use
+directive-2009-31-ec-on-the-geological-storage-of-carbon-dioxide-geological-storage-of-carbon-dioxide-or-ccs-directive_377c,European Union,2009.0,Mitigation,1,1,0,emergency;flood;health;mental,environmental_health;general_health;mental_health
+directive-2009-33-ec-on-the-promotion-of-clean-road-transport-vehicles-in-support-of-low-emission-mobility_62be,European Union,2009.0,Mitigation,1,1,0,emergency;health;mental,general_health;mental_health
+directive-2010-31-eu-amended-by-directive-eu-2018-844-on-the-energy-performance-of-buildings_b70a,European Union,2010.0,Mitigation,1,1,0,health,general_health
+directive-2014-89-eu-establishing-a-framework-for-maritime-spatial-planning_f330,European Union,2014.0,Mitigation,0,1,0,,
+directive-2019-944-on-common-rules-for-the-internal-market-for-electricity-amended-by-regulation-eu-2022-869-and-regulation-eu-2024-1711_e5e2,European Union,2019.0,Mitigation,1,1,0,emergency;health;stress,general_health;mental_health
+directive-eu-2016-2284-on-the-reduction-of-national-emissions-of-certain-atmospheric-pollutants-amending-directive-2003-35-ec-and-repealing-directive-2001-81-ec_59cf,European Union,2016.0,Mitigation,1,1,0,arsenic;health,food_waterborne;general_health
+directive-eu-2018-2001-on-the-promotion-of-the-use-of-energy-from-renewable-sources-amended-by-directive-eu-2023-2413-renewable-energy-directive-or-red_cd8d,European Union,2018.0,Mitigation,1,1,0,covid;health;mental;pandemic;wildfire,communicable_disease;environmental_health;general_health;mental_health
+directive-eu-2022-2464-amending-regulation-eu-no-537-2014-and-others-as-regards-corporate-sustainability-reporting-corporate-sustainability-reporting-directive-or-csrd_0829,European Union,2022.0,Adaptation;Mitigation,1,1,0,covid;diseases;health;pandemic;pandemics,communicable_disease;general_health
+directive-eu-2023-1791-on-energy-efficiency-and-amending-regulation-eu-2023-955-recast-energy-efficiency-directive-or-eed_b43b,European Union,2023.0,Mitigation;Adaptation,1,1,0,emergency;health;healthcare,general_health
+directive-eu-2024-1275-of-the-european-parliament-and-of-the-council-of-24-april-2024-on-the-energy-performance-of-buildings_7ef8,European Union,2024.0,Mitigation,1,1,0,death;health;illness;mental;wellbeing,communicable_disease;general_health;mental_health;mortality_morbidity
+directive-eu-2024-1760-of-the-european-parliament-and-of-the-council-the-corporate-sustainability-due-diligence-directive-or-csddd_f8fa,European Union,2024.0,Mitigation,1,1,0,death;epidemics;health;injury;mental;psychological;wellbeing,communicable_disease;general_health;injury_trauma;mental_health;mortality_morbidity
+directive-eu-2024-1788-of-the-european-parliament-and-of-the-council-of-13-june-2024-on-common-rules-for-the-internal-markets-for-renewable-gas-natural-gas-and-hydrogen-amending-directive-eu-2023-1791-and-repealing-directive-2009-73-ec_b5bd,European Union,2024.0,Mitigation,1,1,0,emergency;health,general_health
+directive-eu-2024-1799-of-the-european-parliament-and-the-council-of-13-june-2024-on-common-rules-promoting-the-repair-of-goods-and-amending-regulation-eu-2017-2394-and-directives-eu-2019-771-and-eu-2020-1828_8ba9,European Union,2024.0,Mitigation,0,1,0,,
+directive-eu-2024-3019-concerning-urban-wastewater-treatment_cdf5,European Union,2024.0,Mitigation,1,1,0,alcohol;bacteria;covid;disease;diseases;emergency;epidemics;health;influenza;medical;pandemic;pandemics;pathogens;sars;virus,communicable_disease;general_health;pathogens_microbiology;substance_use
+directive-eu-2024-825-on-empowering-consumers-for-the-green-transition_1989,European Union,2024.0,Mitigation,0,1,0,,
+ecodesign-act-2008-112_0f1e,Sweden,2008.0,Mitigation,0,1,0,,
+elan-law-on-housing-and-decree-2019-771_b823,France,2018.0,Mitigation,0,0,0,,
+electricity-act-no-1997-857-amended-by-sfs-2024-1187_8dec,Sweden,1998.0,Mitigation,1,1,0,health;healthcare;injury;nutrition;stress,general_health;injury_trauma;mental_health;nutrition
+electricity-act_6942,Netherlands,1998.0,Mitigation,0,1,0,,
+electricity-certificates-act-no-39-of-2011_fda9,Norway,2011.0,Mitigation,0,0,0,,
+electricity-market-law-no-6446-introducing-tax-deductions-for-renewables_6045,Türkiye,2013.0,Mitigation,1,1,0,emergency;health,general_health
+electricity-regulation-act-number-23-of-1999_7f9c,Ireland,1999.0,Mitigation,0,0,0,,
+electricity-supply-act_6043,Switzerland,2024.0,Mitigation,0,0,0,,
+eleventh-national-development-plan-2019-2023_22c9,Türkiye,2019.0,Adaptation;Disaster Risk Management;Mitigation,1,1,1,accident;aids;alcohol;cancer;disease;diseases;drought;emergency;flood;health;healthcare;hospital;injuries;medical;mental;mortality;nutrition;obesity;pathogens;psychological;psychosocial;respiratory;wellbeing,communicable_disease;environmental_health;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease;nutrition;pathogens_microbiology;substance_use
+emergency-decree-320-2023_fbed,Hungary,2023.0,,0,0,0,,
+emergency-management-act_c4ce,Denmark,2009.0,Adaptation,1,0,0,emergency,general_health
+emission-certificates-act_f3ed,Austria,2011.0,Mitigation,1,1,0,distress;gp;medical,general_health;mental_health
+emissions-trading-act-ehg_eaff,Liechtenstein,2012.0,Mitigation,0,1,0,,
+emissions-trading-act-no-1270-of-2023_c924,Finland,2023.0,Mitigation,1,1,0,emergency;medical,general_health
+energy-act-2013_3396,United Kingdom,2013.0,Mitigation,1,1,1,accident;death;deaths;disease;emergency;health;injury;mental,communicable_disease;general_health;injury_trauma;mental_health;mortality_morbidity
+energy-act-2016_2ec3,United Kingdom,2016.0,Mitigation,0,1,0,,
+energy-act-2023_c2f5,United Kingdom,2023.0,Mitigation,1,1,0,accident;emergency;health;injury,general_health;injury_trauma
+energy-act-energetski-zakon-ez-1_cd62,Slovenia,2014.0,Mitigation,0,0,0,,
+energy-act-last-amendment-in-2024_2d2f,Bulgaria,2003.0,Mitigation,0,0,0,,
+energy-act_7080,Montenegro,2015.0,Mitigation,0,0,0,,
+energy-act_c5d1,Croatia,2012.0,Mitigation,0,0,0,,
+energy-act_d247,Switzerland,1999.0,Mitigation,0,0,0,,
+energy-and-climate-fund-act-ekfg_f3d2,Germany,2010.0,Mitigation,0,0,0,,
+energy-audits-act_6a67,Sweden,2014.0,Mitigation,0,1,0,,
+energy-biofuel-obligation-and-miscellaneous-provisions-act-2010-no-11-of-2010-of-the-national-oil-reserves-agency-act-2007-no-7-of-2007_e022,Ireland,2010.0,Mitigation,0,0,0,,
+energy-code_270c,France,2022.0,Mitigation,0,0,0,,
+energy-consumption-labelling-act-envkg_22bf,Germany,1997.0,Mitigation,0,0,0,,
+energy-declaration-of-buildings-act-2006-985_4e10,Sweden,2006.0,Mitigation,0,1,0,,
+energy-efficiency-act-eeg_361e,Liechtenstein,2008.0,Mitigation,0,1,0,,
+energy-efficiency-act-enefg_d64e,Germany,2023.0,Mitigation,0,1,0,,
+energy-efficiency-act-last-amendment-in-2025_7929,Bulgaria,2008.0,Mitigation,0,0,0,,
+energy-efficiency-act_c8b8,Austria,2014.0,Mitigation,1,1,1,emergency;gp;health,general_health
+energy-from-renewable-sources-act-last-amendment-in-2025_fde1,Bulgaria,2011.0,Mitigation,0,0,0,,
+energy-industry-act-enwg_863f,Germany,2005.0,Mitigation,1,1,0,aids;emergency;health;injury,communicable_disease;general_health;injury_trauma
+energy-miscellaneous-provisions-act-2012-number-3-of-2012_1919,Ireland,2012.0,Mitigation,0,0,0,,
+energy-performance-certificate-act-enag_88bb,Liechtenstein,2007.0,Mitigation,0,0,0,,
+energy-policy-framework-pope-no-2005-781_dc27,France,2005.0,Mitigation,0,0,0,,
+energy-saving-act-eneg_acdd,Germany,1976.0,Mitigation,0,0,0,,
+energy-taxation-directive-2003-96-ec-of-27-october-2003-restructuring-the-community-framework-for-the-taxation-of-energy-products-and-electricity_343c,European Union,2003.0,Mitigation,1,1,0,alcohol;health;stroke,general_health;non_communicable_disease;substance_use
+environment-act-2021_918b,United Kingdom,2021.0,Adaptation;Mitigation,1,1,0,drought;emergency;flood;health;hospital;injury,environmental_health;general_health;injury_trauma
+environment-and-planning-act-of-the-netherlands-omgevingswet_6f48,Netherlands,2016.0,Mitigation;Adaptation;Disaster Risk Management;Loss And Damage,1,1,0,accident;aids;arsenic;death;emergency;flood;health;mental;mortality;stress,communicable_disease;environmental_health;food_waterborne;general_health;injury_trauma;mental_health;mortality_morbidity
+environmental-charges-act_3ce6,Estonia,2005.0,Adaptation,1,1,0,accident;arsenic;emergency;flood;health;hospital,environmental_health;food_waterborne;general_health;injury_trauma
+environmental-code-ds2000-61_82b7,Sweden,1999.0,Adaptation;Mitigation,0,0,0,,
+environmental-code_cd9b,France,2025.0,Mitigation;Adaptation,0,0,0,,
+environmental-impact-assessment-act-2000-umweltvertraglichkeitsprufungsgesetz-uvp-g_943a,Austria,2000.0,Adaptation;Mitigation,1,1,0,death;gp;health;stressful,general_health;mental_health;mortality_morbidity
+environmental-impact-assessment-act-dd0a,Germany,1990.0,Mitigation,1,1,0,accident;aids;emergency;flood;health;medical,communicable_disease;environmental_health;general_health;injury_trauma
+environmental-impact-assessment-regulations_2185,Malta,2017.0,Mitigation;Adaptation;Disaster Risk Management,0,0,0,,
+environmental-liability-act-bundes-umwelthaftungsgesetz-b-uhg_b907,Austria,2009.0,Loss And Damage,1,1,0,diseases;gp;health,communicable_disease;general_health
+environmental-management-act-2004_c853,Netherlands,2004.0,Mitigation,1,1,0,arsenic;drought;emergency;epidemic;health,communicable_disease;environmental_health;food_waterborne;general_health
+environmental-protection-act-last-amendment-in-2025_84ba,Bulgaria,2002.0,Adaptation;Mitigation,1,1,1,accident;arsenic;cancer;death;emergency;health;medical;mental,food_waterborne;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease
+environmental-protection-act-usg_7149,Liechtenstein,2008.0,Mitigation;Adaptation,1,1,0,accident;arsenic;diseases;emergency;health;medical;pregnant;stress,communicable_disease;food_waterborne;general_health;injury_trauma;maternal_child_health;mental_health
+environmental-protection-act_1297,Slovenia,2006.0,Mitigation,1,1,0,accident;arsenic;emergency;health;injuries;medical;mortality;stress,food_waterborne;general_health;injury_trauma;mental_health;mortality_morbidity
+environmental-protection-act_f0e0,Croatia,2007.0,Mitigation,0,0,0,,
+environmental-protection-and-energy-efficiency-fund-act_6f1a,Croatia,2003.0,Mitigation,0,0,0,,
+environmental-support-act-umweltforderungsgesetz_7c86,Austria,1993.0,Mitigation,1,1,0,death;emergency;flood;gp;health,environmental_health;general_health;mortality_morbidity
+excise-duties-and-tax-warehouses-act_c0ce,Bulgaria,2006.0,Mitigation,1,1,0,alcohol;emergency;health;healthcare;medical,general_health;substance_use
+farming-forest-and-alimentation-framework-law-no-2014-1170_deba,France,2014.0,Adaptation,0,0,0,,
+federal-act-on-climate-protection-goals-innovation-and-strengthening-energy-security_d8b9,Switzerland,2022.0,Adaptation;Mitigation,0,0,0,,
+federal-climate-adaptation-act-entwurf-eines-bundes-klimaanpassungsgesetzes-kang_555f,Germany,2023.0,Adaptation;Mitigation,1,1,0,diseases;drought;flood;health;hunger;mortality;nutrition;stress,communicable_disease;environmental_health;general_health;mental_health;mortality_morbidity;nutrition
+federal-climate-protection-act-ksg_946d,Germany,2019.0,Mitigation,0,1,0,,
+federal-heavy-vehicle-fee-act-641-81-and-federal-heavy-vehicle-fee-ordinance-641-811_98b3,Switzerland,2000.0,Mitigation,0,0,0,,
+feed-in-tariffs-for-renewable-electricity_0092,United Kingdom,2010.0,Mitigation,1,0,0,coronavirus;death,communicable_disease;mortality_morbidity
+finance-act-1992-as-amended-by-finance-act-no-1-of-2013_76cb,Ireland,2013.0,Mitigation,0,0,0,,
+finance-act-2000-schedule-6-climate-change-levy_260a,United Kingdom,2001.0,Mitigation,0,0,0,,
+finance-act-2011_3228,United Kingdom,2012.0,Mitigation,0,0,0,,
+finance-act-2020_27c8,Ireland,2020.0,Mitigation,1,1,0,aids;covid;emergency;health;medical;pandemic;respiratory,communicable_disease;general_health;non_communicable_disease
+finance-act-2020_6bb8,United Kingdom,2020.0,Mitigation,1,1,0,alcohol;coronavirus;death;deaths;disease;emergency;health;healthcare;medical,communicable_disease;general_health;mortality_morbidity;substance_use
+finance-law-2001_1e4b,Italy,2000.0,Mitigation,0,0,0,,
+finance-law-2007_1e8d,Italy,2006.0,Mitigation,0,0,0,,
+finance-law-2008_fb81,Italy,2007.0,Mitigation,0,0,0,,
+finance-law-2010_3e7d,Italy,2009.0,Mitigation,0,0,0,,
+financial-services-and-markets-act-2023_638c,United Kingdom,2023.0,Mitigation;Disaster Risk Management;Loss And Damage;Adaptation,1,1,0,death;distress;illness;injury,communicable_disease;injury_trauma;mental_health;mortality_morbidity
+flood-risk-management-act-no-620-2010_1f11,Finland,2010.0,Adaptation,1,1,0,flood,environmental_health
+forest-act-289-1995-coll_14cb,Czechia,1995.0,Mitigation,0,0,0,,
+forest-act-921-0_a324,Switzerland,1993.0,Adaptation;Disaster Risk Management,0,0,0,,
+forest-fund-act_7a9f,Austria,2020.0,Mitigation;Loss And Damage,1,1,0,accident;diseases;doctor;gp;health;medical;mental;psychological;psychosocial,communicable_disease;general_health;injury_trauma;mental_health
+forest-law_58f0,Serbia,2010.0,Adaptation;Mitigation,0,0,0,,
+forest-law_7896,Croatia,2005.0,Adaptation;Mitigation,0,0,0,,
+forestry-act_2a1f,Bulgaria,2011.0,Adaptation;Mitigation,0,0,0,,
+fossil-fuel-divestment-act-2018_eaba,Ireland,2018.0,Mitigation,0,0,0,,
+fourth-supplementary-budget_ae24,Finland,2020.0,Mitigation,0,0,0,,
+framework-climate-law-no-98-2021_2801,Portugal,2021.0,Adaptation;Disaster Risk Management;Mitigation,1,1,1,diseases;emergency;health;medical;mental;nutrition,communicable_disease;general_health;mental_health;nutrition
+fuel-emissions-trading-act-behg_5296,Germany,2019.0,Mitigation,1,1,0,aids;nutrition,communicable_disease;nutrition
+fund-for-ghg-emissions-reduction-and-energy-efficiency-finance-law-2001_1bb4,Italy,2000.0,Mitigation,0,0,0,,
+future-ireland-fund-and-infrastructure-climate-and-nature-fund-act-2024_79de,Ireland,2024.0,Mitigation;Adaptation,0,1,0,,
+gas-act-2011-gaswirtschaftsgesetz-2011-gwg-2011_5a0d,Austria,2011.0,Mitigation,1,1,0,accident;aids;death;emergency;gp;health;healthcare;injury;medical,communicable_disease;general_health;injury_trauma;mortality_morbidity
+general-administrative-regulation-on-the-procurement-of-climate-friendly-services-avv-klima_5274,Germany,2021.0,,1,1,0,health,general_health
+general-tax-code-vehicle-registration-tax_fcad,France,2017.0,Mitigation,0,0,0,,
+geological-storage-of-carbon-dioxide-act-gscda-last-amended-in-2023_1571,Bulgaria,2012.0,Mitigation,0,0,0,,
+geological-storage-of-carbon-dioxide-regulations_4365,Malta,2011.0,Mitigation,0,0,0,,
+government-bill-2009-2010-172-government-bill-2009-2010-173-on-nuclear-power_8052,Sweden,2011.0,Mitigation,0,0,0,,
+government-urgency-ordinance-regarding-the-tax-on-polluting-emissions-from-motor-vehicles-9-2013_2c28,Romania,2013.0,Mitigation,0,0,0,,
+great-british-energy-act-2025_2670,United Kingdom,2025.0,Mitigation,0,0,0,,
+green-electricity-act-2012_0460,Austria,2011.0,Mitigation,1,1,0,covid;gp,communicable_disease;general_health
+greenhouse-gas-emission-trading-act-no-99-of-2004_2db0,Norway,2004.0,Mitigation,1,1,0,emergency;health;medical,general_health
+greenhouse-gas-emissions-trading-act-tehg-bgbl-i-p-1475_059f,Germany,2021.0,Mitigation,0,0,0,,
+grenelle-i_16b0,France,2009.0,Adaptation;Mitigation,0,0,0,,
+grenelle-ii_9b8a,France,2010.0,Mitigation,0,0,0,,
+grid-expansion-acceleration-act-nabeg_621b,Germany,2011.0,Mitigation,0,0,0,,
+guarantees-of-origin-of-electricity-from-high-efficiency-cogeneration-and-of-energy-from-renewable-energy-sources-regulations_d415,Malta,2021.0,Mitigation,0,0,0,,
+heat-act-warmtewet-wm_be11,Netherlands,2009.0,Mitigation,0,0,0,,
+heat-planning-and-the-decarbonisation-of-heating-networks-act_be60,Germany,2023.0,Mitigation,1,1,0,flood,environmental_health
+heat-supply-act-no-772-2000-amended-by-act-no-345-2005-and-no-622-2010_43fe,Denmark,2000.0,Mitigation,0,1,0,,
+implementation-act-of-the-environment-and-planning-act_2481,Netherlands,2020.0,,1,1,1,accident;aids;anger;arsenic;bacteria;cryptosporidium;death;depression;disease;diseases;drought;emergency;fever;flood;flu;giardia;gp;health;healthcare;hospital;illness;infection;infections;injuries;injury;legionella;medical;mental;parasite;pathogen;pathogens;pneumonia;poisoning;respiratory;stroke;tb;trauma;virus,communicable_disease;environmental_health;food_waterborne;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease;pathogens_microbiology
+infrastructure-act-2015_8de9,United Kingdom,2015.0,Mitigation,1,1,0,emergency;health;injury,general_health;injury_trauma
+land-use-and-building-decree-enacted-under-the-land-use-and-building-act-132-1999_010c,Finland,1999.0,Adaptation,0,0,0,,
+law-1-2005-of-march-9-which-regulates-the-regime-of-the-trade-of-greenhouse-gases-emission_a1fe,Spain,2005.0,Adaptation;Mitigation,1,1,0,emergency;health;hospital;medical,general_health
+law-102-2015-on-the-natural-gas-sector_68d7,Albania,2015.0,Mitigation,1,1,0,emergency;health,general_health
+law-117-2019-amending-law-50-1991-on-construction-work_2eae,Romania,2019.0,Mitigation,0,0,0,,
+law-12-2022-on-the-state-budget_4f58,Portugal,2022.0,Mitigation,1,1,1,accident;aids;alcohol;covid;death;disease;diseases;doctor;emergency;health;healthcare;hospital;illness;illnesses;infection;medical;mental;pandemic;psychological,communicable_disease;general_health;injury_trauma;mental_health;mortality_morbidity;substance_use
+law-138-2013-on-renewable-sources-of-energy_8382,Albania,2013.0,Mitigation,0,0,0,,
+law-16-2013-which-establishes-certain-measures-regarding-environmental-taxation-and-adopts-other-tax-and-financial-measures_7048,Spain,2013.0,Mitigation,1,1,0,death;health,general_health;mortality_morbidity
+law-19-2014-defining-the-bases-of-the-environment-policy_21a7,Portugal,2014.0,Adaptation;Mitigation,1,1,0,health,general_health
+law-2-2011-of-march-4-of-sustainable-economics_8411,Spain,2011.0,Mitigation,1,1,1,accident;death;disease;diseases;health;illness;illnesses;injury;medical,communicable_disease;general_health;injury_trauma;mortality_morbidity
+law-2-2013-on-the-protection-and-sustainable-use-of-coastal-areas_df21,Spain,2013.0,Adaptation,0,1,0,,
+law-2011-1200-on-electricity-certificates_07c4,Sweden,2011.0,Mitigation,0,1,0,,
+law-221-of-28-december-2015-on-environmental-provisions-to-promote-green-economy-measures-and-to-limit-the-excessive-use-of-natural-resources_a374,Italy,2015.0,Mitigation,1,1,1,accident;aids;alcohol;bacteria;death;doctor;emergency;flood;health;healthcare;illnesses;infection;injury;medical;mental;psychological;salmonella;stress,communicable_disease;environmental_health;food_waterborne;general_health;injury_trauma;mental_health;mortality_morbidity;pathogens_microbiology;substance_use
+law-24-2013-on-the-electric-sector_a1ce,Spain,2013.0,Mitigation,1,1,0,health;medical,general_health
+law-3299-04-on-private-investment-incentives-for-economic-development-and-regional-convergence_2e51,Greece,2004.0,Mitigation,0,0,0,,
+law-34-1998-on-the-hydrocarbons-sector_fbd4,Spain,1998.0,Mitigation,0,0,0,,
+law-34-2007-on-air-quality-and-atmosphere-protection-last-amended-by-law-11-2014_43fa,Spain,2007.0,Mitigation,0,0,0,,
+law-34-2022-operation-thermostat_47a3,Italy,2022.0,Mitigation,1,1,0,emergency;health;healthcare,general_health
+law-3423-2005-on-introducing-biofuels-and-other-renewable-fuels-to-the-greek-market_fe53,Greece,2005.0,Mitigation,0,0,0,,
+law-3661-2008-on-measures-to-reduce-energy-consumption-in-buildings-and-other-provisions_a7f5,Greece,2008.0,Mitigation,0,0,0,,
+law-3831-2010-on-revision-of-the-vehicle-taxes-regime-for-vehicles-abolishment-of-the-vehicles-recycling-measures-scrappage-scheme-and-measures-for-tackling-atmospheric-pollution_b15a,Greece,2010.0,Mitigation,0,0,0,,
+law-3851-2010-on-accelerating-the-development-of-renewable-energy-sources-to-address-climate-change-and-other-provisions-on-jurisdiction-of-the-ministry-of-environment-energy-and-climate-change_677c,Greece,2010.0,Mitigation,0,0,0,,
+law-3855-2010-on-measures-to-improve-energy-efficiency-in-end-use-energy-services-and-other-provisions_f6bb,Greece,2010.0,Mitigation,0,0,0,,
+law-3889-2010-financing-environmental-interventions-green-fund-ratification-of-forest-maps-and-other-provisions_a48b,Greece,2010.0,Mitigation,0,0,0,,
+law-4001-2011-on-the-operation-of-electricity-and-gas-energy-markets-for-exploration-production-and-transmission-networks-of-hydrocarbons-and-other-provisions_1811,Greece,2011.0,Mitigation,0,0,0,,
+law-416-2019-banning-the-use-of-coal-for-energy-purposes_07d9,Finland,2019.0,Mitigation,0,0,0,,
+law-43-2023-council-for-climate-action-cac_4626,Portugal,2023.0,Mitigation;Adaptation,1,1,0,death,mortality_morbidity
+law-4643-2019-on-energy-market-liberalisation-ppc-modernisation-depa-privatisation-and-res-support-and-other-provisions_c113,Greece,2019.0,Mitigation,0,0,0,,
+law-4685-2020-on-the-reform-of-the-environmental-legislation-and-the-renewable-energy-sources-licensing-process_dd75,Greece,2020.0,Mitigation,1,0,0,covid,communicable_disease
+law-4759-2020-on-the-modernisation-of-spatial-and-urban-planning-legislation-and-other-provisions_207c,Greece,2020.0,Mitigation,0,0,0,,
+law-5037-of-2023_e61b,Greece,2023.0,Mitigation,0,0,0,,
+law-54-2015-on-the-exploration-and-use-of-geological-resources_decf,Portugal,2015.0,Mitigation,1,1,0,epidemic;health;mental;wellbeing,communicable_disease;general_health;mental_health
+law-7-2017-promoting-the-use-of-energy-from-renewable-resources_5fc2,Albania,2017.0,Mitigation,0,0,0,,
+law-7-2021-on-climate-change-and-energy-transition_f039,Spain,2021.0,Adaptation;Mitigation,1,1,0,aids;emergency;flood;health;healthcare;morbidity;mortality,communicable_disease;environmental_health;general_health;mortality_morbidity
+law-7552-turkish-climate-law_95c1,Türkiye,2025.0,Mitigation;Adaptation,1,1,0,emergency,general_health
+law-8-2013-on-urban-rehabilitation-regeneration-and-renovation_097e,Spain,2013.0,Mitigation,0,0,0,,
+law-82-2023-the-state-of-budget-for-2024_2fa8,Portugal,2023.0,Mitigation,1,1,0,accident;disease;doctor;emergency;health;healthcare;hospital;medical;mental;suicide,communicable_disease;general_health;injury_trauma;mental_health
+law-approving-government-emergency-ordinance-no-18-2009-on-increasing-the-energy-efficiency-of-residential-buildings-158-2011_0ed3,Romania,2011.0,Mitigation,1,0,0,emergency,general_health
+law-concerning-anti-crisis-measures-energy-provisions-law-no-102_27f0,Italy,2009.0,Mitigation,0,0,0,,
+law-decree-no-145-20131-the-destinazione-italia-decree_68c7,Italy,2013.0,Mitigation,0,0,0,,
+law-for-energy-performance-of-buildings-372-2005_d7ae,Romania,2007.0,Mitigation,0,0,0,,
+law-for-the-conservation-modernisation-and-expansion-of-cogeneration_b678,Germany,2015.0,Mitigation,0,0,0,,
+law-for-the-digitisation-of-the-energy-transition_8d43,Germany,2016.0,Mitigation,1,1,0,emergency,general_health
+law-instituting-the-fund-for-the-protection-of-the-environment_0d9a,Luxembourg,1999.0,Adaptation;Mitigation,1,1,0,alcohol;emergency;health;medical,general_health;substance_use
+law-l3468-2006-on-the-generation-of-electricity-from-renewable-energy-sources-and-through-high-efficiency-co-generation-of-electricity-and-heat-and-miscellaneous-provisions_ee72,Greece,2006.0,Mitigation,0,0,0,,
+law-n-deg-2020-105-of-10-february-2020-relating-to-the-fight-against-waste-and-the-circular-economy_325b,France,2020.0,Mitigation,0,0,0,,
+law-n-deg-85-30-relating-to-the-development-and-protection-of-the-mountain-and-law-n-deg-2016-1888-on-the-modernisation-development-and-protection-of-mountain-territories_35b6,France,2016.0,Adaptation;Mitigation,0,0,0,,
+law-no-06l-079-on-energy-efficency-89d9,Kosovo,2018.0,,1,1,0,health;mental,general_health;mental_health
+law-no-08l-137-on-forests-684a,Kosovo,2023.0,,0,0,0,,
+law-no-112-2013-on-the-promotion-and-encouragement-of-the-use-of-renewable-energy-sources_88d3,Cyprus,2013.0,Mitigation,0,0,0,,
+law-no-116-ratifying-with-amendments-the-law-decree-no-91-of-24-june-2014-on-urgent-provisions-for-the-agricultural-sector-environment-company-development-and-inter-alia-reduction-of-energy-bills_9ef3,Italy,2014.0,Mitigation,0,0,0,,
+law-no-121-on-offshore-wind-energy_03d1,Romania,2024.0,Mitigation,0,0,0,,
+law-no-123-of-july-10-2012-of-electricity-and-natural-gas_d3a4,Romania,2012.0,Mitigation,1,1,0,emergency;health,general_health
+law-no-155-2020-on-climate-change_1817,Albania,2020.0,Adaptation;Mitigation,1,1,1,emergency;health,general_health
+law-no-17-2015-on-the-national-civil-protection-system_b568,Spain,2015.0,Adaptation;Disaster Risk Management,1,1,0,aids;death;emergency;health;injuries;injury;psychological,communicable_disease;general_health;injury_trauma;mental_health;mortality_morbidity
+law-no-2001-153-of-19-february-2001-to-give-the-fight-against-the-greenhouse-effect-and-the-prevention-of-risks-related-to-global-warming-the-status-of-a-national-priority-and-creating-a-national-observatory-on-the-effects-of-global-warming-in-metropolitan-france-and-in-the-overseas-departments-and-territories_0c1b,France,2001.0,Mitigation,0,0,0,,
+law-no-2011-835-aimed-at-prohibiting-the-exploration-and-exploitation-of-liquid-or-gaseous-hydrocarbon-mines-by-hydraulic-fracturing-f3c6,France,2011.0,,0,0,0,,
+law-no-2015-992-on-energy-transition-for-green-growth-energy-transition-law_aea3,France,2015.0,Mitigation,0,0,0,,
+law-no-2017-1839-on-the-end-of-exploration-and-exploitation-of-hydrocarbons-and-diverse-dispositions-related-to-energy-and-the-environment_c16d,France,2017.0,Mitigation,1,0,0,depression;health,general_health;mental_health
+law-no-2019-1147-on-energy-and-the-climate_64b3,France,2019.0,Adaptation;Mitigation,0,0,0,,
+law-no-2019-1270-of-december-2-2019-on-amending-finances-for-2019_404c,France,2019.0,Mitigation,0,0,0,,
+law-no-2021-1104-on-climate-and-resilience_a2f6,France,2021.0,,1,1,0,accident;disease;emergency;flood;health;medical;mental;nutrition,communicable_disease;environmental_health;general_health;injury_trauma;mental_health;nutrition
+law-no-2021-1104-on-the-fight-on-climate-change-and-resilience_6f7e,France,2021.0,Adaptation;Mitigation,0,0,0,,
+law-no-2021-1900-of-december-30-2021-on-finance-for-2022_c93f,France,2021.0,Mitigation,0,0,0,,
+law-no-2023-175-of-march-10-2023-relating-to-the-acceleration-of-the-production-of-renewable-energies_9049,France,2023.0,Mitigation,0,0,0,,
+law-no-2023-491-of-22-june-2023-on-the-acceleration-of-procedures-related-to-the-construction-of-new-nuclear-installations-near-existing-nuclear-sites-and-the-operation-of-existing-installations_dee3,France,2023.0,Adaptation,0,0,0,,
+law-no-2023-630-of-20-july-2023-to-facilitate-the-implementation-of-the-objectives-of-combating-the-artificialisation-of-soils-and-to-strengthen-the-support-of-local-elected-officials_388f,France,2023.0,Mitigation,0,0,0,,
+law-no-2023-973-of-october-23-2023-relating-to-the-green-industry_71cd,France,2023.0,Mitigation;Adaptation,0,0,0,,
+law-no-2024-364-of-22-april-2024-on-various-provisions-for-adaptation-to-european-union-law-in-the-field-of-economy-finance-ecological-transition-criminal-law-social-law-and-agricultural-matters_a3a4,France,2024.0,Mitigation,0,0,0,,
+law-no-205-of-27-december-2017_dfa7,Italy,2017.0,Mitigation,0,0,0,,
+law-no-2090-on-assistance-to-farmers-who-have-suffered-losses-due-to-natural-disasters_74a4,Türkiye,1977.0,Adaptation;Disaster Risk Management;Loss And Damage,0,0,0,,
+law-no-220-2008-for-the-promotion-of-energy-production-from-renewable-energy-sources_6eb8,Romania,2008.0,Mitigation,1,1,0,aids;emergency,communicable_disease;general_health
+law-no-222-of-29-november-2007_2131,Italy,2007.0,Mitigation,0,0,0,,
+law-no-2244-1994-on-the-regulation-of-power-generation-issues-from-renewable-energy-sources-and-conventional-fuels-and-other-provisions_aa76,Greece,1994.0,Mitigation,0,0,0,,
+law-no-24-d-2022-state-budget-for-2023_7f36,Portugal,2022.0,Mitigation;Disaster Risk Management,1,1,1,accident;aids;alcohol;covid;death;disease;diseases;doctor;emergency;health;healthcare;hospital;illness;illnesses;medical;pandemic,communicable_disease;general_health;injury_trauma;mortality_morbidity;substance_use
+law-no-27-2006-on-civil-protection-last-amended-by-law-80-2015_45a5,Portugal,2006.0,Adaptation;Disaster Risk Management,1,1,1,accident;doctor;emergency;epidemics;health;hospital;medical,communicable_disease;general_health;injury_trauma
+law-no-292-2018-on-assessing-the-impact-of-certain-public-and-private-projects-on-the-environment_ad44,Romania,2018.0,Mitigation;Adaptation,1,1,0,accident;emergency;flood;health,environmental_health;general_health;injury_trauma
+law-no-37-may-2019_d076,Italy,2019.0,Mitigation,0,0,0,,
+law-no-43-2015-on-the-power-sector_cb65,Albania,2015.0,Mitigation,1,1,0,drought;emergency;health,environmental_health;general_health
+law-no-4964-of-2022-concerning-provisions-for-the-simplification-of-environmental-licensing-establishing-a-framework-for-the-development-of-offshore-wind-farms-and-dealing-with-the-energy-crisis-environmental-and-other-provisions_d777,Greece,2022.0,Mitigation;Adaptation,1,0,0,covid,communicable_disease
+law-no-5069-of-2023-conditions-of-building-construction-permitted-land-uses-for-data-centres-zoning-and-urban-planning-regulations-utilisation-of-green-fund-resources-other-environmental-and-energy-provisions-and-other-urgent-provisions_cd19,Greece,2023.0,Mitigation;Adaptation,1,0,0,covid,communicable_disease
+law-no-5106-of-2024-arrangements-to-address-the-multi-level-impacts-of-climate-change_6b61,Greece,2024.0,Mitigation;Adaptation,0,0,0,,
+law-no-5116-of-2024-private-natural-disaster-insurance-government-aid-and-protection-housing-assistance-fire-department-provisions-and-other-provisions_bfa4,Greece,2024.0,Disaster Risk Management,1,0,0,covid,communicable_disease
+law-no-5902-on-the-establishment-and-duties-of-the-disaster-and-emergency-management-authority_0a39,Türkiye,2009.0,Adaptation;Disaster Risk Management,1,0,0,emergency,general_health
+law-no-6306-on-restructuring-of-areas-under-risk-of-natural-disasters_220c,Türkiye,2012.0,Adaptation;Disaster Risk Management,0,0,0,,
+law-no-7335-ratifying-the-paris-agreement_8692,Türkiye,2021.0,Adaptation;Mitigation,0,0,0,,
+law-no-82-d-2014-establishing-a-set-of-green-fiscal-rules-last-amended-by-law-82-2023_6f5a,Portugal,2014.0,Mitigation,1,1,0,accident;disease;doctor;emergency;health;healthcare;hospital;medical;mental;suicide,communicable_disease;general_health;injury_trauma;mental_health
+law-no-9876-2008_7920,Albania,2008.0,Mitigation,1,1,0,health,general_health
+law-no-99-of-23-july-2009_262c,Italy,2009.0,Mitigation,0,0,0,,
+law-no-xi-329-on-financial-instruments-for-climate-change-management_af8a,Lithuania,2009.0,Mitigation,1,1,0,emergency;health;medical,general_health
+law-no05l-081-on-energy-cdd6,Kosovo,2016.0,,0,0,0,,
+law-no08l-072-on-agriculture-and-rural-development-4ef2,Kosovo,2023.0,,0,0,0,,
+law-of-15-december-2020-relating-to-the-climate_40b1,Luxembourg,2020.0,Adaptation;Mitigation,1,1,0,alcohol;emergency;medical,general_health;substance_use
+law-of-17-april-2018-on-territory-planning_e7fb,Luxembourg,2018.0,Adaptation;Mitigation,0,0,0,,
+law-of-the-republic-of-lithuania-on-alternative-fuels_f691,Lithuania,2021.0,Mitigation,1,1,0,alcohol;death;emergency;health,general_health;mortality_morbidity;substance_use
+law-on-ambient-air-quality_fd2e,North Macedonia,2004.0,Mitigation,0,0,0,,
+law-on-biofuels-for-transport_e749,Croatia,2009.0,Mitigation,1,1,0,emergency;health,general_health
+law-on-carbon-dioxide-geological-storage-and-environmental-responsibility_e22e,Luxembourg,2012.0,Mitigation,1,1,0,emergency;health,general_health
+law-on-climate-change-and-the-protection-of-the-ozone-layer_0227,Croatia,2019.0,,1,1,0,distress;emergency;health;healthcare;medical,general_health;mental_health
+law-on-climate-change_15c7,Kosovo,2024.0,Mitigation;Adaptation,0,0,0,,
+law-on-climate-protection_3a0f,Hungary,2020.0,Mitigation,0,0,0,,
+law-on-disaster-risk-reduction-and-emergency-situation-management-2018_d23d,Serbia,2018.0,Adaptation;Disaster Risk Management,0,0,0,,
+law-on-efficient-use-of-energy_4b7e,Serbia,2013.0,Mitigation,0,0,0,,
+law-on-efficient-use-of-energy_c6a5,Montenegro,2014.0,Mitigation,0,0,0,,
+law-on-energy-efficency-and-the-rational-use-of-energy_abb1,Serbia,2021.0,Mitigation,1,0,0,covid;sars,communicable_disease
+law-on-energy-efficiency-121-2014_ed3f,Romania,2014.0,Mitigation,1,1,0,health,general_health
+law-on-energy-efficiency-no-124-2015_7303,Albania,2015.0,Mitigation,0,1,0,,
+law-on-energy-efficiency_1775,Bosnia and Herzegovina,2017.0,Mitigation,0,0,0,,
+law-on-energy-efficiency_596c,Croatia,2014.0,Mitigation,0,0,0,,
+law-on-energy-performance-in-buildings-no-116-2016_d4ba,Albania,2016.0,Mitigation,0,0,0,,
+law-on-energy_25e0,Serbia,2014.0,Mitigation,0,0,0,,
+law-on-industrial-emissions-278-2013_9246,Romania,2013.0,Mitigation,0,0,0,,
+law-on-privileging-the-use-of-electric-vehicles-electromobility-act-emog_7358,Germany,2015.0,Mitigation,0,1,0,,
+law-on-protection-from-the-negative-impacts-of-climate-change_2c3c,Montenegro,2019.0,Adaptation;Mitigation,0,0,0,,
+law-on-protection-of-air-from-pollution_4d01,Kosovo,2022.0,Mitigation,1,1,1,arsenic;health,food_waterborne;general_health
+law-on-purchasing-power_cc5e,France,2022.0,Mitigation,1,0,0,emergency,general_health
+law-on-renewable-energy-resources_8834,Lithuania,2011.0,Mitigation,1,1,1,accident;emergency;health;medical,general_health;injury_trauma
+law-on-renewable-energy-sources-and-highly-efficient-cogeneration_28ae,Croatia,2015.0,Mitigation,0,0,0,,
+law-on-spatial-planning-and-construction-2013-amended-in-2019_c497,Bosnia and Herzegovina,2013.0,Adaptation;Disaster Risk Management,1,1,0,disease;flood;health;hospital,communicable_disease;environmental_health;general_health
+law-on-the-conservation-of-forests-and-the-promotion-of-forestry-federal-forest-act-0a19,Germany,1975.0,Mitigation,1,1,0,nutrition,nutrition
+law-on-the-electricity-market_fceb,Luxembourg,2015.0,Mitigation,0,1,0,,
+law-on-the-establishment-of-infrastructure-for-alternative-fuels_552b,Croatia,2016.0,Mitigation,0,0,0,,
+law-on-the-governance-of-federal-climate-policy_b052,Belgium,2024.0,Mitigation;Adaptation,1,1,0,accident;aids;covid;doctor;emergency;gestation;gp;grief;health;healthcare;ill;illness;injury;medical;mental;pandemic;psychiatric;psychological;psychosocial,communicable_disease;general_health;injury_trauma;maternal_child_health;mental_health
+law-on-the-implementation-of-conditionality-under-the-common-agricultural-policy-cap-conditionality-law-gapkondg_ae0c,Germany,2021.0,Mitigation,1,1,0,nutrition,nutrition
+law-on-the-implementation-of-direct-payments-financed-under-the-common-agricultural-policy-cap-direct-payments-act-gapdzg_6bd0,Germany,2021.0,Mitigation,1,0,0,nutrition,nutrition
+law-on-the-implementation-of-the-climate-protection-program-2030-in-tax-law_aca4,Germany,2019.0,Mitigation,0,0,0,,
+law-on-the-mobility-budget_baf9,Belgium,2019.0,Mitigation,1,1,0,death;emergency;gp;health;healthcare;hospital;medical;psychiatric;tb,communicable_disease;general_health;mental_health;mortality_morbidity
+law-on-the-natural-gas-market_baf9,Luxembourg,2015.0,Mitigation,1,1,0,health,general_health
+law-on-the-promotion-of-clean-and-energy-efficient-vehicles-on-roads_46f7,Croatia,2013.0,Mitigation,0,0,0,,
+law-on-the-promotion-of-renewable-energy-no-1392-2008-and-legislative-decree-1288-2016_2244,Denmark,2009.0,Mitigation,1,1,0,health,general_health
+law-on-the-reduction-and-termination-of-coal-fired-power-generation-and-the-amendment-of-further-laws-kohleausstiegsgesetz_76d0,Germany,2020.0,Mitigation,1,0,0,doctor;emergency,general_health
+law-on-the-reduction-of-co2-emissions-co2-act_91c1,Liechtenstein,2013.0,Mitigation,0,1,0,,
+law-on-the-use-of-nuclear-energy-for-exclusively-peaceful-purposes-321-2003-that-approved-the-government-ordinance-no-7-2003_55f1,Romania,2003.0,Mitigation,0,0,0,,
+law-on-the-use-of-renewable-energy-sources_665b,Serbia,2021.0,Mitigation,0,0,0,,
+law-on-turkish-atomic-energy-authority_b6df,Türkiye,1982.0,Mitigation,0,0,0,,
+law-prohibiting-coal-in-electricity-production-wet-verbod-op-kolen_20ed,Netherlands,2019.0,Mitigation,0,0,0,,
+law-relating-to-the-coordination-of-the-federal-sustainable-development-policy_94fd,Belgium,1997.0,Mitigation,1,1,1,aids;bacteria;death;disease;diseases;doctor;emergency;fever;gestation;gp;health;healthcare;hospital;hospitalisation;illness;medical;mental;psychiatric;psychological;psychosocial;stroke;tuberculosis,communicable_disease;general_health;maternal_child_health;mental_health;mortality_morbidity;non_communicable_disease;pathogens_microbiology
+law-supporting-sustainable-development-in-rural-areas_c0bf,Luxembourg,2016.0,Adaptation,1,1,0,accident;aids;death;disease;diseases;doctor;gestation;health;illness;illnesses;infections;medical;zoonoses,communicable_disease;general_health;injury_trauma;maternal_child_health;mortality_morbidity;vector_borne_zoonotic
+legislative-decree-47-2020-amended-by-legislative-decree-147-2024_8630,Italy,2020.0,Mitigation,1,1,1,accident;alcohol;covid;doctor;drought;emergency;fatigue;health;healthcare;hospital;medical;mental;stress,communicable_disease;environmental_health;general_health;injury_trauma;mental_health;substance_use
+legislative-decree-73-implementation-of-of-the-directive-eu-2018-2002-on-energy-efficiency_75ca,Italy,2020.0,Mitigation,1,0,0,hospital,general_health
+levelling-up-and-regeneration-act-2023-3795,United Kingdom,2023.0,Mitigation;Adaptation,1,1,1,alcohol;death;emergency;flood;health;medical,environmental_health;general_health;mortality_morbidity;substance_use
+lifecycle-greenhouse-emissions-from-fuels-regulations_cb94,Malta,2010.0,Mitigation,0,0,0,,
+long-term-climate-strategy-until-2050_61eb,Slovenia,2021.0,Adaptation;Mitigation,1,1,1,coronavirus;covid;disease;diseases;drought;emergency;epidemic;flood;health;healthcare;mortality;nutrition;pandemic;stress,communicable_disease;environmental_health;general_health;mental_health;mortality_morbidity;nutrition
+malta-european-union-greenhouse-gas-emissions-trading-scheme-for-aviation-regulations_1023,Malta,2019.0,Mitigation,0,0,0,,
+malta-european-union-greenhouse-gas-emissions-trading-scheme-regulations_20c5,Malta,2005.0,Mitigation,0,0,0,,
+malta-resources-authority-act_51e3,Malta,2015.0,Mitigation,0,0,0,,
+maritime-area-planning-act-2021_3320,Ireland,2021.0,Adaptation,1,1,0,aids;death;emergency;health;ill;injury,communicable_disease;general_health;injury_trauma;mortality_morbidity
+mineral-oil-tax-reduction-on-biofuels-and-natural-gas-mineral-oil-tax-act-amendment_fe94,Switzerland,2008.0,Mitigation,0,0,0,,
+ministerial-decision-21906-on-the-compensation-to-those-carbon-intensive-industries-sectors-and-sub-sectors-exposed-to-carbon-leakage-caused-by-the-indirect-costs-of-the-eu-emissions-trading-scheme-as-defined-in-the-directive-2009-29-ec_eb12,Greece,2014.0,Mitigation,0,0,0,,
+mobility-orientation-law-2019-1428-on-transport-lom_b77b,France,2019.0,Mitigation,0,0,0,,
+monetary-and-financial-code_f94e,France,2023.0,Mitigation,0,0,0,,
+motor-vehicle-duties-and-licences-act-no-22-2001-and-no-9-2013_3f74,Ireland,2001.0,Mitigation,0,0,0,,
+motor-vehicle-tax-law_64e7,Türkiye,2021.0,Mitigation,0,0,0,,
+motor-vehicles-registration-tax-amendment-act-2009_d17e,Malta,2009.0,Mitigation,0,0,0,,
+national-climate-change-strategy-2008-2025-resolution-of-the-parliament-no-29-2008_b3ca,Hungary,2008.0,Adaptation,0,0,0,,
+national-climate-law-4936-2022-on-the-transition-to-climate-neutrality-and-adaptation-to-climate-change_2ff3,Greece,2022.0,Adaptation;Mitigation,1,0,0,covid,communicable_disease
+national-emissions-certificate-trading-act_bff1,Austria,2022.0,Mitigation,1,1,0,gp,general_health
+national-energy-independence-strategy_ec55,Lithuania,2024.0,Mitigation;Adaptation,0,0,0,,
+national-renewable-energy-action-plan_424b,Serbia,2013.0,Mitigation,0,0,0,,
+national-strategy-for-climate-change-adaptation-government-proposition-2017-18-163_582c,Sweden,2018.0,Adaptation;Mitigation,1,1,1,accident;aids;anxious;bacteria;deaths;diseases;drought;emergency;flood;health;healthcare;hunger;ill;infection;infections;injuries;injury;medical;mental;morbidity;mortality;stress;stroke;zoonoses,communicable_disease;environmental_health;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease;nutrition;pathogens_microbiology;vector_borne_zoonotic
+natural-damage-insurance-act_3703,Norway,1989.0,Adaptation;Disaster Risk Management,0,0,0,,
+natural-hazards-compensation-act-no-59-of-2014_508d,Norway,2014.0,Adaptation;Disaster Risk Management;Loss And Damage,0,0,0,,
+natural-hazards-compensation-act-no-59-of-2014_51d7,Norway,1994.0,Adaptation;Disaster Risk Management,1,1,0,bacteria;drought;flood,environmental_health;pathogens_microbiology
+natural-resources-tax-law_efdc,Latvia,2005.0,Adaptation,1,1,0,diseases;health;hiv;medical,communicable_disease;general_health
+nature-conservation-and-landscape-management-act-ae52,Germany,2009.0,Mitigation,1,1,0,aids;death;disease;emergency;flood;health;infection;injury;medical;nutrition,communicable_disease;environmental_health;general_health;injury_trauma;mortality_morbidity;nutrition
+new-aid-scheme-for-power-plants-using-res-and-co-generation-of-electricity-and-high-efficiency-heat_50a2,Greece,2016.0,Mitigation,0,0,0,,
+offshore-energy-act-no-21-of-2010_2981,Norway,2010.0,Mitigation,0,0,0,,
+offshore-wind-energy-act-wet-windenergie-op-zee_d9b2,Netherlands,2016.0,Mitigation,0,1,0,,
+offshore-wind-energy-act-windseeg-2017_31b6,Germany,2017.0,Mitigation,1,1,0,health,general_health
+ordinance-no-38-2021_812a,Portugal,2021.0,Mitigation,1,1,0,death;emergency;medical,general_health;mortality_morbidity
+ordinance-on-climate-disclosures-made-under-the-swiss-code-of-obligations_46c6,Switzerland,2022.0,Adaptation;Mitigation,0,0,0,,
+overview-of-cap-reform-2014-2020_7c45,European Union,2021.0,Adaptation;Mitigation,1,1,0,covid;health,communicable_disease;general_health
+package-on-climate-bank-and-sustainable-housing_323f,Luxembourg,2016.0,Mitigation,1,1,0,death;health,general_health;mortality_morbidity
+pension-schemes-act-2021_f903,United Kingdom,2021.0,Adaptation;Mitigation,1,1,0,tb,communicable_disease
+petroleum-and-other-minerals-development-prohibition-of-onshore-hydraulic-fracturing-act-15-2017_cf31,Ireland,2017.0,Mitigation,1,1,0,health,general_health
+planning-act-2008-f03c,United Kingdom,2008.0,,1,1,1,death;emergency;flood;health;injury;medical,environmental_health;general_health;injury_trauma;mortality_morbidity
+planning-act-no-937-of-2009-consolidated-no-587-of-2013-no-50-2018_6610,Denmark,2009.0,Adaptation;Mitigation,1,1,0,death;flood;health;hospital;medical,environmental_health;general_health;mortality_morbidity
+planning-and-building-act-no-71-of-2008_a760,Norway,2008.0,Mitigation,0,0,0,,
+pollution-control-act_1cb3,Norway,2012.0,Mitigation,1,1,0,accident;emergency;health;injury;nutrition,general_health;injury_trauma;nutrition
+power-grid-expansion-act-enlag_cd37,Germany,2009.0,Mitigation,0,0,0,,
+preferential-tax-regimes-for-biofuels_6628,United Kingdom,2002.0,Mitigation,0,0,0,,
+product-control-act-no-79-of-1976_3ff7,Norway,1976.0,Mitigation,0,0,0,,
+prohibition-and-minimisation-of-the-risks-of-fracking-technology_e0cd,Germany,2016.0,Mitigation,0,0,0,,
+promotion-of-energy-from-renewable-sources_663c,Malta,2021.0,Mitigation,0,1,0,,
+public-procurement-act-2016_9936,Norway,2016.0,Mitigation,1,1,0,health,general_health
+regulation-2017-1369-setting-a-framework-for-energy-labelling-and-repealing-directive-2010-30-eu-amended-by-regulation-eu-2020-740-energy-labelling-regulation_214c,European Union,2017.0,Mitigation,1,1,0,health,general_health
+regulation-2018-1999-on-the-governance-of-the-energy-union-and-climate-action_26fa,European Union,2018.0,Adaptation;Mitigation,1,1,0,covid;drought;emergency;flood;health;mental;pandemic;wildfire,communicable_disease;environmental_health;general_health;mental_health
+regulation-31761-amending-the-planned-areas-zoning-regulation_f5a8,Türkiye,2022.0,Mitigation,1,0,0,hospital,general_health
+regulation-ec-no-106-2008-on-a-community-energy-efficiency-labelling-programme-for-office-equipment-amended-by-regulation-eu-no-174-2013_88c7,European Union,2008.0,Mitigation,0,1,0,,
+regulation-eu-2015-757-on-the-monitoring-reporting-and-verification-of-greenhouse-gas-emissions-from-maritime-transport-amended-by-regulation-eu-2023-957_5514,European Union,2015.0,Mitigation,1,1,0,covid;distress;health;pandemic,communicable_disease;general_health;mental_health
+regulation-eu-2018-841-on-the-inclusion-of-greenhouse-gas-emissions-and-removals-from-land-use-land-use-change-and-forestry-in-the-2030-climate-and-energy-framework-last-amended-by-regulation-eu-2023-839-lulucf-regulation_b4d6,European Union,2018.0,Mitigation,1,1,0,covid;disease;drought;emergency;flood;health;hunger;pandemic,communicable_disease;environmental_health;general_health;nutrition
+regulation-eu-2018-842-on-binding-annual-greenhouse-gas-emission-reductions-by-member-states-from-2021-to-2030-effort-sharing-regulation-or-esr_db2e,European Union,2018.0,Mitigation,1,1,0,covid;health;pandemic,communicable_disease;general_health
+regulation-eu-2019-1242-setting-co2-emission-performance-standards-for-new-heavy-duty-vehicles-amended-by-regulation-eu-2024-1610-and-commission-delegated-regulation-eu-2025-1045_2da5,European Union,2019.0,Mitigation,1,1,0,covid;health;medical;pandemic,communicable_disease;general_health
+regulation-eu-2019-2088-on-sustainability-related-disclosures-in-the-financial-services-sector-sustainable-finance-disclosure-regulation-or-sfdr_8da0,European Union,2019.0,Mitigation,1,1,0,arsenic;disease;health,communicable_disease;food_waterborne;general_health
+regulation-eu-2019-2089-of-the-european-parliament-and-of-the-council-of-27-november-2019-amending-regulation-eu-2016-1011-as-regards-low-carbon-benchmarks_c126,European Union,2019.0,Mitigation,0,1,0,,
+regulation-eu-2019-631-setting-co2-emission-performance-standards-for-new-passenger-cars-and-for-new-light-commercial-vehicles_a8fb,European Union,2019.0,Mitigation,1,1,0,covid;emergency;health;pandemic,communicable_disease;general_health
+regulation-eu-2020-2220-laying-down-certain-transitional-provisions-of-support-from-the-european-agricultural-fund-for-rural-development-eafrd-the-european-agricultural-guarantee-fund-eagf-in-the-years-2021-and-2022_089d,European Union,2020.0,Adaptation;Mitigation,1,1,0,aids;covid;disease;emergency;health;pandemic,communicable_disease;general_health
+regulation-eu-2020-740-on-the-labelling-of-tyres-with-respect-to-fuel-efficiency-and-other-parameters-amending-regulation-eu-2017-1369-and-repealing-regulation-ec-no-1222-2009_b39b,European Union,2020.0,Mitigation,1,1,0,health,general_health
+regulation-eu-2020-852-on-the-establishment-of-a-framework-to-facilitate-sustainable-investment-taxonomy-regulation_0c44,European Union,2020.0,Adaptation;Mitigation,1,1,0,arsenic;disease;health,communicable_disease;food_waterborne;general_health
+regulation-eu-2021-1056-establishing-the-just-transition-fund-amended-by-regulation-eu-2024-795-and-regulation-eu-2025-1914_0f6e,European Union,2021.0,Adaptation;Mitigation,1,1,0,covid;drought;emergency;health;mental;pandemic;stress,communicable_disease;environmental_health;general_health;mental_health
+regulation-eu-2021-1060-laying-down-common-provisions-on-a-range-of-support-funds-amended-by-regulation-eu-2023-955_1f11,European Union,2021.0,Adaptation;Disaster Risk Management;Mitigation,1,1,1,covid;drought;emergency;health;healthcare;medical;mental,communicable_disease;environmental_health;general_health;mental_health
+regulation-eu-2021-1119-establishing-the-framework-for-achieving-climate-neutrality-european-climate-law_df60,European Union,2021.0,Adaptation;Mitigation;Loss And Damage,1,1,0,covid;diseases;emergency;health,communicable_disease;general_health
+regulation-eu-2021-1229-of-the-european-parliament-and-of-the-council-on-the-public-sector-loan-facility-under-the-just-transition-mechanism_b33d,European Union,2021.0,Mitigation,0,0,0,,
+regulation-eu-2021-2115-establishing-rules-on-support-for-strategic-plans-to-be-drawn-up-by-member-states-under-the-common-agricultural-policy-cap-strategic-plans-and-financed-by-the-european-agricultural-guarantee-fund-eagf-and-by-the-european-agricultural-fund-for-rural-development-eafrd_f1b7,European Union,2021.0,Mitigation,1,1,0,alcohol;disease;diseases;emergency;flood;health;mental;nutrition,communicable_disease;environmental_health;general_health;mental_health;nutrition;substance_use
+regulation-eu-2021-2116-repealing-regulation-eu-1306-2013-on-the-financing-management-and-monitoring-of-the-cap_9aa4,European Union,2021.0,Adaptation;Mitigation,1,1,0,aids;death;disease;diseases;emergency;health,communicable_disease;general_health;mortality_morbidity
+regulation-eu-2021-2117-laying-down-measures-for-agricultural-markets-and-products_3dfb,European Union,2021.0,Adaptation;Mitigation,1,1,0,aids;alcohol;allergies;covid;disease;diseases;health;nutrition;pandemic,communicable_disease;general_health;non_communicable_disease;nutrition;substance_use
+regulation-eu-2021-241-of-the-european-parliament-and-of-the-council-of-12-february-2021-establishing-the-recovery-and-resilience-facility-rrf_e7b4,European Union,2021.0,Mitigation,1,1,1,covid;drought;emergency;health;healthcare;mental;nutrition;pandemic,communicable_disease;environmental_health;general_health;mental_health;nutrition
+regulation-eu-2021-783-establishing-a-programme-for-the-environment-and-climate-action-life-and-repealing-regulation-eu-no-1293-2013_ec10,European Union,2021.0,Mitigation;Adaptation,1,1,0,health,general_health
+regulation-eu-2022-869-on-guidelines-for-trans-european-energy-infrastructure-last-amended-by-regulation-eu-2024-1991_aea9,European Union,2022.0,Mitigation,1,1,0,health,general_health
+regulation-eu-2023-1115-on-deforestation-free-products-eudr_1e29,European Union,2023.0,Mitigation,1,1,0,covid;diseases;epidemics;health;hunger;medical;mental;nutrition;pandemic;pandemics,communicable_disease;general_health;mental_health;nutrition
+regulation-eu-2023-1542-of-the-european-parliament-and-of-the-council-of-12-july-2023-concerning-batteries-and-waste-batteries-new-battery-regulation_c58c,European Union,2023.0,Mitigation,1,1,0,covid;health;medical;mental;pandemic;respiratory;stress;wasting,communicable_disease;general_health;mental_health;non_communicable_disease;nutrition
+regulation-eu-2023-1804-on-the-deployment-of-alternative-fuels-infrastructure_f9b5,European Union,2023.0,Mitigation,1,1,0,emergency;health,general_health
+regulation-eu-2023-1805-on-the-use-of-renewable-and-low-carbon-fuels-in-maritime-transport-and-amending-directive-2009-16-ec-fueleu-maritime-regulation_5bc0,European Union,2023.0,Mitigation,1,1,0,distress;emergency,general_health;mental_health
+regulation-eu-2023-2405-on-ensuring-a-level-playing-field-for-sustainable-air-transport-refueleu-aviation-regulation_12b7,European Union,2023.0,Mitigation,1,1,0,covid;medical;pandemic,communicable_disease;general_health
+regulation-eu-2023-955-establishing-a-social-climate-fund-scf_4489,European Union,2023.0,,1,1,0,covid;emergency;health;healthcare;mental,communicable_disease;general_health;mental_health
+regulation-eu-2023-956-establishing-a-carbon-border-adjustment-mechanism-amended-by-regulation-eu-2025-2083-cbam_bfb5,European Union,2023.0,Mitigation,1,1,0,covid;health;pandemic,communicable_disease;general_health
+regulation-eu-2024-1157-on-shipments-of-waste_df3b,European Union,2024.0,Mitigation,1,1,0,arsenic;emergency;health;medical,food_waterborne;general_health
+regulation-eu-2024-1244-of-the-european-parliament-and-of-the-council-of-24-april-2024-on-reporting-of-environmental-data-from-industrial-installations-establishing-an-industrial-emissions-portal-and-repealing-regulation-ec-no-166-2006_f623,European Union,2024.0,Mitigation,1,1,0,accident;arsenic;health,food_waterborne;general_health;injury_trauma
+regulation-eu-2024-1252-critical-raw-materials-act_dd0b,European Union,2024.0,Mitigation,1,1,0,accident;arsenic;covid;emergency;health;medical;stress;tb,communicable_disease;food_waterborne;general_health;injury_trauma;mental_health
+regulation-eu-2024-1257-of-the-european-parliament-and-of-the-council-of-24-april-2024-on-type-approval-of-motor-vehicles-and-engines-and-of-systems-components-and-separate-technical-units-intended-for-such-vehicles-with-respect-to-their-emissions-and-battery-durability-euro-7_0ab5,European Union,2024.0,Mitigation,1,1,0,health,general_health
+regulation-eu-2024-1679-on-guidelines-for-the-development-of-the-trans-european-transport-network_6f1b,European Union,2024.0,Mitigation;Adaptation,1,1,0,aids;covid;drought;emergency;flood;health;pandemic;pandemics,communicable_disease;environmental_health;general_health
+regulation-eu-2024-1735-establishing-a-framework-of-measures-for-strengthening-europes-net-zero-technology-net-zero-industry-act-or-nzia-and-amending-regulation-eu-2018-1724_d343,European Union,2024.0,Mitigation,1,1,0,accident;bacteria;health,general_health;injury_trauma;pathogens_microbiology
+regulation-eu-2024-1781-establishing-a-framework-for-the-setting-of-ecodesign-requirements-for-sustainable-products-ecodesign-for-sustainable-products-regulation_02c5,European Union,2024.0,Mitigation;Adaptation,1,1,0,covid;health;medical;mental;pandemic;respiratory;stress;wasting,communicable_disease;general_health;mental_health;non_communicable_disease;nutrition
+regulation-eu-2024-1787-on-the-reduction-of-methane-emissions-in-the-energy-sector-and-amending-regulation-eu-2019-942-the-methane-regulation_260d,European Union,2024.0,Mitigation,1,1,0,emergency;health,general_health
+regulation-eu-2024-1789-of-the-european-parliament-and-of-the-council-of-13-june-2024-on-the-internal-markets-for-renewable-gas-natural-gas-and-hydrogen-the-eu-gas-regulation-amending-regulations-eu-no-1227-2011-2017-1938-2019-942-and-2022-869-and-decision-2017-684-and-repealing-regulation-ec-no-715-2009_d952,European Union,2024.0,Mitigation,1,1,0,emergency,general_health
+regulation-eu-2024-1991-of-the-european-parliament-and-of-the-council-of-24-june-2024-on-nature-restoration-and-amending-regulation-eu-2022-869-nature-restoration-law_1525,European Union,2024.0,Mitigation;Adaptation,1,1,0,disease;diseases;drought;emergency;flood;health;pandemics;wellbeing;wildfire,communicable_disease;environmental_health;general_health
+regulation-eu-2024-3012-of-the-european-parliament-and-of-the-council-of-27-november-2024-establishing-a-union-certification-framework-for-permanent-carbon-removals-carbon-farming-and-carbon-storage-in-products-the-carbon-removal-certification-framework-crcf_74b6,European Union,2024.0,Mitigation,1,1,0,health,general_health
+regulation-eu-2024-573-of-the-european-parliament-and-of-the-council-of-7-february-2024-on-fluorinated-greenhouse-gases-the-f-gas-regulation-amending-directive-eu-2019-1937-and-repealing-regulation-eu-no-517-2014_9ecd,European Union,2024.0,Mitigation,1,1,0,asthma;disease;emergency;health;healthcare;medical;respiratory,communicable_disease;general_health;non_communicable_disease
+regulation-eu-2025-40-on-packaging-and-packaging-waste_76e6,European Union,2024.0,Mitigation,1,1,0,alcohol;bacteria;health;healthcare;infection;medical;nutrition;stress,communicable_disease;general_health;mental_health;nutrition;pathogens_microbiology;substance_use
+regulation-eu-no-575-2013-on-prudential-requirements-for-credit-institutions-as-amended-capital-requirements-regulation_3434,European Union,2013.0,Adaptation;Mitigation,1,1,0,drought;flood;health;stress,environmental_health;general_health;mental_health
+regulation-no-180-2016-on-biofuels_df5a,Albania,2016.0,Mitigation,0,0,0,,
+regulation-on-environmental-impact-assessment_820d,Türkiye,2022.0,,1,1,0,emergency;health,general_health
+regulation-on-environmental-levy-for-air-pollution-with-carbon-dioxide-emissions_3459,Slovenia,2018.0,,1,1,0,stress,mental_health
+regulation-on-florinated-greenhouse-gases_4eb8,Türkiye,2022.0,,1,1,0,health;medical,general_health
+regulation-on-fuel-economy-data-and-co2-emissions-for-new-passenger-vehicles_e367,Serbia,2022.0,Mitigation,0,0,0,,
+regulation-on-measures-to-prevent-carbon-leakage-through-national-fuel-emissions-trading-behg-carbon-leakage-ordinance-becv-22e1,Germany,2023.0,Mitigation,0,1,0,,
+regulation-on-ozone-depleting-substances_67de,Türkiye,2017.0,,1,1,0,health;medical,general_health
+regulation-on-the-conditions-of-access-to-the-carbon-dioxide-transport-network-procedure-and-criteria-for-acceptance-of-carbon-dioxide-flows_f62b,Montenegro,2021.0,Mitigation,1,0,0,health,general_health
+regulation-on-the-content-of-the-plan-for-monitoring-greenhouse-gas-ghg-emissions-from-facilities_ece7,Montenegro,2022.0,Mitigation,1,1,0,ckd;emergency,general_health;non_communicable_disease
+regulation-on-the-documentation-for-the-issuance-of-permits-for-the-installation-maintenance-and-or-repair-activities-equipment-and-products-containing-ozone-depleting-substances_ce0e,Montenegro,2021.0,Mitigation,0,0,0,,
+regulations-on-environmental-safety-for-ships-and-mobile-offshore-units_df13,Norway,2012.0,Mitigation,1,1,1,emergency;health;medical,general_health
+regulator-for-energy-and-water-services-act_c4c0,Malta,2015.0,Mitigation;Adaptation,0,0,0,,
+renewable-energies-heat-act-eewrmeg_7948,Germany,2008.0,Mitigation,0,0,0,,
+renewable-energy-act-act-309-2009-on-promotion-of-renewable-energy-sources-and-high-efficiency-cogeneration-and-on-amendments-to-certain-acts_cca3,Slovakia,2009.0,Mitigation,0,0,0,,
+renewable-energy-expansion-act-erneuerbarenausbau-gesetz-eag_ac8a,Austria,2021.0,Mitigation,1,1,1,covid;emergency;epidemic;epidemics;gp;health,communicable_disease;general_health
+renewable-energy-sources-act-eeg-latest-version-eeg-2022_1b40,Germany,2000.0,Mitigation,1,1,0,emergency;health,general_health
+reorganisation-of-energy-sector-regulation-law-no-239_0017,Italy,2004.0,Mitigation,0,0,0,,
+resolution-approving-the-establishment-of-the-citizens-assembly_3b3b,Ireland,2016.0,Adaptation;Mitigation,0,0,0,,
+royal-decree-law-14-2022-on-economic-sustainability-measures-in-the-field-of-transport-in-terms-of-scholarships-and-study-aid-as-well-as-measures-for-saving-energy-efficiency-and-reducing-the-energy-dependence-of-the-natural-gas_3969,Spain,2022.0,Mitigation,1,1,1,aids;covid;diseases;emergency;health;infections;medical;pandemic;pandemics;pregnancy;sars;virus,communicable_disease;general_health;maternal_child_health;pathogens_microbiology
+royal-decree-law-20-2022-on-response-measures-to-the-economic-and-social-consequences-of-the-ukrainian-war-and-support-for-the-reconstruction-of-the-island-of-la-palma-and-other-situations-of-vulnerability_4a63,Spain,2022.0,Mitigation,1,1,1,aids;covid;drought;emergency;health;healthcare;illness;infections;injuries;medical;pandemic;sars,communicable_disease;environmental_health;general_health;injury_trauma
+royal-decree-law-23-2020-which-approves-measures-in-the-field-of-energy-and-in-other-areas-for-economic-recovery_1095,Spain,2020.0,Mitigation,1,1,0,anxiety;coronavirus;covid;disease;emergency;health;pandemic,communicable_disease;general_health;mental_health
+royal-decree-law-25-2020-on-urgent-measures-to-support-economic-reactivation-and-employment_f0f1,Spain,2020.0,Adaptation;Mitigation,1,1,1,aids;coronavirus;covid;emergency;epidemic;health;healthcare;medical;pandemic;sars;virus,communicable_disease;general_health;pathogens_microbiology
+royal-decree-law-29-2021-adopting-urgent-measures-in-the-energy-field-to-promote-electric-mobility-self-consumption-and-the-deployment-of-renewable-energies_85e1,Spain,2021.0,Mitigation,1,1,0,anxiety;covid;emergency;health;hospital;medical;pandemic,communicable_disease;general_health;mental_health
+royal-decree-law-42023-adopting-the-drought-recovery-plan-e78a,Spain,2023.0,,1,1,0,aids;covid;deaths;drought;emergency;health;mortality;pandemic;stress,communicable_disease;environmental_health;general_health;mental_health;mortality_morbidity
+royal-decree-law-6-2022-adopting-measures-of-the-framework-of-the-national-response-plan-to-the-economic-and-social-consequences-of-the-war-in-ukraine_d508,Spain,2022.0,Mitigation,1,1,1,accident;aids;allergens;covid;death;drought;emergency;epidemics;health;healthcare;injury;medical;pandemic;psychological;psychosocial,communicable_disease;environmental_health;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease
+royal-decree-law-no-10-2017-on-urgent-measures-to-mitigate-the-effects-caused-by-drought-in-certain-river-basins_165f,Spain,2017.0,Adaptation,1,0,0,drought,environmental_health
+royal-decree-no-1007-2015_375b,Spain,2015.0,Mitigation,0,1,0,,
+scrapping-scheme-programme-for-old-vehicles_fad7,Türkiye,2019.0,Mitigation,0,0,0,,
+serbian-law-on-climate-change_7d49,Serbia,2021.0,Adaptation;Mitigation,0,0,0,,
+seventh-law-amending-the-regionalization-law-9-euro-public-transport-ticket_bde4,Germany,2022.0,Mitigation,1,1,0,covid;pandemic,communicable_disease
+spatial-development-act-last-amendment-in-2025_e3e9,Bulgaria,2001.0,Adaptation;Disaster Risk Management,1,1,0,accident;emergency;flood;health;healthcare;injury;medical;nutrition,environmental_health;general_health;injury_trauma;nutrition
+spatial-planning-act-df65,Germany,2008.0,Mitigation;Adaptation,1,1,0,flood;health;injury,environmental_health;general_health;injury_trauma
+subsidy-control-act-2022_a388,United Kingdom,2022.0,Disaster Risk Management;Mitigation,1,1,0,emergency;health;stress,general_health;mental_health
+sustainable-development-act_5737,Malta,2012.0,Mitigation;Adaptation,0,0,0,,
+sustainable-energy-act-number-2-of-2002_b441,Ireland,2002.0,Mitigation,0,0,0,,
+tax-reform-act-2020_c485,Austria,2019.0,Mitigation,0,0,0,,
+tax-reform-act-2022_6178,Austria,2021.0,Mitigation,1,1,0,gp;health,general_health
+the-building-and-planning-act-sfs-2010-900_7349,Sweden,2010.0,Adaptation,1,1,0,accident;disease;emergency;health;illness;injury;medical,communicable_disease;general_health;injury_trauma
+the-cap-towards-2020-meeting-the-food-natural-resources-and-territorial-challenges-of-the-future_42f6,European Union,2013.0,Adaptation;Mitigation,1,1,0,drought;emergency;health;mental,environmental_health;general_health;mental_health
+the-carbon-accounting-determination-of-excess-uk-assigned-amount-units-regulations-2023_b9fb,United Kingdom,2023.0,Mitigation,0,0,0,,
+the-climate-act_dae7,Denmark,2020.0,Adaptation;Mitigation,0,1,0,,
+the-climate-change-targeted-greenhouse-gases-order-2023_d2ab,United Kingdom,2023.0,Mitigation,0,0,0,,
+the-co-operation-agreement-on-the-national-climate-plan-and-the-national-climate-plan_55ad,Belgium,2002.0,Mitigation,0,0,0,,
+the-companies-strategic-report-climate-related-financial-disclosure-regulations-2022-made-under-the-companies-act-2006_c374,United Kingdom,2022.0,Adaptation;Mitigation,0,0,0,,
+the-energy-act-no-50-of-1990_f8a0,Norway,1990.0,Mitigation,0,0,0,,
+the-environment-buildings-decree-of-the-netherlands-besluit-bouwwerken-leefomgeving-bbl_1057,Netherlands,2018.0,Mitigation,1,1,1,accident;aids;alcohol;allergens;arsenic;cancer;death;doctor;drought;emergency;health;healthcare;hospital;injuries;injury;legionella;medical;mental;poisoning;psychiatric;stroke;wildfire,communicable_disease;environmental_health;food_waterborne;general_health;injury_trauma;mental_health;mortality_morbidity;non_communicable_disease;substance_use
+the-environment-decree-of-the-netherlands-omgevingsbesluit_d731,Netherlands,2018.0,Adaptation;Loss And Damage,1,1,0,accident;depression;disease;diseases;drought;emergency;flood;health,communicable_disease;environmental_health;general_health;injury_trauma;mental_health
+the-environmental-activities-decree-of-the-netherlands-besluit-activiteiten-leefomgeving-bal_3577,Netherlands,2018.0,Loss And Damage,0,0,0,,
+the-environmental-quality-decree-of-the-netherlands-besluit-kwaliteit-leefomgeving-bkl_e534,Netherlands,2018.0,Adaptation;Mitigation,1,1,1,accident;aids;alcohol;arsenic;bacteria;death;deaths;disease;diseases;distressed;drought;emergency;fatigue;fever;flood;flu;gestation;gp;health;healthcare;hospital;injury;lbw;medical;mental;overweight;psychiatric;respiratory;stress;stroke;trauma;zoonoses,communicable_disease;environmental_health;food_waterborne;general_health;injury_trauma;maternal_child_health;mental_health;mortality_morbidity;non_communicable_disease;nutrition;pathogens_microbiology;substance_use;vector_borne_zoonotic
+the-eu-budget-powering-the-recovery-plan-for-europe_ce4b,European Union,2020.0,Mitigation,1,1,0,coronavirus;covid;disease;emergency;health;healthcare;medical;pandemic,communicable_disease;general_health
+the-federal-sustainable-development-plan_fd4d,Belgium,1997.0,Mitigation,1,1,1,aids;alcohol;alcoholism;anxiety;cholera;death;deaths;depression;diabetes;disease;diseases;doctor;epidemics;health;healthcare;hospital;illness;malaria;malnutrition;measles;medical;mental;mortality;nutrition;obesity;onchocerciasis;pandemics;polio;psychological;psychosocial;sars;trauma;tuberculosis;undernourished,communicable_disease;general_health;mental_health;mortality_morbidity;non_communicable_disease;nutrition;substance_use;vector_borne_zoonotic
+the-landlord-to-tenant-electricity-act-2017_aead,Germany,2017.0,Mitigation,0,1,0,,
+the-limited-liability-partnerships-climate-related-financial-disclosure-regulations-2022-made-under-the-limited-liability-partnerships-act-2000_6c8b,United Kingdom,2022.0,Adaptation;Mitigation,0,1,0,,
+the-national-renewable-energy-action-plan-2016-2020_c4cd,Luxembourg,2016.0,Mitigation,1,1,0,aids;death;health,communicable_disease;general_health;mortality_morbidity
+the-sixth-carbon-budget_179f,United Kingdom,2020.0,Adaptation;Mitigation,1,1,0,anxiety;bacteria;coronavirus;covid;death;deaths;disease;diseases;drought;flood;health;heatwave;illness;legionella;medical;mental;mortality;pandemic;stress;stroke;wellbeing,communicable_disease;environmental_health;food_waterborne;general_health;mental_health;mortality_morbidity;non_communicable_disease;pathogens_microbiology
+the-vehicle-emissions-trading-schemes-order-2023_260e,United Kingdom,,Mitigation,0,1,0,,
+the-vehicle-emissions-trading-schemes-order-2023_e0be,United Kingdom,2024.0,Mitigation,0,1,0,,
+turkish-sustainability-reporting-standards_d934,Türkiye,2023.0,Mitigation,1,0,1,health,general_health
+uk-flood-and-water-management-act-2010_b7b7,United Kingdom,2010.0,Adaptation,1,0,0,flood,environmental_health
+unfair-competition-act_00e1,Switzerland,1986.0,Mitigation,1,0,1,health;healthcare;injury,general_health;injury_trauma
+value-added-tax-vat-act-no-58-of-2009_522d,Norway,2009.0,Mitigation,0,0,0,,
+waste-management-act_e347,Bulgaria,2012.0,Mitigation,0,0,0,,
+water-act-2014-creation-of-flood-re-scheme_2c5a,United Kingdom,2016.0,Adaptation,1,1,0,drought;emergency;flood;health;wasting,environmental_health;general_health;nutrition
+water-protection-act-gschg_0b08,Liechtenstein,2003.0,Mitigation;Adaptation,1,1,0,flood;health;pregnant,environmental_health;general_health;maternal_child_health
+water-special-measures-act-2025_a67e,United Kingdom,2025.0,Mitigation,1,1,0,drought;emergency;health,environmental_health;general_health
+wind-energy-area-requirements-act-909b,Germany,2022.0,Mitigation,0,1,0,,
