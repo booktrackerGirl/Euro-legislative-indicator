@@ -35,12 +35,28 @@ def load_left_subregion_block(excel_path):
 
 
 # ---------------------------------------------------
+# LOAD EU SHEET
+# ---------------------------------------------------
+def load_eu_sheet(excel_path):
+
+    eu = pd.read_excel(excel_path, sheet_name="EU")
+    eu.columns = [str(c).strip() for c in eu.columns]
+
+    eu = eu[eu["Year"].notna()]
+    eu["Year"] = pd.to_numeric(eu["Year"], errors="coerce")
+    eu = eu[eu["Year"].notna()]
+
+    return eu
+
+
+# ---------------------------------------------------
 # MAIN PLOT
 # ---------------------------------------------------
 def plot_subregion_health_trends(excel_path, output_png, output_pdf):
 
     print("Loading subregional trend data...")
     df = load_left_subregion_block(excel_path)
+    eu_df = load_eu_sheet(excel_path)
 
     # ---------------------------------------------------
     # EUROPE-WIDE ACTIVE HEALTH STOCK PER YEAR
@@ -52,6 +68,7 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
     )
 
     df = df.merge(europe_total, on="Year", how="left")
+    eu_df = eu_df.merge(europe_total, on="Year", how="left")
 
     # ---------------------------------------------------
     # REGIONAL SHARE OF EUROPE TOTAL
@@ -60,26 +77,43 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
         df["Health-relevant documents"] / df["Europe_total_health"] * 100
     )
 
-    regions = sorted(df["EEA_subregion"].dropna().unique())
+    eu_df["Health percent"] = (
+        eu_df["Health-relevant documents"] / eu_df["Europe_total_health"] * 100
+    )
 
-    global_count_max = df["Health-relevant documents"].max() * 1.15
-    global_pct_max = df["Health percent"].max() * 1.15
+    regions = sorted(df["EEA_subregion"].dropna().unique())
+    total_rows = len(regions) + 1   # + EU row
+
+    global_count_max = max(
+        df["Health-relevant documents"].max(),
+        eu_df["Health-relevant documents"].max()
+    ) * 1.15
+
+    global_pct_max = max(
+        df["Health percent"].max(),
+        eu_df["Health percent"].max()
+    ) * 1.15
 
     fig, axes = plt.subplots(
-        len(regions),
+        total_rows,
         1,
-        figsize=(13.5, 8.8),
+        figsize=(13.5, 10.4),
         sharex=True
     )
 
-    fig.subplots_adjust(hspace=0.22, top=0.90)
+    fig.subplots_adjust(hspace=0.20, top=0.91)
 
-    if len(regions) == 1:
+    if total_rows == 1:
         axes = [axes]
 
     legend_handles = None
 
-    for ax, region in zip(axes, regions):
+    # ---------------------------------------------------
+    # PLOT EACH EEA SUBREGION
+    # ---------------------------------------------------
+    for i, region in enumerate(regions):
+
+        ax = axes[i]
 
         temp = df[df["EEA_subregion"] == region].copy()
         temp = temp.sort_values("Year")
@@ -94,20 +128,13 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
         )
 
         ax.set_ylim(0, global_count_max)
-        ax.set_ylabel("Count", fontsize=9)
+        ax.set_ylabel("Count", fontsize=8.5)
         ax.grid(axis="y", linestyle="--", alpha=0.35)
         ax.margins(x=0.01)
 
-        # Count labels
         for x, y in zip(temp["Year"], temp["Health-relevant documents"]):
-            ax.text(
-                x,
-                y + global_count_max * 0.010,
-                str(int(y)),
-                ha="center",
-                fontsize=6.5,
-                color="#C44E52"
-            )
+            ax.text(x, y + global_count_max*0.010, str(int(y)),
+                    ha="center", fontsize=6.2, color="#C44E52")
 
         ax2 = ax.twinx()
 
@@ -122,37 +149,86 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
         )
 
         ax2.set_ylim(0, global_pct_max)
-        ax2.set_ylabel("% Europe", fontsize=9)
+        ax2.set_ylabel("% Europe", fontsize=8.5)
         ax2.margins(x=0.01)
 
-        # Percentage labels
         for x, y in zip(temp["Year"], temp["Health percent"]):
-            ax2.text(
-                x,
-                y + global_pct_max * 0.010,
-                f"{y:.1f}%",
-                ha="center",
-                fontsize=6,
-                color="#4C72B0"
-            )
+            ax2.text(x, y + global_pct_max*0.010, f"{y:.1f}%",
+                     ha="center", fontsize=5.8, color="#4C72B0")
 
-        ax.set_title(region, fontsize=11, fontweight="bold", loc="left", pad=6)
+        ax.set_title(region, fontsize=10.5, fontweight="bold", loc="left", pad=4)
 
         if 2016 in temp["Year"].values:
             ax.axvline(2016, linestyle=":", linewidth=1.1, color="black")
-
             ax.text(
                 2016 + 0.15,
                 global_count_max * 0.88,
                 "Paris Agreement\nin force",
-                fontsize=7,
-                color="black",
+                fontsize=6.8,
                 ha="left",
                 va="top"
             )
 
         legend_handles = [line1, line2]
 
+    # ---------------------------------------------------
+    # PLOT EU ON BOTTOM ROW
+    # ---------------------------------------------------
+    ax = axes[-1]
+    eu_df = eu_df.sort_values("Year")
+
+    line1, = ax.plot(
+        eu_df["Year"],
+        eu_df["Health-relevant documents"],
+        color="#C44E52",
+        linewidth=2.6,
+        marker="o"
+    )
+
+    ax.set_ylim(0, global_count_max)
+    ax.set_ylabel("Count", fontsize=8.5)
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    ax.margins(x=0.01)
+
+    for x, y in zip(eu_df["Year"], eu_df["Health-relevant documents"]):
+        ax.text(x, y + global_count_max*0.010, str(int(y)),
+                ha="center", fontsize=6.2, color="#C44E52")
+
+    ax2 = ax.twinx()
+
+    line2, = ax2.plot(
+        eu_df["Year"],
+        eu_df["Health percent"],
+        color="#4C72B0",
+        linewidth=2.0,
+        linestyle="--",
+        marker="s"
+    )
+
+    ax2.set_ylim(0, global_pct_max)
+    ax2.set_ylabel("% Europe", fontsize=8.5)
+    ax2.margins(x=0.01)
+
+    for x, y in zip(eu_df["Year"], eu_df["Health percent"]):
+        ax2.text(x, y + global_pct_max*0.010, f"{y:.1f}%",
+                 ha="center", fontsize=5.8, color="#4C72B0")
+
+    ax.set_title("European Union", fontsize=10.5, fontweight="bold", loc="left", pad=4)
+
+    if 2016 in eu_df["Year"].values:
+        ax.axvline(2016, linestyle=":", linewidth=1.1, color="black")
+        ax.text(
+            2016 + 0.15,
+            global_count_max * 0.88,
+            "Paris Agreement\nin force",
+            fontsize=6.8,
+            ha="left",
+            va="top"
+        )
+
+    # ---------------------------------------------------
+    # GLOBAL LABELS
+    # ---------------------------------------------------
     axes[-1].set_xlabel("Year", fontsize=10)
 
     fig.legend(
@@ -164,15 +240,15 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
         loc="upper center",
         ncol=2,
         frameon=True,
-        bbox_to_anchor=(0.5, 0.825),
+        bbox_to_anchor=(0.5, 0.84),
         fontsize=9
     )
 
     fig.suptitle(
-        "Subregional Trends in Active Health-Relevant Climate Legislative Families\nAbsolute Count and Share of Europe-Wide Active Health Stock",
+        "Regional and EU Trends in Active Health-Relevant Climate Legislative Families\nAbsolute Count and Share of Europe-Wide Active Health Stock",
         fontsize=12,
         fontweight="bold",
-        y=0.875
+        y=0.885
     )
 
     plt.tight_layout(rect=[0, 0, 1, 0.89])
