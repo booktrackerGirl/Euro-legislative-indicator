@@ -24,6 +24,7 @@ COLORS = {
 
 DATA_START_YEAR = 1963
 PLOT_START_YEAR = 2000
+PLOT_END_YEAR   = 2025
 
 
 # ---------------- PLOTTING FUNCTION ---------------- #
@@ -67,6 +68,10 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
     df_long = df_long[df_long["Year"].str.match(r"^\d{4}$", na=False)]
     df_long["Year"] = df_long["Year"].astype(int)
 
+    # FIX 2: cap events at PLOT_END_YEAR to avoid future-dated events
+    # extending the plot or affecting the active stock
+    df_long = df_long[df_long["Year"] <= PLOT_END_YEAR]
+
     # ----------------------------
     # Define start & end events
     # ----------------------------
@@ -101,6 +106,11 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
     policy_years.columns = ["start_year", "end_year"]
     policy_years = policy_years.dropna(subset=["start_year"])
 
+    # FIX 3: cap end_year at PLOT_END_YEAR (consistent with build_health_counts)
+    policy_years["end_year"] = policy_years["end_year"].apply(
+        lambda x: min(x, PLOT_END_YEAR) if pd.notnull(x) else x
+    )
+
     # Merge response info
     policy_years = policy_years.merge(
         annotation_df[["Family ID", "Response"]],
@@ -121,10 +131,17 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
     # ----------------------------
     # STOCK LOGIC (timeline-based)
     # ----------------------------
-    max_year = df_long["Year"].max()
-    YEARS = list(range(PLOT_START_YEAR, max_year + 1))
+    # FIX 2: use fixed PLOT_END_YEAR instead of max year from data
+    YEARS = list(range(PLOT_START_YEAR, PLOT_END_YEAR + 1))
 
-    active_set = set()
+    # FIX 1: seed active_set with pre-2000 policies that are still active
+    # at PLOT_START_YEAR, so they are not silently excluded from the count
+    pre_start = policy_years[policy_years["start_year"] < PLOT_START_YEAR]
+    pre_active = pre_start[
+        pre_start["end_year"].isna() | (pre_start["end_year"] >= PLOT_START_YEAR)
+    ]["Family ID"]
+    active_set = set(pre_active)
+
     active_totals = []
     category_totals = {col: [] for col in RESPONSE_COLS}
 
@@ -171,7 +188,7 @@ def plot_global_stackplot(annotation_df, legis_df, output_path):
         gdata[col] = gdata[col].astype(int)
 
     # ----------------------------
-    # Plot (unchanged logic)
+    # Plot
     # ----------------------------
     X = np.arange(len(YEARS))
 

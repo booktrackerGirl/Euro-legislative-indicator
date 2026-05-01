@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 # ----------------------------
 # Health categories and colors
 # ----------------------------
+PLOT_END_YEAR = 2025
+PLOT_START_YEAR = 2000
+
 HEALTH_CATEGORIES = [
     "communicable_disease", "environmental_health", "food_waterborne",
     "general_health", "injury_trauma", "maternal_child_health",
@@ -51,7 +54,7 @@ CATEGORY_LABELS = {
 # ----------------------------
 # Main plotting function
 # ----------------------------
-def plot_health_stackplot(annotation_df, legis_df, output_path, plot_start_year=2000):
+def plot_health_stackplot(annotation_df, legis_df, output_path, plot_start_year=PLOT_START_YEAR):
 
     annotation_df["Health keyword categories"] = annotation_df["Health keyword categories"].fillna("")
 
@@ -79,6 +82,10 @@ def plot_health_stackplot(annotation_df, legis_df, output_path, plot_start_year=
     df_long = df_long[df_long["Year"].str.match(r"^\d{4}$", na=False)]
     df_long["Year"] = df_long["Year"].astype(int)
 
+    # FIX 2: cap events at PLOT_END_YEAR to avoid future-dated events
+    # extending the plot or affecting the active stock
+    df_long = df_long[df_long["Year"] <= PLOT_END_YEAR]
+
     # Define start & end events
     start_events = ["Passed/Approved", "Entered Into Force", "Set", "Net Zero Pledge"]
     end_events = ["Repealed/Replaced", "Closed", "Settled"]
@@ -89,6 +96,11 @@ def plot_health_stackplot(annotation_df, legis_df, output_path, plot_start_year=
     policy_years = pd.concat([start_years, end_years], axis=1)
     policy_years.columns = ["start_year", "end_year"]
     policy_years = policy_years.dropna(subset=["start_year"])
+
+    # FIX 3: cap end_year at PLOT_END_YEAR (consistent with build_health_counts)
+    policy_years["end_year"] = policy_years["end_year"].apply(
+        lambda x: min(x, PLOT_END_YEAR) if pd.notnull(x) else x
+    )
 
     # Merge health keyword info
     policy_years = policy_years.merge(
@@ -105,11 +117,17 @@ def plot_health_stackplot(annotation_df, legis_df, output_path, plot_start_year=
             cat, case=False, regex=False
         ).astype(int)
 
-    # Timeline-based stock logic
-    max_year = df_long["Year"].max()
-    YEARS = list(range(plot_start_year, max_year + 1))
+    # FIX 2: use fixed PLOT_END_YEAR instead of max year from data
+    YEARS = list(range(plot_start_year, PLOT_END_YEAR + 1))
 
-    active_set = set()
+    # FIX 1: seed active_set with pre-2000 policies that are still active
+    # at plot_start_year, so they are not silently excluded from the count
+    pre_start = policy_years[policy_years["start_year"] < plot_start_year]
+    pre_active = pre_start[
+        pre_start["end_year"].isna() | (pre_start["end_year"] >= plot_start_year)
+    ]["Family ID"]
+    active_set = set(pre_active)
+
     active_totals = []
     category_totals = {cat: [] for cat in HEALTH_CATEGORIES}
 
