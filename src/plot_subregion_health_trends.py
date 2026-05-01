@@ -138,7 +138,7 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
                ne["Year"].tolist(),
                ne["Health-relevant documents"].tolist(),
                ne["Health percent"].tolist(),
-               "Non-EEA Cooperating Countries")
+               "United Kingdom (Cooperating Country)")
 
     # EU panel
     eu_s = eu_df.sort_values("Year")
@@ -163,7 +163,7 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
     fig.suptitle(
         "Regional and EU Trends in Active Health-Relevant Climate Legislative Families\n"
         "Absolute Count and Share of Europe-Wide Active Health Stock\n"
-        "(Cooperating countries included within their respective EEA subregions)",
+        "(EEA38+UK+EU)",
         fontsize=11, fontweight="bold", y=0.975,
     )
 
