@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 import argparse
 import pandas as pd
 import matplotlib
@@ -48,45 +47,53 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
     not_eea  = load_not_eea(excel_path)
     eu_df    = load_eu_sheet(excel_path)
 
-    # Europe-wide total = right block (4 subregions) + Not EEA + EU
-    sub_total   = df.groupby("Year")["Health-relevant documents"].sum().reset_index(name="sub")
-    not_eea_tot = not_eea.groupby("Year")["Health-relevant documents"].sum().reset_index(name="not_eea")
-    eu_annual   = eu_df[["Year","Health-relevant documents"]].rename(columns={"Health-relevant documents":"eu"})
+    # Minimal logic change: add UK (Not EEA) values directly into Northern region year by year
+    for yr in not_eea["Year"].unique():
+        uk_row = not_eea[not_eea["Year"] == yr]
+        if uk_row.empty:
+            continue
 
-    europe_total = sub_total.merge(not_eea_tot, on="Year").merge(eu_annual, on="Year")
-    europe_total["Europe_total"] = europe_total["sub"] + europe_total["not_eea"] + europe_total["eu"]
+        uk_health = uk_row["Health-relevant documents"].values[0]
+
+        northern_mask = (df["EEA_subregion"] == "Northern") & (df["Year"] == yr)
+        df.loc[northern_mask, "Health-relevant documents"] = (
+            df.loc[northern_mask, "Health-relevant documents"] + uk_health
+        )
+
+    # Europe-wide total = right block (Northern now includes UK) + EU
+    sub_total = df.groupby("Year")["Health-relevant documents"].sum().reset_index(name="sub")
+    eu_annual = eu_df[["Year","Health-relevant documents"]].rename(columns={"Health-relevant documents":"eu"})
+
+    europe_total = sub_total.merge(eu_annual, on="Year")
+    europe_total["Europe_total"] = europe_total["sub"] + europe_total["eu"]
     europe_total = europe_total[["Year","Europe_total"]]
 
     # Verify
-    print("\nVerification (right + Not EEA + EU = combined EEA+UK+EU):")
+    print("\nVerification (right with UK added into Northern + EU = combined EEA+UK+EU):")
     for yr in [2000, 2016, 2020, 2024, 2025]:
         tot = europe_total[europe_total["Year"]==yr]["Europe_total"].values[0]
         print(f"  {yr}: {tot}")
 
     df      = df.merge(europe_total, on="Year", how="left")
-    not_eea = not_eea.merge(europe_total, on="Year", how="left")
     eu_df   = eu_df.merge(europe_total, on="Year", how="left")
 
-    df["Health percent"]      = df["Health-relevant documents"]      / df["Europe_total"] * 100
-    not_eea["Health percent"] = not_eea["Health-relevant documents"] / not_eea["Europe_total"] * 100
-    eu_df["Health percent"]   = eu_df["Health-relevant documents"]   / eu_df["Europe_total"] * 100
+    df["Health percent"]    = df["Health-relevant documents"] / df["Europe_total"] * 100
+    eu_df["Health percent"] = eu_df["Health-relevant documents"] / eu_df["Europe_total"] * 100
 
     regions    = ["Eastern", "Northern", "Southern", "Western"]
-    total_rows = len(regions) + 2   # 4 subregions + Not EEA + EU
+    total_rows = len(regions) + 1   # 4 subregions + EU
 
     global_count_max = max(
         df["Health-relevant documents"].max(),
-        not_eea["Health-relevant documents"].max(),
         eu_df["Health-relevant documents"].max(),
     ) * 1.15
 
     global_pct_max = max(
         df["Health percent"].max(),
-        not_eea["Health percent"].max(),
         eu_df["Health percent"].max(),
     ) * 1.15
 
-    fig, axes = plt.subplots(total_rows, 1, figsize=(13.5, 14.5), sharex=True)
+    fig, axes = plt.subplots(total_rows, 1, figsize=(13.5, 12.5), sharex=True)
     fig.subplots_adjust(hspace=0.20, top=0.91)
 
     legend_handles = []
@@ -123,7 +130,7 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
                     ha="left", va="top")
         legend_handles = [line1, line2]
 
-    # 4 EEA subregion panels
+    # 4 EEA subregion panels (Northern now includes UK values)
     for i, region in enumerate(regions):
         temp = df[df["EEA_subregion"] == region].sort_values("Year")
         draw_panel(axes[i],
@@ -131,14 +138,6 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
                    temp["Health-relevant documents"].tolist(),
                    temp["Health percent"].tolist(),
                    region)
-
-    # Not EEA panel
-    ne = not_eea.sort_values("Year")
-    draw_panel(axes[-2],
-               ne["Year"].tolist(),
-               ne["Health-relevant documents"].tolist(),
-               ne["Health percent"].tolist(),
-               "United Kingdom (Cooperating Country)")
 
     # EU panel
     eu_s = eu_df.sort_values("Year")
@@ -157,14 +156,14 @@ def plot_subregion_health_trends(excel_path, output_png, output_pdf):
             "Share of Europe-wide active health stock (%)",
         ],
         loc="upper center", ncol=2, frameon=True,
-        bbox_to_anchor=(0.5, 0.945), fontsize=9,
+        bbox_to_anchor=(0.5, 0.875), fontsize=9,
     )
 
     fig.suptitle(
         "Regional and EU Trends in Active Health-Relevant Climate Legislative Families\n"
         "Absolute Count and Share of Europe-Wide Active Health Stock\n"
         "(EEA38+UK+EU)",
-        fontsize=11, fontweight="bold", y=0.975,
+        fontsize=11, fontweight="bold", y=0.91,
     )
 
     plt.tight_layout(rect=[0, 0, 1, 0.93])
