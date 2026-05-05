@@ -300,31 +300,28 @@ def run(cclw_csv: str, annotations_csv: str, group_file: str, output_excel: str)
         #               Cooperating countries remain in Southern.
         print("Building sheet: EEA38 subregion...")
 
+        # LEFT BLOCK SPECIAL RULE:
+        # Club United Kingdom into Northern Europe so that there is no
+        # separate "Not EEA" category in the EEA+UK subregional split.
+
+        left_block_df = europe_uk.copy()
+        left_block_df.loc[left_block_df["Country"] == "United Kingdom", "EEA_subregion"] = "Northern"
+
         sub_tables_uk = []
-        for sub in sorted(europe_uk["EEA_subregion"].dropna().unique()):
-            subdf = europe_uk[europe_uk["EEA_subregion"] == sub]
+        for sub in sorted(left_block_df["EEA_subregion"].dropna().unique()):
+            subdf = left_block_df[left_block_df["EEA_subregion"] == sub]
             pol   = policy_years[policy_years["Family ID"].isin(subdf["Family ID"])]
             tmp   = simulate_active(subdf, pol, group_name="EEA_subregion", group_value=sub)
             sub_tables_uk.append(tmp)
+
         block1 = pd.concat(sub_tables_uk, ignore_index=True).rename(columns=CATEGORY_LABELS)
 
-        # RIGHT BLOCK SPECIAL RULE:
-        # Build the EEA subregion table using europe_no_uk as the base population,
-        # but club United Kingdom legislative families into Northern Europe for
-        # subregional reporting only.
-
-        right_block_df = pd.concat([
-            europe_no_uk,
-            europe_uk[europe_uk["Country"] == "United Kingdom"].assign(EEA_subregion="Northern")
-        ], ignore_index=True)
-
         sub_tables_no_uk = []
-        for sub in sorted(right_block_df["EEA_subregion"].dropna().unique()):
-            subdf = right_block_df[right_block_df["EEA_subregion"] == sub]
+        for sub in sorted(europe_no_uk["EEA_subregion"].dropna().unique()):
+            subdf = europe_no_uk[europe_no_uk["EEA_subregion"] == sub]
             pol   = policy_years[policy_years["Family ID"].isin(subdf["Family ID"])]
             tmp   = simulate_active(subdf, pol, group_name="EEA_subregion", group_value=sub)
             sub_tables_no_uk.append(tmp)
-
         block2 = pd.concat(sub_tables_no_uk, ignore_index=True).rename(columns=CATEGORY_LABELS)
 
         block1.to_excel(writer, sheet_name="EEA38 subregion",
